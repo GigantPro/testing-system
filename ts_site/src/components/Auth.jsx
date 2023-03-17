@@ -10,9 +10,9 @@ const Reg = () => {
       <div className="main_content">
         <p>Вход:</p>
         <form action="" className="auth_form">
-        <input type="text"  name='login' itemID='login' className='auth-input'/>
-        <input type="password" name='login' itemID='login' className='auth-input'/>
-        <button>Accept</button>
+          <input type="text"  name='login' itemID='login' className='auth-input'/>
+          <input type="password" name='login' itemID='login' className='auth-input'/>
+          <button>Accept</button>
         </form>
       </div>
     </div>
