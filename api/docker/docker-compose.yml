@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  ts-api:
+    environment:
+      - DEBUG=false
+    env_file: 
+      - ./../.env
+    build:
+      context: /opt/xiver/testing-system/api
+      dockerfile: docker/Dockerfile
+    volumes:
+      - /var/log/xiver/testing-system/api:/app/log
+    ports:
+      - "5001:5001"

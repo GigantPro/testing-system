@@ -61,7 +61,7 @@ class Config:
     try:
         source_path: str = get_str_env("SOURCE_PATH")
     except EnvVariableUndefined:
-        source_path: str = '/app/testing_system/site/source'
+        source_path: str = '/app/src/source'
     debug: bool = get_bool_env("DEBUG")
 
 

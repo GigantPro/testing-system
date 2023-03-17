@@ -1,4 +1,4 @@
-from testing_system.site.app import app
+from ...app import app
 
 from flask import render_template
 

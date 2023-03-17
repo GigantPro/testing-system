@@ -5,7 +5,7 @@ from .app import app
 from .requests import init_requests
 
 
-def main() -> NoReturn:
+def main() -> int | NoReturn:
     init_requests()
     
     app.run(
@@ -13,3 +13,4 @@ def main() -> NoReturn:
         port=config.port,
         debug=config.debug,
     )
+    return 0

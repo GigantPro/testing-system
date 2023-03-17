@@ -1,29 +1,25 @@
 [tool.poetry]
-name = "testing_system"
+name = "Testing system API"
 version = "0.1.0"
-description = "Testing system [By Xiver organization]."
+description = "Testing system`s API [By Xiver organization]."
 authors = [
     "GigantPro <pochtagigantpro@gmail.com>"
 ]
 license = "GPL-3.0-only"
-readme = "README.md"
-packages = [{include = "testing_system"}]
-
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-flask = "^2.2.3"
+fastapi = "^0.94.1"
+uvicorn = "^0.21.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.2"
 mypy = "^1.1.1"
-
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-start_flask = "testing_system.site.main:main"
-start_api = "testing_system.api.main:main"
-start = "testing_system.main:main"
+start = "src.main:main"
