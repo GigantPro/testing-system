@@ -44,20 +44,23 @@ def get_str_env(env_name: str, default: str | None = None) -> str | NoReturn:
     return env_value
 
 
-def get_int_env(env_name: str) -> str | NoReturn:
+def get_int_env(env_name: str, default: int | None = None) -> str | NoReturn:
     env_value = getenv(env_name, None)
-    if env_value is None:
+    if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
+    elif env_value is None and default is not None:
+        return default
     return int(env_value)
 
 
 @dataclass(slots=True, frozen=True)
 class Config:
     """Config class."""
-    ip: str = get_str_env("IP", "0.0.0.0")
-    port: int = 5001
-    source_path: str = get_str_env("SOURCE_PATH", "/app/testing_system/site/source")
-    log_level: bool = get_str_env("LOG_LEVEL", "debug")
+    pg_ip: str = get_str_env("PG_IP", "127.0.0.1")
+    pg_port: int = get_int_env("PG_PORT", 5432)
+    pg_base: str = get_str_env("PG_BASE")
+    pg_user: str = get_str_env("PG_USER")
+    pg_password: bool = get_str_env("PG_PASSWORD")
 
 
 config = Config()

@@ -90,3 +90,4 @@ db\all_base.db
 # Node.js modules
 */node_modules/
 ts_site/node_modules
+node_modules

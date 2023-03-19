@@ -7,4 +7,5 @@ def init_get() -> None:
     """
     # Import the module.
     from .index import index
+    from .login import login
     

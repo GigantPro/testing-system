@@ -2,11 +2,14 @@ from typing import NoReturn
 
 from .config import config
 from .requests import init_requests
+from .services import init_database
 
 import uvicorn
 
 
 def main() -> NoReturn:
+    init_database()
+    
     init_requests()
     
     uvicorn.run(
