@@ -6,7 +6,7 @@ else
 	COMPOSE_FILE = "./docker/docker-compose.yml"
 endif
 
-init: docker-down docker-pull docker-build docker-up
+init:  docker-pull docker-build docker-up
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
@@ -22,7 +22,7 @@ docker-pull:
 	$(COMPOSE_CMD) pull
 
 docker-down:
-	$(COMPOSE_CMD) down --remove-orphans
+	$(COMPOSE_CMD) down 
 
 docker-build: 
 	$(COMPOSE_CMD) build
