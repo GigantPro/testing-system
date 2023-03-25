@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ts-site-dev:
+  ts-frontend-dev:
     environment:
       - DEBUG=true
     build:
@@ -10,4 +10,4 @@ services:
     volumes:
       - ../source:/app
     ports:
-      - "3000:3000"
+      - "5000:5000"

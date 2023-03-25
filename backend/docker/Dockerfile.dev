@@ -13,7 +13,7 @@ RUN python3 -m venv $POETRY_VENV \
     && $POETRY_VENV/bin/pip install -U pip setuptools \
     && $POETRY_VENV/bin/pip install poetry==${POETRY_VERSION}
 
-FROM python-base as api
+FROM python-base as backend
 
 COPY --from=poetry-base ${POETRY_VENV} ${POETRY_VENV}
 
@@ -29,6 +29,6 @@ COPY src /app/src
 
 COPY poetry.lock pyproject.toml ./
 
-RUN poetry install --no-interaction --no-cache --without dev
+RUN poetry install --no-interaction --no-cache --with dev
 
 CMD ["poetry", "run", "start"]

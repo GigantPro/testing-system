@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  ts-site:
+  ts-frontend:
     environment:
       - DEBUG=false
     build:
-      context: /opt/xiver/testing-system/site
+      context: /opt/xiver/testing-system/frontend
       dockerfile: docker/Dockerfile
     ports:
       - "5000:5000"

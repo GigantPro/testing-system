@@ -4,8 +4,8 @@ Description=edu.xiver.ru
 
 [Service]
 Type=simple
-ExecStart=/opt/xiver/testing-system/site/scripts/start.sh
-ExecStop=/opt/xiver/testing-system/site/scripts/stop.sh
+ExecStart=/opt/xiver/testing-system/frontend/scripts/start.sh
+ExecStop=/opt/xiver/testing-system/frontend/scripts/stop.sh
 Restart=always
 RestartSec=3
 

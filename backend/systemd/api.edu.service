@@ -1,0 +1,13 @@
+[Unit]
+After=network.target
+Description=Backend for edu.xiver.ru
+
+[Service]
+Type=simple
+ExecStart=/opt/xiver/testing-system/backend/scripts/start.sh
+ExecStop=/opt/xiver/testing-system/backend/scripts/stop.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
