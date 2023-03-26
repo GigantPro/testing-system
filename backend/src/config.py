@@ -57,7 +57,8 @@ class Config:
     ip: str = get_str_env("IP", "0.0.0.0")
     port: int = 5001
     source_path: str = get_str_env("SOURCE_PATH", "/app/testing_system/frontend/source")
-    log_level: bool = get_str_env("LOG_LEVEL", "debug")
+    log_level: str = get_str_env("LOG_LEVEL", "debug")
+    debug: bool = get_bool_env('DEBUG')
 
 
 config = Config()

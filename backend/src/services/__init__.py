@@ -1,12 +1,10 @@
-from .data_base import (
-    check_correct_accaunt,
+from .FastAPIUsers import (
+    get_async_session,
     init_database,
-    select_all,
-    add_token,
-    session,
-    engine,
-    Base,
-    User,
+    DB_HOST,
+    DB_PASS,
+    DB_PORT,
+    DB_USER,
+    DB_NAME,
+    DEBUG,
 )
-
-from .check_token import check_token

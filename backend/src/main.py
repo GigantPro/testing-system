@@ -1,4 +1,5 @@
 from typing import NoReturn
+import asyncio
 
 from .config import config
 from .requests import init_requests
@@ -10,10 +11,11 @@ import uvicorn
 def main() -> NoReturn:
     init_database()
     
-    init_requests()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(init_requests())
     
     uvicorn.run(
-        "src.app:app",
+        "app:app",
         host=config.ip,
         port=config.port,
         log_level=config.log_level,

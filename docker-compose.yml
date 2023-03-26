@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    env_file:
+      - ./.env/database.env
+    volumes:
+      - postgres_data:/var/lib/posgresql/data
+  backend:
+    depends_on:
+      - postgres
+    environment:
+      - DEBUG=false
+    env_file: 
+      - ./.env/backend.env
+    build:
+      context: /opt/xiver/testing-system/backend
+      dockerfile: Dockerfile
+    volumes:
+      - /var/log/xiver/testing-system/backend:/app/log
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: /opt/xiver/testing-system/frontend
+    volumes:
+      - /opt/xiver/testing-system/frontend:/app
+  nginx:
+    depends_on:
+      - backend
+    build:
+      dockerfile: Dockerfile
+      context: /opt/xiver/testing-system/frontend/nginx
+    ports:
+      - 80:80
+
+volumes:
+  postgres_data:

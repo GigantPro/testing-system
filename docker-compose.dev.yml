@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    env_file:
+      - ./.env/database.env
+    volumes:
+      - postgres_dev_data:/var/lib/postgres/data
+    ports:
+      - 5000:5432
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  backend-dev:
+    depends_on:
+      - postgres
+    environment:
+      - DEBUG=true
+    env_file: 
+      - ./.env/backend.env.dev
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+
+  frontend-dev:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+
+  nginx:
+    depends_on:
+      - frontend-dev
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - 80:80
+
+volumes:
+  postgres_dev_data:
+
+networks:
+  postgres:
+    driver: bridge

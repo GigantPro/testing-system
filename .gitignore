@@ -91,3 +91,7 @@ db\all_base.db
 */node_modules/
 ts_site/node_modules
 node_modules
+build
+db.sqlite3
+.env/
+venv/
