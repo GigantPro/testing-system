@@ -15,22 +15,20 @@ services:
     env_file: 
       - ./.env/backend.env
     build:
-      context: /opt/xiver/testing-system/backend
+      context: backend
       dockerfile: Dockerfile
     volumes:
       - /var/log/xiver/testing-system/backend:/app/log
   frontend:
     build:
       dockerfile: Dockerfile
-      context: /opt/xiver/testing-system/frontend
-    volumes:
-      - /opt/xiver/testing-system/frontend:/app
+      context: frontend
   nginx:
     depends_on:
       - backend
     build:
       dockerfile: Dockerfile
-      context: /opt/xiver/testing-system/frontend/nginx
+      context: nginx
     ports:
       - 80:80
 

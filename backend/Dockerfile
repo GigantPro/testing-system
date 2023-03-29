@@ -1,4 +1,4 @@
-FROM python:3.10.9-alpine3.17 as python-base
+FROM python:3.10.10-alpine3.17 as python-base
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -22,10 +22,7 @@ ENV PATH="${PATH}:${POETRY_VENV}/bin"
 
 WORKDIR /app
 
-RUN apk update && \
-    apk upgrade
-
-COPY ./src ./src
+COPY . .
 
 RUN poetry install --no-interaction --no-cache --without dev
 
