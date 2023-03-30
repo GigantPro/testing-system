@@ -9,7 +9,9 @@ import uvicorn
 
 
 def main() -> NoReturn:
+    # init
     asyncio.run(init_database())
+    init_requests()
     
     # loop = asyncio.get_event_loop()
     # loop.run_until_complete(init_requests())
