@@ -96,3 +96,5 @@ db.sqlite3
 .env/
 env/
 venv/
+postgres_dev_data
+pgadmin

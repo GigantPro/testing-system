@@ -1,4 +1,6 @@
-from .database import async_session_maker, Role
+from sqlalchemy import select, insert
+
+from .database import engine, Role
 
 
 __standart_roles = [
@@ -19,9 +21,9 @@ __standart_roles = [
     }
 ]
 
-async def init_roles(session = async_session_maker) -> None:
-    __session = session.begin().async_session
-    for role_ in __standart_roles:
-        __session.add(Role(**role_))
-
-    await __session.commit()
+async def init_roles() -> None:
+    async with engine.connect() as connection:
+        for role_ in __standart_roles:
+            if not await connection.execute(select(Role).where(Role.id == role_['id'])):
+                await connection.execute(insert(Role).values(**role_))
+        await connection.commit()
