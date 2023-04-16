@@ -26,23 +26,27 @@ def get_bool_env(env_name: str, default: bool | None = None) -> bool | NoReturn:
     env_value = getenv(env_name, None)
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
-    elif not(default is None):
+
+    if default:
         return default
-    else:
-        if env_value.lower() in ("1", "true", "t", "y", "yes"):
-            return True
-        elif env_value.lower() in ("0", "false", "f", "n", "no"):
-            return False
-        else:
-            raise CannotRecognizeBoolEnv(env_name, env_value)
+
+    if env_value.lower() in ("1", "true", "t", "y", "yes"):
+        return True
+
+    if env_value.lower() in ("0", "false", "f", "n", "no"):
+        return False
+
+    raise CannotRecognizeBoolEnv(env_name, env_value)
 
 
 def get_str_env(env_name: str, default: str | None = None) -> str | NoReturn:
     env_value = getenv(env_name, None)
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
-    elif env_value is None and default is not None:
+
+    if env_value is None and default is not None:
         return default
+
     return env_value
 
 
@@ -50,8 +54,10 @@ def get_int_env(env_name: str, default: int | None = None) -> str | NoReturn:
     env_value = getenv(env_name, None)
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
-    elif env_value is None and default is not None:
+
+    if env_value is None and default is not None:
         return default
+
     return int(env_value)
 
 

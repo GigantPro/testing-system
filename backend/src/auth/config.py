@@ -29,18 +29,20 @@ def get_bool_env(env_name: str) -> bool | NoReturn:
 
     if env_value.lower() in ("1", "true", "t", "y", "yes"):
         return True
-    elif env_value.lower() in ("0", "false", "f", "n", "no"):
+    if env_value.lower() in ("0", "false", "f", "n", "no"):
         return False
-    else:
-        raise CannotRecognizeBoolEnv(env_name, env_value)
+
+    raise CannotRecognizeBoolEnv(env_name, env_value)
 
 
 def get_str_env(env_name: str, default: str | None = None) -> str | NoReturn:
     env_value = getenv(env_name, None)
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
-    elif env_value is None and default is not None:
+
+    if env_value is None and default is not None:
         return default
+
     return env_value
 
 
@@ -59,7 +61,7 @@ class Config:
     POSTGRES_DB = get_str_env('POSTGRES_DB')
 
     DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT') 
+    DB_PORT = get_int_env('DB_PORT')
 
     SECRET = get_str_env('SECRET')
     SECRET_MANAGER = get_str_env('SECRET_MANAGER')
