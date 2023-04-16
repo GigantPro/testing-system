@@ -22,8 +22,14 @@ ENV PATH="${PATH}:${POETRY_VENV}/bin"
 
 WORKDIR /app
 
-COPY . .
+RUN apk update && \
+    apk upgrade
+
+COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-interaction --no-cache --without dev
 
-CMD ["poetry", "run", "start"]
+COPY ./src ./src
+
+CMD ["poetry", "run", "uvicorn",  "--reload",  "--host", "0.0.0.0",  "--port", "5001", "src.app:app"]
+

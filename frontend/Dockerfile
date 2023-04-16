@@ -1,13 +1,12 @@
-FROM node:19.6.0-alpine3.17 AS builder
+FROM node:19.6.0-alpine3.17 as build-deps
 ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY package.json .
-COPY yarn.lock .
+COPY package.json yarn.lock ./
 RUN yarn install --production
 
-COPY . .
+COPY ./ ./
 
 RUN yarn build
 
@@ -15,7 +14,7 @@ RUN yarn build
 FROM nginx:1.21.0-alpine as production
 ENV NODE_ENV production
 
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=build-deps /app/build /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

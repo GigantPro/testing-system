@@ -3,34 +3,56 @@ version: '3'
 services:
   postgres:
     image: postgres
+    hostname: postgres
     env_file:
-      - ./.env/database.env
+      - ./.env
+    environment:
+      - DB_PORT=5000
+    command: 
+      - -p 5000
     volumes:
-      - postgres_data:/var/lib/posgresql/data
+      - postgres_dev_data:/var/lib/postgres/data
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+
   backend:
     depends_on:
       - postgres
+    hostname: backend
     environment:
-      - DEBUG=false
+      - DEBUG=true
+      - DB_HOST=postgres
+      - DB_PORT=5000
     env_file: 
-      - ./.env/backend.env
+      - ./.env
     build:
-      context: backend
+      context: ./backend
       dockerfile: Dockerfile
-    volumes:
-      - /var/log/xiver/testing-system/backend:/app/log
+    ports:
+      - 5001:5001
+
   frontend:
     build:
       dockerfile: Dockerfile
-      context: frontend
+      context: ./frontend
+    hostname: frontend
+    ports:
+      - 3000:5002
+
   nginx:
     depends_on:
+      - frontend
       - backend
     build:
       dockerfile: Dockerfile
-      context: nginx
+      context: ./nginx
     ports:
       - 80:80
 
 volumes:
-  postgres_data:
+  postgres_dev_data:
+
+networks:
+  postgres:
+    driver: bridge

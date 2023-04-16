@@ -3,26 +3,34 @@ version: '3'
 services:
   postgres:
     image: postgres
+    hostname: postgres
     env_file:
-      - ./.env/database.env
+      - ./.env.dev
+    environment:
+      - DB_PORT=5000
+    command: 
+      - -p 5000
     volumes:
       - postgres_dev_data:/var/lib/postgres/data
     ports:
       - 5000:5432
-    networks:
-      - postgres
     restart: unless-stopped
 
   backend-dev:
     depends_on:
       - postgres
+    hostname: backend
     environment:
       - DEBUG=true
+      - DB_HOST=postgres
+      - DB_PORT=5000
     env_file: 
-      - ./.env/backend.env.dev
+      - ./.env.dev
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
+    ports:
+      - 5001:5001
     volumes:
       - ./backend:/app
 
@@ -30,12 +38,14 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./frontend
-    volumes:
-      - ./frontend:/app
+    hostname: frontend
+    ports:
+      - 3000:80
 
   nginx:
     depends_on:
       - frontend-dev
+      - backend-dev
     build:
       dockerfile: Dockerfile
       context: ./nginx

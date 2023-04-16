@@ -94,4 +94,5 @@ node_modules
 build
 db.sqlite3
 .env/
+env/
 venv/

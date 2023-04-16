@@ -6,7 +6,6 @@ authors = [
     "GigantPro <pochtagigantpro@gmail.com>"
 ]
 license = "GPL-3.0-only"
-packages = [{include = "./src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -24,6 +23,3 @@ mypy = "^1.1.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-start = "src.main:main"
