@@ -34,6 +34,8 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     username = Column(String, nullable=False)
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)
     role_id = Column(Integer, ForeignKey(role.c.id))
+    name = Column(String, nullable=False)
+    surname = Column(String, nullable=False)
 
     email: Mapped[str] = mapped_column(
         String(length=320), unique=True, index=True, nullable=False

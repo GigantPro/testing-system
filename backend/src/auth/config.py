@@ -46,10 +46,14 @@ def get_str_env(env_name: str, default: str | None = None) -> str | NoReturn:
     return env_value
 
 
-def get_int_env(env_name: str) -> str | NoReturn:
+def get_int_env(env_name: str, default: int | None = None) -> str | NoReturn:
     env_value = getenv(env_name, None)
-    if env_value is None:
+    if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
+
+    if env_value is None and default is not None:
+        return default
+
     return int(env_value)
 
 
@@ -65,6 +69,8 @@ class Config:
 
     SECRET = get_str_env('SECRET')
     SECRET_MANAGER = get_str_env('SECRET_MANAGER')
+
+    TTL_COOKIE_DAYS = get_int_env('TTL_COOKIE_DAYS', 30) * 24 * 60
 
 
 config = Config()
