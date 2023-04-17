@@ -75,6 +75,8 @@ services:
       dockerfile: Dockerfile.dev
       context: ./frontend
     hostname: frontend
+    volumes:
+      -./frontend:/app
     networks:
       - nginx
     ports:

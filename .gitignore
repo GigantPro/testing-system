@@ -98,3 +98,4 @@ env/
 venv/
 postgres_dev_data
 pgadmin
+*/yarn-error.log
