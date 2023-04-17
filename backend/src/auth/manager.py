@@ -4,7 +4,7 @@ from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
 from .database import User, get_user_db
-from .config import config
+from ..db_config import config
 
 SECRET = config.SECRET_MANAGER
 

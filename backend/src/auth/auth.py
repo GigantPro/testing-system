@@ -1,7 +1,7 @@
 from fastapi_users.authentication import CookieTransport
 from fastapi_users.authentication import AuthenticationBackend, JWTStrategy
 
-from .config import config
+from ..db_config import config
 
 
 cookie_transport = CookieTransport(

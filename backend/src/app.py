@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 import fastapi_users
 
-from .auth.init_roles import init_roles
+from .init_db import init_db
 from .auth.manager import get_user_manager
-from .auth.database import User, create_db_and_tables, async_session_maker
+from .auth.database import User, async_session_maker
 from .auth.schemas import UserCreate, UserRead
 from .auth.auth import auth_backend
 from .config import config
+from .classrooms.router import classrooms_router
 
 
 app = FastAPI(
@@ -34,11 +35,14 @@ app.include_router(
     tags=["auth"],
 )
 
+app.include_router(
+    classrooms_router,
+    tags=["classrooms"]
+)
+
 @app.on_event("startup")
 async def on_startup():
-    # Not needed if you setup a migration system like Alembic
-    await create_db_and_tables()
-    await init_roles()
+    await init_db()
 
 
 @app.on_event("shutdown")

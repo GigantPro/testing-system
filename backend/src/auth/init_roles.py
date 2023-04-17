@@ -11,11 +11,21 @@ __standart_roles = [
     },
     {
         "id": 2,
-        "name": "admin",
+        "name": "teacher",
         "permissions": None
     },
     {
         "id": 3,
+        "name": "moderator",
+        "permissions": None
+    },
+    {
+        "id": 4,
+        "name": "admin",
+        "permissions": None
+    },
+    {
+        "id": 5,
         "name": "creator",
         "permissions": None
     }

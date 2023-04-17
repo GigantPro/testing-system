@@ -8,7 +8,7 @@ from sqlalchemy import JSON, TIMESTAMP, Boolean, Column, ForeignKey, Integer, St
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from .config import config
+from ..db_config import config
 from ..models.models import role
 
 
@@ -30,7 +30,7 @@ class Role(Base):
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, nullable=False)
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)
     role_id = Column(Integer, ForeignKey(role.c.id))

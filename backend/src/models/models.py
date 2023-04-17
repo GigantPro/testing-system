@@ -27,3 +27,15 @@ user = Table(
     Column("is_superuser", Boolean, default=False, nullable=False),
     Column("is_verified", Boolean, default=False, nullable=False),
 )
+
+classroom = Table(
+    "classroom",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("owner_id", Integer, ForeignKey(user.c.id)),
+    Column("class_name", String, nullable=False),
+    Column("created_at", TIMESTAMP, default=datetime.utcnow),
+    Column("admins", JSON, nullable=False),
+    Column("members", JSON, nullable=False),
+    Column("optins", JSON),
+)
