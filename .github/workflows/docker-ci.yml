@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"
+      POSTGRES_DB: "base"
+      SECRET: "secret"
+      SECRET_MANAGER: "secret2"
+      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin_pgadmin4"
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+      touch .env
+      sudo docker-compose -f ./docker-compose.yml up --build
