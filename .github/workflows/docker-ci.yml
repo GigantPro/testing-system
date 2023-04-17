@@ -1,10 +1,6 @@
 name: Docker Image CI
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, pull_request]
 
 jobs:
 
@@ -12,17 +8,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_USER: "user"
-      POSTGRES_DB: "base"
-      SECRET: "secret"
-      SECRET_MANAGER: "secret2"
-      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.com"
-      PGADMIN_DEFAULT_PASSWORD: "admin_pgadmin4"
+    
     steps:
     - uses: actions/checkout@v3
+    - name: Create .env file
+      run: cp ./.env.example ./.env
+
+    - uses: isbang/compose-action@v1.4.1
+      with:
+        compose-file: "./docker-compose.yml"
     - name: Build the Docker image
       run: |
-      touch .env
-      sudo docker-compose -f ./docker-compose.yml up --build
+        sudo docker-compose -f ./docker-compose.yml up --build --abort-on-container-exit --exit-code-from service-test
+      

@@ -66,6 +66,15 @@ services:
       - nginx
     ports:
       - 80:80
+  
+  service-test:
+    image: alpine
+    privileged: true
+    depends_on:
+      - nginx
+      - frontend
+      - backend
+      - postgres
 
 networks:
   postgres:
