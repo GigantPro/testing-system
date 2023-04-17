@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: yarn ci, build and test
+      - name: yarn ci and build
         run: |
           cd frontend;
           yarn install -D
