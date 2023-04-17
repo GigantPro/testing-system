@@ -21,6 +21,6 @@ jobs:
     - uses: isbang/compose-action@v1.4.1
     - name: Build the Docker image
       run: |
-      touch .env
-      sudo docker-compose -f ./docker-compose.yml up --build
+        touch .env
+        sudo docker-compose -f ./docker-compose.yml up --build
       
