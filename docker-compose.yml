@@ -14,7 +14,7 @@ services:
       - -p 5000
     volumes:
       - /opt/xiver/projects_data/edu/db/data:/data/postgres
-      # - /opt/xiver/projects_data/edu/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - /opt/xiver/projects_data/edu/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     ports:
       - 5000:5000
     healthcheck:
