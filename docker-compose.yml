@@ -26,27 +26,6 @@ services:
     networks:
       - postgres
 
-  pgadmin:
-    image: dpage/pgadmin4
-    depends_on:
-      - postgres
-    user: root
-    env_file:
-      - ./.env
-    environment:
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-       - /opt/xiver/db/edu/pgadmin:/var/lib/pgadmin
-    networks:
-      - postgres
-    ports:
-      - "5003:80"
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-
   backend:
     depends_on:
       - postgres
