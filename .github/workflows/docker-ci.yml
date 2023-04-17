@@ -17,10 +17,10 @@ jobs:
       PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.com"
       PGADMIN_DEFAULT_PASSWORD: "admin_pgadmin4"
     steps:
+    - uses: actions/checkout@v3
     - name: Create .env file
       run: touch .env
 
-    - uses: actions/checkout@v3
     - uses: isbang/compose-action@v1.4.1
     - name: Build the Docker image
       run: |
