@@ -76,7 +76,7 @@ services:
       context: ./frontend
     hostname: frontend
     volumes:
-      -./frontend:/app
+      - ./frontend:/app
     networks:
       - nginx
     ports:
