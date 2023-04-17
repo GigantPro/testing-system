@@ -19,5 +19,5 @@ jobs:
         compose-file: "./docker-compose.yml"
     - name: Build the Docker image
       run: |
-        sudo docker-compose -f ./docker-compose.yml up --build
+        sudo docker-compose -f ./docker-compose.yml up --build --abort-on-container-exit --exit-code-from service-test
       
