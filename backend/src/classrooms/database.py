@@ -27,7 +27,7 @@ class Classroom(Base):
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
     admins = Column(JSON, nullable=False)
     members = Column(JSON, nullable=False)
-    optins = Column(JSON)
+    optins = Column(JSON, default=list())
 
 
 class ClassInvite(Base):

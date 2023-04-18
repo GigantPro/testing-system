@@ -37,7 +37,7 @@ classroom = Table(
     Column("created_at", TIMESTAMP, default=datetime.utcnow),
     Column("admins", JSON, nullable=False),
     Column("members", JSON, nullable=False),
-    Column("optins", JSON),
+    Column("optins", JSON, default=list()),
 )
 
 classinvite = Table(
