@@ -1,10 +1,9 @@
 from datetime import datetime
 from typing import AsyncGenerator
 
-from fastapi import Depends
-from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String
+from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase
 
 from ..db_config import config
 from ..models.models import user
@@ -29,6 +28,19 @@ class Classroom(Base):
     admins = Column(JSON, nullable=False)
     members = Column(JSON, nullable=False)
     optins = Column(JSON)
+
+
+class ClassInvite(Base):
+    __tablename__ = 'classinvite'
+
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+    invite_code = Column(String, primary_key=True, nullable=False)
+    created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
+    class_id = Column(Integer, ForeignKey(Classroom.id), nullable=False)
+    works_end = Column(TIMESTAMP, nullable=True)
+    is_active = Column(Boolean, default=True, nullable=False)
+    creator_id = Column(Integer, ForeignKey(user.c.id), nullable=False)
+    invites_last = Column(Integer, default=1000000, nullable=False)
 
 
 engine = create_async_engine(DATABASE_URL)

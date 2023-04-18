@@ -1,11 +1,9 @@
 from fastapi import FastAPI
-import fastapi_users
 
 from .init_db import init_db
-from .auth.manager import get_user_manager
-from .auth.database import User, async_session_maker
+from .auth.database import async_session_maker
 from .auth.schemas import UserCreate, UserRead
-from .auth.auth import auth_backend
+from .auth.auth import auth_backend, fastapi_users
 from .config import config
 from .classrooms.router import classrooms_router
 
@@ -16,11 +14,6 @@ app = FastAPI(
     openapi_url="/openapi.json",
     docs_url="/docs",
     root_path='/api',
-)
-
-fastapi_users = fastapi_users.FastAPIUsers[User, int](
-    get_user_manager,
-    [auth_backend],
 )
 
 app.include_router(

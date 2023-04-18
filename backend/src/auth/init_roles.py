@@ -1,4 +1,4 @@
-from sqlalchemy import select, insert, delete
+from sqlalchemy import select, insert, update
 
 from .database import engine, Role
 
@@ -38,10 +38,11 @@ __standart_roles = [
 
 async def init_roles() -> None:
     async with engine.connect() as connection:
-        await connection.execute(delete(Role))
-
         for role_ in __standart_roles:
             result = await connection.execute(select(Role).where(Role.id == role_['id']))
             if not result.fetchone():
                 await connection.execute(insert(Role).values(**role_))
+            else:
+                await connection.execute(update(Role).where(Role.id == role_['id']).values(**role_))
+                
         await connection.commit()

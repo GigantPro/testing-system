@@ -39,3 +39,16 @@ classroom = Table(
     Column("members", JSON, nullable=False),
     Column("optins", JSON),
 )
+
+classinvite = Table(
+    "classinvite",
+    metadata,
+    Column("id", Integer, primary_key=True, autoincrement=True, nullable=False),
+    Column("invite_code", String, primary_key=True, nullable=False),
+    Column("created_at", TIMESTAMP, default=datetime.utcnow, nullable=False),
+    Column("class_id", Integer, ForeignKey(classroom.c.id), nullable=False),
+    Column("works_end", TIMESTAMP, nullable=True),
+    Column("is_active", Boolean, default=True, nullable=False),
+    Column("creator_id", Integer, ForeignKey(user.c.id), nullable=False),
+    Column("invites_last", Integer, default=1000000, nullable=False),
+)
