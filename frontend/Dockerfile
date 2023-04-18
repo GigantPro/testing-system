@@ -1,6 +1,6 @@
 FROM node:19.6.0-alpine3.17 as build-deps
-ENV NODE_ENV production
 
+ENV NODE_ENV production
 WORKDIR /app
 
 COPY package.json yarn.lock ./

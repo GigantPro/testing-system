@@ -5,8 +5,9 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 RUN yarn install --development
+COPY ./node_modules ./
 
-COPY ./ ./
+COPY ./public ./src ./nginx.conf ./
 EXPOSE 3000
 
 # CMD [ "echo", "$(yarn bin)" ]
