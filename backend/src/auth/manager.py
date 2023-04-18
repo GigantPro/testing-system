@@ -14,17 +14,17 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     verification_token_secret = SECRET
 
     async def on_after_register(self, user: User, request: Optional[Request] = None):
-        print(f"User {user.id} has registered.")
+        print(f'User {user.id} has registered.')
 
     async def on_after_forgot_password(
         self, user: User, token: str, request: Optional[Request] = None
     ):
-        print(f"User {user.id} has forgot their password. Reset token: {token}")
+        print(f'User {user.id} has forgot their password. Reset token: {token}')
 
     async def on_after_request_verify(
         self, user: User, token: str, request: Optional[Request] = None
     ):
-        print(f"Verification requested for user {user.id}. Verification token: {token}")
+        print(f'Verification requested for user {user.id}. Verification token: {token}')
 
     async def create(
         self,
@@ -43,9 +43,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             if safe
             else user_create.create_update_dict_superuser()
         )
-        password = user_dict.pop("password")
-        user_dict["hashed_password"] = self.password_helper.hash(password)
-        user_dict["role_id"] = 1
+        password = user_dict.pop('password')
+        user_dict['hashed_password'] = self.password_helper.hash(password)
+        user_dict['role_id'] = 1
 
         created_user = await self.user_db.create(user_dict)
 

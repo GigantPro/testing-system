@@ -3,7 +3,7 @@ from typing import NoReturn
 from dataclasses import dataclass
 
 
-__all__ = ("config",)
+__all__ = ('config',)
 
 
 class EnvVariableUndefined(Exception):
@@ -64,10 +64,10 @@ def get_int_env(env_name: str, default: int | None = None) -> str | NoReturn:
 @dataclass(slots=True, frozen=True)
 class Config:
     """Config class."""
-    ip: str = get_str_env("IP", "0.0.0.0")
+    ip: str = get_str_env('IP', '0.0.0.0')
     port: int = 5001
-    source_path: str = get_str_env("SOURCE_PATH", "/app/testing-system/frontend/source")
-    log_level: str = get_str_env("LOG_LEVEL", "debug")
+    source_path: str = get_str_env('SOURCE_PATH', '/app/testing-system/frontend/source')
+    log_level: str = get_str_env('LOG_LEVEL', 'debug')
     debug: bool = get_bool_env('DEBUG', False)
 
 

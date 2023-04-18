@@ -24,7 +24,7 @@ classrooms_router = APIRouter(prefix='/classrooms')
 async def create_class_room(class_name: str, request: Request, user: User = Depends(current_active_user)) -> dict:
     perm = await has_permission(user, 'create_classrooms')
     if not perm:
-        return JSONResponse(content={"message": "Permission Denied"}, status_code=403)
+        return JSONResponse(content={'message': 'Permission Denied'}, status_code=403)
 
     generated_code_link = await generate_invite_class_chars()
     await save_generated_class(user, generated_code_link, class_name)
@@ -38,7 +38,7 @@ async def create_class_room(class_name: str, request: Request, user: User = Depe
 @classrooms_router.get('/join/{invite_code}')
 async def join_class_room(invite_code: str, user: User = Depends(current_active_user)) -> dict:
     if not check_for_valid_invite(invite_code):
-        return JSONResponse(content={"message": "Invite code does not exist"}, status_code=404)
+        return JSONResponse(content={'message': 'Invite code does not exist'}, status_code=404)
 
     res = await activate_invite(user, invite_code)
     return res

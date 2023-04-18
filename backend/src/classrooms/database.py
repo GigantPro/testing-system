@@ -10,8 +10,8 @@ from ..models.models import user
 
 
 
-DATABASE_URL = f"postgresql+asyncpg://{config.POSTGRES_USER}:{config.POSTGRES_PASSWORD}@"\
-    f"{config.DB_HOST}:{config.DB_PORT}/{config.POSTGRES_DB}"
+DATABASE_URL = f'postgresql+asyncpg://{config.POSTGRES_USER}:{config.POSTGRES_PASSWORD}@'\
+    f'{config.DB_HOST}:{config.DB_PORT}/{config.POSTGRES_DB}'
 
 
 class Base(DeclarativeBase):
