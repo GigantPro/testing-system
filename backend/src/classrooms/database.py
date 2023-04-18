@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import AsyncGenerator
 
-from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import JSON, TIMESTAMP, DateTime, Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
@@ -37,7 +37,7 @@ class ClassInvite(Base):
     invite_code = Column(String, primary_key=True, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
     class_id = Column(Integer, ForeignKey(Classroom.id), nullable=False)
-    works_end = Column(TIMESTAMP, nullable=True)
+    works_end = Column(DateTime, nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
     creator_id = Column(Integer, ForeignKey(user.c.id), nullable=False)
     invites_last = Column(Integer, default=1000000, nullable=False)

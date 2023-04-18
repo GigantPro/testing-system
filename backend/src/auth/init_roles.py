@@ -12,27 +12,37 @@ __standart_roles = [
     {
         "id": 2,
         "name": "teacher",
-        "permissions": None
+        "permissions": {
+            'create_classrooms': True
+        }
     },
     {
         "id": 3,
         "name": "tester",
-        "permissions": None
+        "permissions": {
+            'create_classrooms': True
+        }
     },
     {
         "id": 4,
         "name": "moderator",
-        "permissions": None
+        "permissions": {
+            'create_classrooms': True
+        }
     },
     {
         "id": 5,
         "name": "admin",
-        "permissions": None
+        "permissions": {
+            'create_classrooms': True
+        }
     },
     {
         "id": 6,
         "name": "creator",
-        "permissions": None
+        "permissions": {
+            'create_classrooms': True
+        }
     }
 ]
 
