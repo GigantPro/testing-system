@@ -3,7 +3,6 @@ from fastapi.responses import JSONResponse
 
 from ..auth.database import User
 from ..auth.auth import fastapi_users
-from .database import engine
 from .functions import (
     has_permission,
     generate_invite_class_chars,

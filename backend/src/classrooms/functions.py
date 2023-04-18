@@ -1,8 +1,9 @@
 from typing import Any
-from sqlalchemy import select, insert, update
 from string import ascii_lowercase, ascii_uppercase
 import random
 from datetime import datetime, timedelta
+
+from sqlalchemy import select, insert, update
 from fastapi.responses import JSONResponse
 
 from ..auth.database import User, Role
@@ -63,7 +64,7 @@ async def save_generated_class(user: User, generated_code: str, class_name: str)
         )
         res = await connection.execute(select(Classroom).column(Classroom.id))
         res = res.fetchall()
-        res = max([i[0] for i in res])
+        res = max(res, key=lambda i: i[0])
 
         await connection.execute(
             insert(ClassInvite)\
@@ -90,7 +91,7 @@ async def check_for_valid_invite(invite_code: str) -> bool:
 
         if res[5] is False or \
             res [8] == 0:
-                return False
+            return False
         if res[4] < datetime.now():
             await connection.execute(
                 update(ClassInvite.is_active) \

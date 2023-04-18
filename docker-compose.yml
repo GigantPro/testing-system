@@ -69,7 +69,6 @@ services:
   
   service-test:
     image: alpine
-    privileged: true
     depends_on:
       - nginx
       - frontend

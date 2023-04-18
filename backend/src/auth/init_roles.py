@@ -54,5 +54,5 @@ async def init_roles() -> None:
                 await connection.execute(insert(Role).values(**role_))
             else:
                 await connection.execute(update(Role).where(Role.id == role_['id']).values(**role_))
-                
+
         await connection.commit()
