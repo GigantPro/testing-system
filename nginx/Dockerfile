@@ -5,6 +5,6 @@ COPY nginx.conf /etc/nginx/
 COPY ./SSL/ /etc/letsencrypt/live/edu.xiver.ru/
 
 EXPOSE 80
-EXPOSE 443
+EXPOSE 444
 
 CMD ["nginx", "-g", "daemon off;"]
