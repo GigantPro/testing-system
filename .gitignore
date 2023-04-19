@@ -99,3 +99,4 @@ venv/
 postgres_dev_data
 pgadmin
 */yarn-error.log
+*/SSL
