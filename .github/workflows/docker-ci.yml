@@ -24,10 +24,10 @@ jobs:
     - name: Key preparation
       run: |
         mkdir ./nginx/SSL
-        echo ${FULLCHAIN_PEM} > ./nginx/SSL/fullchain.pem
-        echo ${PRIVKEY_PEM} > ./nginx/SSL/privkey.pem
-        echo ${CERT_PEM} > ./nginx/SSL/cert.pem
-        echo ${CHAIN_PEM} > ./nginx/SSL/chain.pem
+        echo ${{ FULLCHAIN_PEM }} > ./nginx/SSL/fullchain.pem
+        echo ${{ PRIVKEY_PEM }} > ./nginx/SSL/privkey.pem
+        echo ${{ CERT_PEM }} > ./nginx/SSL/cert.pem
+        echo ${{ CHAIN_PEM }} > ./nginx/SSL/chain.pem
 
     - uses: isbang/compose-action@v1.4.1
       with:
