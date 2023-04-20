@@ -26,3 +26,12 @@ async def get_user_by_id(user_id: int) -> dict:
 
     user_read = await _get_user_read_by_user(user)
     return json.loads(user_read.json())
+
+@user_get_router.get('/{userid}/email')
+async def get_user_user_by_id(user_id: int) -> str:
+    user = await _get_user_by_id(user_id)
+
+    if not user:
+        return JSONResponse('User not found', status_code=404)
+
+    return user.email
