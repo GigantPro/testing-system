@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubuntu-latest
     environment: 
-      name: production
+      name: DockerCI
       url: https://github.com/xiver-org/testing-system/settings/environments/989119136
     
     steps:
