@@ -29,7 +29,7 @@ class Role(Base):
     permissions = Column(JSON)
 
 
-class User(SQLAlchemyBaseUserTable[int], Base):
+class User(SQLAlchemyBaseUserTable[int], Base, ):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, nullable=False)
     registered_at = Column(TIMESTAMP, default=datetime.utcnow)

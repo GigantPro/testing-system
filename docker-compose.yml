@@ -75,6 +75,7 @@ services:
       - frontend
       - backend
       - postgres
+    command: sleep 20s
 
 networks:
   postgres:
