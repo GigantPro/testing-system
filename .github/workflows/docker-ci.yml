@@ -16,8 +16,8 @@ jobs:
 
     - name: Key preparation
       run: |
-        echo ${FULLCHAIN_PEM} > /etc/letsencrypt/live/edu.xiver.ru/fullchain.pem
-        echo ${PRIVKEY_PEM} > /etc/letsencrypt/live/edu.xiver.ru/privkey.pem
+        echo ${FULLCHAIN_PEM} > ./nginx/SSL/fullchain.pem
+        echo ${PRIVKEY_PEM} > ./nginx/SSL/privkey.pem
 
     - uses: isbang/compose-action@v1.4.1
       with:
