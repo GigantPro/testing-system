@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.inspection import inspect
 
 from .database import User, engine
-from .schemas import UserRead 
+from .schemas import UserRead
 
 
 async def _get_user_by_id(user_id: int) -> None | User:
