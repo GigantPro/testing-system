@@ -1,6 +1,10 @@
 name: Docker Image CI
 
-on: [push]
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 env:
   FULLCHAIN_PEM: ${{ secrets.FULLCHAIN_PEM }}
   PRIVKEY_PEM: ${{ secrets.PRIVKEY_PEM }}
