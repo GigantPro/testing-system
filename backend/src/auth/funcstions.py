@@ -1,5 +1,3 @@
-import inspect as insp
-
 from sqlalchemy import select
 from sqlalchemy.inspection import inspect
 
@@ -17,7 +15,7 @@ async def _get_user_by_id(user_id: int) -> None | User:
 
         user_cfg = {}
         columns = inspect(User).c.keys()
-        
+
         for i in range(len(columns)):
             user_cfg[columns[i]] = user[i]
 

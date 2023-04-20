@@ -1,10 +1,8 @@
 import json
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from .database import User
 from .auth import fastapi_users
-from .schemas import UserRead
 from .funcstions import (
     _get_user_by_id,
     _get_user_read_by_user,
