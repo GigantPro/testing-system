@@ -16,6 +16,7 @@ jobs:
 
     - name: Key preparation
       run: |
+        mkdir ./nginx/SSL
         echo ${FULLCHAIN_PEM} > ./nginx/SSL/fullchain.pem
         echo ${PRIVKEY_PEM} > ./nginx/SSL/privkey.pem
 
