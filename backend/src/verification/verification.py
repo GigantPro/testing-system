@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 
 from ..auth.database import User
 from ..auth.auth import fastapi_users
-from ..config import config
+from .config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
 from .functions import __update_verification_status
 
@@ -26,18 +26,15 @@ verification_orders = {}
 async def send_verif_mail(
     verification_code: int = -1,
     user: User = Depends(current_active_user),
-    
 ) -> dict:
     if verification_code != -1:
         if verification_orders.get(user.id, -1) != verification_code:
             return JSONResponse({'message': 'The code is incorrect or you didn`t ask for it'}, 404)
 
-        else:
-            await __update_verification_status(user.id)
+        await __update_verification_status(user.id)
+        verification_orders.pop(user.id)
 
-            verification_orders.pop(user.id)
-
-            return RedirectResponse(URL_FOR_REDIRRECT_AFTER_VERIF_PASSED, 303)
+        return RedirectResponse(URL_FOR_REDIRRECT_AFTER_VERIF_PASSED, 303)
 
     else:
         with smtplib.SMTP_SSL(config.mail_server, 465) as smtp:
