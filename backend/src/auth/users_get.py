@@ -8,6 +8,7 @@ from .funcstions import (
     _get_user_read_by_user,
 )
 from ..verification.verification import verification_router
+from .self_get import self_router
 
 
 current_user = fastapi_users.current_user()
@@ -19,6 +20,9 @@ user_get_router = APIRouter(prefix='/user')
 
 user_get_router.include_router(
     verification_router
+)
+user_get_router.include_router(
+    self_router
 )
 
 
