@@ -12,7 +12,7 @@ async def _get_user_by_id(user_id: int) -> None | User:
             .where(User.id == user_id)
         )
         user = user.fetchone()
-    
+
         if not user:
             return None
 
