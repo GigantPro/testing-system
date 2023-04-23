@@ -81,7 +81,7 @@ services:
     networks:
       - nginx
     ports:
-      - 3000:80
+      - 100:3000
 
   nginx:
     depends_on:
