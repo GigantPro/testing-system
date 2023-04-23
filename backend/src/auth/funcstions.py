@@ -13,6 +13,9 @@ async def _get_user_by_id(user_id: int) -> None | User:
         )
         user = user.fetchone()
 
+        if not user:
+            return None
+
         user_cfg = {}
         columns = inspect(User).c.keys()
 
