@@ -1,0 +1,60 @@
+@import './config.scss';
+
+
+.header {
+    background-color: $header-color;
+    width: 100vw;
+    height: 50px; 
+}
+
+.loginButtons {
+    align-self: flex-end;
+}
+
+.Accaunt {
+    display: flex;
+    align-items: center;
+    float: right;
+    padding: 0 5px;
+
+    height: 50px;
+    padding-right: 10px;
+}
+
+.NotifyButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 1 1 auto;
+    margin: 0 5px;
+
+    height: 45px;
+    width: 45px;
+
+    background-color: $header-color;
+    border: none;
+    border-radius: 50%;
+}
+
+.NotifyButton:hover {
+    background-color: $button-hover-color;
+}
+
+.NotifyButton:active {
+    background-color: $button-hover-active;
+    box-shadow: 0 2px #666;
+  }
+
+.notyfiImg {
+    height: 45px;
+    width: 45px;
+}
+
+.AccauntButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 45px;
+}

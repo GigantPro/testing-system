@@ -68,6 +68,7 @@ class Config:
     port: int = 5001
     source_path: str = get_str_env('SOURCE_PATH', '/app/testing-system/frontend/source')
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
+    static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
     debug: bool = get_bool_env('DEBUG', False)
 
 

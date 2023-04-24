@@ -4,7 +4,7 @@ ENV NODE_ENV development
 WORKDIR /app 
 
 COPY package.json yarn.lock ./
-RUN yarn install --development
+RUN yarn install --development --prodaction
 COPY ./node_modules ./
 
 COPY ./public ./src ./nginx.conf ./

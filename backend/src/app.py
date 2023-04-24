@@ -1,4 +1,7 @@
+from os import makedirs
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from .init_db import init_db
 from .auth.database import async_session_maker
@@ -16,6 +19,9 @@ app = FastAPI(
     docs_url='/docs',
     root_path='/api',
 )
+
+makedirs(config.static_files_path, exist_ok=True)
+app.mount("/static", StaticFiles(directory=config.static_files_path))
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
