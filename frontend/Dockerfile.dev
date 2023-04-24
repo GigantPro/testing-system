@@ -3,9 +3,7 @@ FROM node:19.6.0-alpine3.17
 ENV NODE_ENV development
 WORKDIR /app 
 
-COPY package.json yarn.lock ./
-RUN yarn install --development --prodaction
-COPY ./node_modules ./
+COPY node_modules /app/
 
 COPY ./public ./src ./nginx.conf ./
 EXPOSE 3000
