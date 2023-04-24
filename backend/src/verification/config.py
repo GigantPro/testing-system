@@ -66,6 +66,7 @@ class Config:
     mail_server: str = get_str_env('MAIL_SERVICE')
     email: str = get_str_env('EMAIL')
     mail_password: str = get_str_env('MAIL_PASSWORD')
+    debug: bool = get_bool_env('DEBUG', False)
 
 
 config = Config()
