@@ -8,6 +8,7 @@ class UserRead(schemas.BaseUser[int]):
     username: str
     name: str
     surname: str
+    ico_url: str
     role_id: int
     is_active: bool = True
     is_superuser: bool = False
@@ -20,6 +21,7 @@ class UserCreate(schemas.BaseUserCreate):
     password: str
     name: str
     surname: str
+    ico_url: Optional[str] = '/api/static/standart_ico.png'
     role_id: int
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
@@ -32,6 +34,7 @@ class UserUpdate(schemas.BaseUserUpdate):
     username: Optional[str]
     name: Optional[str]
     surname: Optional[str]
+    ico_url: Optional[str]
     hashed_password: Optional[str]
 
     is_active: Optional[bool]
