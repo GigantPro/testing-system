@@ -62,7 +62,7 @@ class Auth extends React.Component {
         const username = loginInput.value;
         const password = passwordInput.value;
         axios
-            .post('/api/auth/login', data={ username: username, password: password })
+            .post('/api/auth/login', { username: username, password: password })
             .then((res) => res.data)
             .then(
                 (result) => {
@@ -70,7 +70,7 @@ class Auth extends React.Component {
                         isLoggedPasswordRequest: true,
                         items: result,
                     });
-                    console.log(res.data);
+                    console.log(result);
                 },
                 (error) => {
                     this.setState({
