@@ -1,7 +1,7 @@
 .. raw:: html
 
     <p align="center">
-        <h1 align="center">Education.Xiver</h1>
+        <h1 align="center"><a href="https://edu.xiver.ru/">Education.Xiver</a></h1>
         <h2 align="center">Этот проект нужен для эффективной учебы и облегчения раброты учителям!</h2>
     </p>
     <p align="center">
