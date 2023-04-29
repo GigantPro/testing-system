@@ -11,7 +11,6 @@ import { Footer } from './Components/Footer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export default function App() {
-    console.log(1);
     return (
         <div className='App'>
             <Header />

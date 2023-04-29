@@ -1,1 +1,1 @@
-export const fetcher = (url, init) => fetch(url, init).then((res) => res.json());
+export const fetcher = (url, init, ...args) => fetch(url, init, ...args).then((res) => res.json());

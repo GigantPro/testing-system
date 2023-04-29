@@ -5,7 +5,6 @@ import './styles/Header.scss';
 
 export const Header = () => {
     const { data } = useFetchMe();
-    console.log(data);
 
     if (!data) {
         return <div>Loading...</div>;
