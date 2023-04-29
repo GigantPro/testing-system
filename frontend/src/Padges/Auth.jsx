@@ -1,39 +1,48 @@
 import { useFetchMe, useLogin } from '../Api/Auth';
 
+import { useState } from 'react';
+
 import closePassword from './assets/close_password.png';
 import openPassword from './assets/open_password.png';
 
 import './styles/Auth.scss';
 
-let loginIncorrect = false;
-
-function showPassword() {
-    let passwordInput = document.getElementsByClassName('auth-password-input')[0];
-    let passwordStatusImg = document.getElementsByClassName('password-status-img')[0];
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        passwordStatusImg.src = closePassword;
-    } else if (passwordInput.type === 'text') {
-        passwordInput.type = 'password';
-        passwordStatusImg.src = openPassword;
-    } else {
-        console.log('Incorrect logic');
-    }
-}
-
-export function Login() {
-    let passwordInput = document.getElementsByClassName('auth-password-input')[0];
-    let loginInput = document.getElementsByClassName('auth-login-input')[0];
-    console.log(passwordInput.value, loginInput.value);
-
-    const password = passwordInput.value;
-    const login = loginInput.value;
-
-    const { data, error } = useLogin(login, password);
-}
-
 export const Auth = () => {
+    const { loginIncorrect, setLoginIncorrect } = useState(false);
+    const { startLogin, setStartLogin } = useState(false);
+
+    function showPassword() {
+        let passwordInput = document.getElementsByClassName('auth-password-input')[0];
+        let passwordStatusImg = document.getElementsByClassName('password-status-img')[0];
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordStatusImg.src = closePassword;
+        } else if (passwordInput.type === 'text') {
+            passwordInput.type = 'password';
+            passwordStatusImg.src = openPassword;
+        } else {
+            console.log('Incorrect logic');
+        }
+    }
+
+    const Login = () => {
+        let passwordInput = document.getElementsByClassName('auth-password-input')[0];
+        let loginInput = document.getElementsByClassName('auth-login-input')[0];
+        console.log(passwordInput.value, loginInput.value);
+
+        const password = passwordInput.value;
+        const login = loginInput.value;
+
+        // const [data, error] = useLogin(login, password);
+        console.log(data, error);
+    };
+
+    if (startLogin) {
+        const [data, error] = useLogin(login, password);
+    }
+
     const { data, isLoading } = useFetchMe();
+
     if (data && data.detail === 'Unauthorized') {
         return (
             <div className='auth_wigit'>
