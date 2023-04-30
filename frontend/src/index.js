@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
-import { Auth } from './Padges/Auth';
+import reportWebVitals from './reportWebVitals';
+import { Login } from './Padges/Login';
+import { Registration } from './Padges/Registration';
 import { Main } from './Padges/Main';
 import { Header } from './Components/Header';
 import { Footer } from './Components/Footer';
@@ -10,7 +12,6 @@ import { Footer } from './Components/Footer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export default function App() {
-    console.log(1);
     return (
         <div className='App'>
             <Header />
@@ -18,7 +19,8 @@ export default function App() {
                 <Routes>
                     <Route path='/'>
                         <Route index element={<Main />} />
-                        <Route path='auth' element={<Auth />} />
+                        <Route path='login' element={<Login />} />
+                        <Route path='registration' element={<Registration />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
@@ -28,3 +30,5 @@ export default function App() {
 }
 
 root.render(<App />);
+
+reportWebVitals();
