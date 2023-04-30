@@ -31,4 +31,4 @@ export default function App() {
 
 root.render(<App />);
 
-reportWebVitals()
+reportWebVitals();
