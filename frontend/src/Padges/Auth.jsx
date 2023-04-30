@@ -1,4 +1,4 @@
-import { useFetchMe, useLogin } from '../Api/Auth';
+import { useFetchMe } from '../Api/Auth';
 
 import { useState } from 'react';
 
@@ -6,14 +6,18 @@ import closePassword from './assets/close_password.png';
 import openPassword from './assets/open_password.png';
 
 import './styles/Auth.scss';
+import { login } from '../Api/userAPI';
 
 export const Auth = () => {
-    const { loginIncorrect, setLoginIncorrect } = useState(false);
-    const { startLogin, setStartLogin } = useState(false);
+    const [beforSubmtButText, setBeforSubmtButText] = useState('');
+    const [loginText, setLoginText] = useState('');
+    const [password, setPassword] = useState('');
+
+    const { data, isLoading } = useFetchMe();
 
     function showPassword() {
-        let passwordInput = document.getElementsByClassName('auth-password-input')[0];
-        let passwordStatusImg = document.getElementsByClassName('password-status-img')[0];
+        const passwordStatusImg = document.getElementsByClassName('password-status-img')[0];
+        const passwordInput = document.getElementsByClassName('auth-password-input')[0];
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             passwordStatusImg.src = closePassword;
@@ -25,23 +29,15 @@ export const Auth = () => {
         }
     }
 
-    const Login = () => {
-        let passwordInput = document.getElementsByClassName('auth-password-input')[0];
-        let loginInput = document.getElementsByClassName('auth-login-input')[0];
-        console.log(passwordInput.value, loginInput.value);
+    const Login = async () => {
+        const res = await login(loginText, password);
 
-        const password = passwordInput.value;
-        const login = loginInput.value;
-
-        // const [data, error] = useLogin(login, password);
-        console.log(data, error);
+        if (!res) {
+            setBeforSubmtButText('Неправильная почта или пароль');
+        } else {
+            window.location.href = '/';
+        }
     };
-
-    if (startLogin) {
-        const [data, error] = useLogin(login, password);
-    }
-
-    const { data, isLoading } = useFetchMe();
 
     if (data && data.detail === 'Unauthorized') {
         return (
@@ -49,12 +45,20 @@ export const Auth = () => {
                 <div className='login_form'>
                     <b className='login_msg'>Войти</b>
                     <p />
-                    <input type='text' className='auth-login-input' placeholder='Логин' />
+                    <input
+                        type='text'
+                        className='auth-login-input'
+                        placeholder='Логин'
+                        value={loginText}
+                        onChange={(e) => setLoginText(e.target.value)}
+                    />
                     <div className='password-pole'>
                         <input
                             type='password'
                             className='auth-password-input'
                             placeholder='Пароль'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <button className='show-password-button' onClick={showPassword}>
                             <img
@@ -64,34 +68,7 @@ export const Auth = () => {
                             />
                         </button>
                     </div>
-                    <button className='accept-button' onClick={Login}>
-                        √
-                    </button>
-                </div>
-            </div>
-        );
-    } else if (loginIncorrect) {
-        return (
-            <div className='auth_wigit'>
-                <div className='login_form'>
-                    <b className='login_msg'>Войти</b>
-                    <p />
-                    <input type='text' className='auth-login-input' placeholder='Логин' />
-                    <div className='password-pole'>
-                        <input
-                            type='password'
-                            className='auth-password-input'
-                            placeholder='Пароль'
-                        />
-                        <button className='show-password-button' onClick={showPassword}>
-                            <img
-                                src={openPassword}
-                                alt='Open password'
-                                className='password-status-img'
-                            />
-                        </button>
-                        <p className='incorrect-data'>Неправильные логин или пароль!</p>
-                    </div>
+                    <p className='incorrect-data'>{beforSubmtButText}</p>
                     <button className='accept-button' onClick={Login}>
                         √
                     </button>
