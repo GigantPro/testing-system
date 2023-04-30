@@ -60,7 +60,7 @@
     width: 200px;
     height: 70px;
 
-    margin-top: 100px;
+    margin-top: 10px;
     align-self: center;
 
     border: none;
@@ -85,4 +85,15 @@
 
 .incorrect-data {
     color: red;
+    align-self: center;
+}
+
+.registration-button {
+    align-self: center;
+    margin-top: 10px;
+    
+    height: 80px;
+    font-size: 20px;
+
+    color: #366731;
 }

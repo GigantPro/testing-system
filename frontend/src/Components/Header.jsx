@@ -14,13 +14,13 @@ export const Header = () => {
                 <div className='loginButtons'>
                     <button
                         className='loginButton'
-                        onClick={(event) => (window.location.href = '/auth')}
+                        onClick={(event) => (window.location.href = '/login')}
                     >
                         Вход
                     </button>
                     <button
                         className='registredButton'
-                        onClick={(event) => (window.location.href = '/auth')}
+                        onClick={(event) => (window.location.href = '/registration')}
                     >
                         Регистрация
                     </button>

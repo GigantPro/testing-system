@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Auth } from './Padges/Auth';
+import { Login } from './Padges/Login';
+import { Registration } from './Padges/Registration';
 import { Main } from './Padges/Main';
 import { Header } from './Components/Header';
 import { Footer } from './Components/Footer';
@@ -18,7 +19,8 @@ export default function App() {
                 <Routes>
                     <Route path='/'>
                         <Route index element={<Main />} />
-                        <Route path='auth' element={<Auth />} />
+                        <Route path='login' element={<Login />} />
+                        <Route path='registration' element={<Registration />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

@@ -5,10 +5,10 @@ import { useState } from 'react';
 import closePassword from './assets/close_password.png';
 import openPassword from './assets/open_password.png';
 
-import './styles/Auth.scss';
-import { login } from '../Api/userAPI';
+import './styles/Login.scss';
+import { login as loginAPI } from '../Api/userAPI';
 
-export const Auth = () => {
+export const Login = () => {
     const [beforSubmtButText, setBeforSubmtButText] = useState('');
     const [loginText, setLoginText] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +30,7 @@ export const Auth = () => {
     }
 
     const Login = async () => {
-        const res = await login(loginText, password);
+        const res = await loginAPI(loginText, password);
 
         if (!res) {
             setBeforSubmtButText('Неправильная почта или пароль');
@@ -67,11 +67,14 @@ export const Auth = () => {
                                 className='password-status-img'
                             />
                         </button>
+                        <p className='incorrect-data'>{beforSubmtButText}</p>
                     </div>
-                    <p className='incorrect-data'>{beforSubmtButText}</p>
                     <button className='accept-button' onClick={Login}>
                         √
                     </button>
+                    <a className='registration-button' href='/registration'>
+                        Зарегистрироваться
+                    </a>
                 </div>
             </div>
         );
