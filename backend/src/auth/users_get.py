@@ -9,6 +9,7 @@ from .funcstions import (
 )
 from ..verification.verification import verification_router
 from .self_get import self_router
+from .upload import upload_router
 
 
 current_user = fastapi_users.current_user()
@@ -17,6 +18,7 @@ current_active_verified_user = fastapi_users.current_user(active=True, verified=
 current_superuser = fastapi_users.current_user(active=True, superuser=True)
 
 user_get_router = APIRouter(prefix='/user')
+user_get_router.include_router(upload_router)
 
 user_get_router.include_router(
     verification_router

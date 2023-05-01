@@ -48,7 +48,7 @@ export const Login = () => {
                     <input
                         type='text'
                         className='auth-login-input'
-                        placeholder='Логин'
+                        placeholder='Почта'
                         value={loginText}
                         onChange={(e) => setLoginText(e.target.value)}
                     />

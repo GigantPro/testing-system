@@ -1,0 +1,52 @@
+@import '../../config.scss';
+
+
+.registration_wigit, .inputs,
+.left-column, .right-column, .imagine-div {
+    padding: 15px;
+    margin: 5px;
+    
+    align-items: center;
+    align-self: center;
+    justify-content: space-around;
+    color: $font-color;
+
+    input{
+        color: #000;
+        width: 400px;
+        height: 20px;
+        margin-bottom: 20px;
+    }
+    
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+}
+
+.registrationLale {
+    font-size: 55px;
+}
+
+.inputs {
+    align-self: row;
+    flex-direction: row;
+}
+
+.registration-form {
+    align-items: center;
+    align-self: center;
+    justify-content: space-around;
+}
+
+.imagine-div {
+    justify-content: center;
+}
+
+.user-avatar-img {
+    margin-top: 0px;
+    padding-top: 0px;
+
+    height: 100px;
+
+    margin-block: 10px;
+}

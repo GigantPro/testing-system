@@ -6,7 +6,6 @@ export const registration = async (email, password, username, name, surname, ico
         { email, username, password, name, surname, ico_url },
         { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } },
     );
-    // localStorage.setItem('token', data.token);
     return response;
 };
 
@@ -25,6 +24,27 @@ export const login = async (username, password) => {
 
 export const check = async () => {
     const response = await $authHost.get('user/auth');
-    // localStorage.setItem('token', data.token);
     return response;
+};
+
+export const uploadImg = async (file) => {
+    console.log(file);
+    try {
+        const formData = new FormData();
+        formData.append('file', file)
+        const response = await $host.post(
+            '/api/user/upload/avatar',
+            formData,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'multipart/form-data',
+                },
+            },
+        );
+
+        return response.data;
+    } catch (e) {
+        return null;
+    }
 };

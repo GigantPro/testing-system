@@ -1,31 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Login } from './Padges/Login';
-import { Registration } from './Padges/Registration';
-import { Main } from './Padges/Main';
-import { Header } from './Components/Header';
-import { Footer } from './Components/Footer';
+import {MainApp} from './MainApp'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export default function App() {
     return (
-        <div className='App'>
-            <Header />
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/'>
-                        <Route index element={<Main />} />
-                        <Route path='login' element={<Login />} />
-                        <Route path='registration' element={<Registration />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-            <Footer />
-        </div>
+        <MainApp />
     );
 }
 
