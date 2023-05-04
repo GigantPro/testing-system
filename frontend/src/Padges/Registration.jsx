@@ -5,6 +5,9 @@ import { useState, useRef } from 'react';
 import './styles/Registration.scss';
 import { registration as registrationAPI, uploadImg } from '../Api/userAPI';
 
+import "croppie/croppie.css"
+import Croppie from "croppie"
+
 export const Registration = () => {
     const { data, isLoading } = useFetchMe();
 
@@ -14,7 +17,11 @@ export const Registration = () => {
     const [username, setUsername] = useState('');
     const [surname, setSurname] = useState('');
     const [name, setName] = useState('');
-    const [customIco, setCustomIco] = useState('')
+    const [customIco, setCustomIco] = useState(null);
+
+    const [croppie, setCroppie] = useState<Croppie | null>(null)
+
+    const icoRef = useRef(null);
 
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
@@ -24,8 +31,7 @@ export const Registration = () => {
     const ico_url = '/api/static/standart_ico.png';
 
     const handleFile = (event) => {
-        const userFile = event.target.files[0];
-        fileReader.readAsDataURL(userFile);
+        setCustomIco(event.target.files[0]);
     };
 
     const Registrate = async (event) => {
@@ -47,6 +53,8 @@ export const Registration = () => {
         //     window.location.href = '/';
         // }
     };
+    console.log(customIco !== null, customIco);
+
 
     if (data && data.detail === 'Unauthorized') {
         return (
@@ -97,15 +105,17 @@ export const Registration = () => {
                         <div className='imagine-div'>
                             <img
                                 className='user-avatar-img'
-                                src={customIco ? customIco.result : ico_url}
+                                src={customIco ? URL.createObjectURL(customIco) : ico_url}
                                 alt='ico'
                             />
+                            <button className='change-ico-button' onClick={() => icoRef.current.click()} type='button'>Поменять аватарку</button>
                             <input
-                                className='change-Imagine'
+                                hidden
                                 accept='image/*'
                                 type='file'
                                 id='button-file'
                                 onChange={handleFile}
+                                ref={icoRef}
                             />
                         </div>
                     </div>

@@ -1,7 +1,10 @@
+import './styles/Footer.scss';
+
+
 export const Footer = () => {
     return (
         <div className='footer'>
-            <h1>Footer</h1>
+            <p className='main-footer-content'>Powered by <a href="https://xiver.ru/">Xiver</a> group</p>
         </div>
     );
 };
