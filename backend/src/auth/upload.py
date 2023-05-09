@@ -3,7 +3,6 @@ from random import randint
 from datetime import datetime
 
 from fastapi import APIRouter, Form
-from fastapi.responses import JSONResponse
 
 from .auth import fastapi_users
 from ..config import config
