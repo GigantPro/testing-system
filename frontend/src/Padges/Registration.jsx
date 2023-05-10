@@ -129,7 +129,7 @@ export const Registration = () => {
                         </div>
                         <div className='right-column'>
                             <input
-                                type='text'
+                                type='email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder='Почта'
@@ -163,7 +163,7 @@ export const Registration = () => {
                             <input
                                 hidden
                                 acce
-                                pt='image/*'
+                                pt='image/png, image/jpeg'
                                 type='file'
                                 id='button-file'
                                 onChange={handleChangeIco}
