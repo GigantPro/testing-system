@@ -9,7 +9,7 @@ import './Main.scss';
 export const MainApp = () => {
     return (
         <div className='App'>
-        <Header />
+            <Header />
             <BrowserRouter>
                 <Routes>
                     <Route path='/'>
@@ -22,4 +22,4 @@ export const MainApp = () => {
             <Footer />
         </div>
     );
-}
+};
