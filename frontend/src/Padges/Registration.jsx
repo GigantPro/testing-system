@@ -5,8 +5,12 @@ import { useState, useRef } from 'react';
 import './styles/Registration.scss';
 import { registration as registrationAPI, uploadImg } from '../Api/userAPI';
 
+import Avatar from 'react-avatar-edit';
+
 export const Registration = () => {
     const { data, isLoading } = useFetchMe();
+
+    const [statusFroUser, setStatusFroUser] = useState('');
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +18,13 @@ export const Registration = () => {
     const [username, setUsername] = useState('');
     const [surname, setSurname] = useState('');
     const [name, setName] = useState('');
-    const [customIco, setCustomIco] = useState('')
+    const [customIco, setCustomIco] = useState(null);
+
+    const [cropedIco, setCropedIco] = useState(null);
+    const [croopieModalActive, setCroopieModalActive] = useState(false);
+
+    const icoRef = useRef(null);
+    const customIcoRef = useRef(null);
 
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
@@ -23,36 +33,79 @@ export const Registration = () => {
 
     const ico_url = '/api/static/standart_ico.png';
 
-    const handleFile = (event) => {
-        const userFile = event.target.files[0];
-        fileReader.readAsDataURL(userFile);
+    const CroopieModal = () => {
+        let croppedImg = null;
+
+        const onSave = () => {
+            setCropedIco(croppedImg);
+            setCroopieModalActive(false);
+        };
+
+        const onDiscard = () => {
+            setCroopieModalActive(false);
+        };
+
+        // Fix me: когда снимаешь клик на областе с cropie_modal то он тоже деактивируется
+        // Fix me: очень высокий выбор размеров аватарки
+        return (
+            <div
+                className={croopieModalActive ? 'cropie_modal active' : 'cropie_modal'}
+                onClick={() => setCroopieModalActive(false)}
+            >
+                <div className='cropie_modal_content' onClick={(e) => e.stopPropagation()}>
+                    <Avatar
+                        ref={customIcoRef}
+                        src={customIco ? URL.createObjectURL(customIco) : null}
+                        onCrop={(e) => (croppedImg = e)}
+                        onClose={() => (croppedImg = null)}
+                        imageWidth={1024}
+                        width={1024}
+                    />
+                    <div className='modal_croop_buttons'>
+                        <button className='modal_croop_button_save' onClick={onSave}>
+                            Сохранить
+                        </button>
+                        <button className='modal_croop_button_discard' onClick={onDiscard}>
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
     };
 
-    const Registrate = async (event) => {
+    const handleChangeIco = (event) => {
+        setCustomIco(event.target.files[0]);
+        setCroopieModalActive(true);
+    };
+
+    const registrate = async (event) => {
         event.preventDefault();
-        
+
         let userIco = ico_url;
 
-        if (customIco) {
-            userIco = await uploadImg(customIco);
-            console.log(customIco);
+        if (cropedIco) {
+            console.log(cropedIco);
+            userIco = await uploadImg(cropedIco);
         }
         console.log(userIco);
 
-        // const res = await registrationAPI(email, password, username, name, surname, ico_url);
+        const res = await registrationAPI(email, password, username, name, surname, userIco);
 
-        // if (!res) {
-        //     console.log('Неправильная почта или пароль');
-        // } else {
-        //     window.location.href = '/';
-        // }
+        console.log(res);
+        if (!res) {
+            setStatusFroUser('Что-то пошло не так');
+        } else {
+            window.location.href = '/';
+        }
     };
 
     if (data && data.detail === 'Unauthorized') {
         return (
             <div className='registration_wigit'>
                 <b className='registrationLale'>Регистрация</b>
-                <form onSubmit={Registrate} className='registration-form'>
+                <CroopieModal />
+                <form onSubmit={registrate} className='registration-form'>
                     <div className='inputs'>
                         <div className='left-column'>
                             <input
@@ -76,7 +129,7 @@ export const Registration = () => {
                         </div>
                         <div className='right-column'>
                             <input
-                                type='text'
+                                type='email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder='Почта'
@@ -97,18 +150,28 @@ export const Registration = () => {
                         <div className='imagine-div'>
                             <img
                                 className='user-avatar-img'
-                                src={customIco ? customIco.result : ico_url}
+                                src={cropedIco ? cropedIco : ico_url}
                                 alt='ico'
                             />
+                            <button
+                                className='change-ico-button'
+                                onClick={() => icoRef.current.click()}
+                                type='button'
+                            >
+                                Поменять аватарку
+                            </button>
                             <input
-                                className='change-Imagine'
-                                accept='image/*'
+                                hidden
+                                acce
+                                pt='image/png, image/jpeg'
                                 type='file'
                                 id='button-file'
-                                onChange={handleFile}
+                                onChange={handleChangeIco}
+                                ref={icoRef}
                             />
                         </div>
                     </div>
+                    {statusFroUser}
                     <button type='submit' className='submit-button'>
                         Зарегистрироваться
                     </button>

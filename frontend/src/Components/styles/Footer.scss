@@ -1,0 +1,14 @@
+@import '../../config.scss';
+
+.footer {
+    display: flex;
+
+    padding-top: 20px;
+
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+
+    color: $font-color;
+}

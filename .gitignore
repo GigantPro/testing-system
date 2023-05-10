@@ -102,3 +102,5 @@ pgadmin
 */SSL
 
 docker-data
+backend/public
+!backend/public/standart_ico.png

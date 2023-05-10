@@ -1,12 +1,16 @@
 import { $authHost, $host } from './index';
 
 export const registration = async (email, password, username, name, surname, ico_url) => {
-    const response = await $host.post(
-        '/api/auth/login',
-        { email, username, password, name, surname, ico_url },
-        { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } },
-    );
-    return response;
+    try {
+        const response = await $host.post(
+            '/api/auth/register',
+            { email, username, password, name, surname, ico_url, role_id: 1 },
+            { headers: { 'Content-Type': 'application/json', Accept: 'application/json' } },
+        );
+        return response;
+    } catch {
+        return null;
+    }
 };
 
 export const login = async (username, password) => {
@@ -27,21 +31,17 @@ export const check = async () => {
     return response;
 };
 
-export const uploadImg = async (file) => {
-    console.log(file);
+export const uploadImg = async (filedata) => {
     try {
         const formData = new FormData();
-        formData.append('file', file)
-        const response = await $host.post(
-            '/api/user/upload/avatar',
-            formData,
-            {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'multipart/form-data',
-                },
+        formData.append('filedata', filedata.replace('data:', '').replace(/^.+,/, ''));
+        formData.append('file_type', filedata.split(';')[0].split('/')[1]);
+        const response = await $host.post('/api/user/upload/avatar', formData, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
-        );
+        });
 
         return response.data;
     } catch (e) {
