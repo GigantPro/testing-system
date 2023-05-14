@@ -30,6 +30,7 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry install --no-interaction --no-cache --without dev
 
 COPY ./src ./src
+COPY ./public ./public
 
 CMD ["poetry", "run", "uvicorn",  "--reload",  "--host", "0.0.0.0",  "--port", "5001", "src.app:app"]
 

@@ -162,7 +162,6 @@ export const Registration = () => {
                             </button>
                             <input
                                 hidden
-                                acce
                                 pt='image/png, image/jpeg'
                                 type='file'
                                 id='button-file'
