@@ -5,22 +5,32 @@ const cspConfigPolicy = {
     'default-src': "'none'",
     'object-src': "'none'",
     'base-uri': "'self'",
-    'connect-src': "'self'",
+    'connect-src': "'self' 'unsafe-inline' 'unsafe-eval' ws:",
     'worker-src': "'self'",
     'img-src': "'self' blob: data: content:",
     'font-src': "'self'",
     'frame-src': "'self'",
     'manifest-src': "'self'",
-    'style-src': ["'self'"],
-    'script-src': ["'strict-dynamic'"],
-    'require-trusted-types-for': ["'script'"]
+    'script-src': ["'unsafe-inline'", "'self'", "'unsafe-eval'"],
 };
 
 function addCspHtmlWebpackPlugin(config) {
-    if (process.env.NODE_ENV === 'production') {
-        config.plugins.push(new CspHtmlWebpackPlugin(cspConfigPolicy));
-        config.output.crossOriginLoading = "anonymous";
-    }
+    config.plugins.push(new CspHtmlWebpackPlugin(cspConfigPolicy, {
+        enabled: true,
+        integrityEnabled: false,
+        primeReactEnabled: false,
+        trustedTypesEnabled: false,
+        hashingMethod: 'sha384',
+        hashEnabled: {
+            'script-src': false,
+            'style-src': false
+        },
+        nonceEnabled: {
+            'script-src': false,
+            'style-src': false
+        },
+    }));
+    config.output.crossOriginLoading = "anonymous";
     return config;
 }
 
