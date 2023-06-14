@@ -76,6 +76,7 @@ export const Registration = () => {
 
     const handleChangeIco = (event) => {
         setCustomIco(event.target.files[0]);
+        console.log(customIco);
         setCroopieModalActive(true);
     };
 
