@@ -65,8 +65,8 @@ services:
     networks:
       - nginx
     ports:
-      - 81:80
-      - 82:443
+      - 83:80
+      - 84:443
   
   service-test:
     image: alpine
