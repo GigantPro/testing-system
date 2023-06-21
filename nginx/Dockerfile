@@ -4,7 +4,6 @@ RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/
 COPY ./SSL/ /etc/letsencrypt/live/edu.xiver.ru/
 
-EXPOSE 81
-EXPOSE 82
+EXPOSE 83
 
 CMD ["nginx", "-g", "daemon off;"]
