@@ -71,18 +71,6 @@ services:
     volumes:
       - ./backend:/app
 
-  frontend-dev:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./frontend
-    hostname: frontend
-    volumes:
-      - ./frontend:/app
-    networks:
-      - nginx
-    ports:
-      - 100:3000
-
   nginx:
     depends_on:
       - frontend-dev

@@ -10,6 +10,7 @@ from .auth.users_get import user_get_router
 from .auth.auth import auth_backend, fastapi_users
 from .config import config
 from .classrooms.router import classrooms_router
+from .courses.router import courses_router
 
 
 app = FastAPI(
@@ -43,6 +44,11 @@ app.include_router(
 app.include_router(
     user_get_router,
     tags=['users']
+)
+
+app.include_router(
+    courses_router,
+    tags=['courses']
 )
 
 @app.on_event('startup')
