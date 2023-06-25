@@ -53,15 +53,3 @@ classinvite = Table(
     Column('creator_id', Integer, ForeignKey(user.c.id), nullable=False),
     Column('invites_last', Integer, default=1000000, nullable=False),
 )
-
-course = Table(
-    'course',
-    metadata,
-    Column('id', Integer, primary_key=True, autoincrement=True, nullable=False),
-    Column('owners_ids', JSON, nullable=False),
-    Column('title', String, nullable=False),
-    Column('description', String, nullable=False),
-    Column('created_at', TIMESTAMP, default=datetime.utcnow, nullable=False),
-    Column('is_active', Boolean, default=True, nullable=False),
-    Column('course_data', JSON, default=[]),
-)

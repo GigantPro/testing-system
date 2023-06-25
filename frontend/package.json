@@ -1,7 +1,11 @@
 {
   "name": "xiver_dsbot_site",
   "description": "Settings site for Xiver discord bot.",
-  "author": {"email": "pochtagigantpro@gmail.com", "name": "GigantPro", "url": "https://github.com/GigantPro"},
+  "author": {
+    "email": "pochtagigantpro@gmail.com",
+    "name": "GigantPro",
+    "url": "https://github.com/GigantPro"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",

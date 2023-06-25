@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import AsyncGenerator
 
-from sqlalchemy import JSON, TIMESTAMP, Column, Integer, Boolean, String
+from sqlalchemy import JSON, TIMESTAMP, Column, Integer, Boolean, String, FLOAT
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
@@ -23,8 +23,13 @@ class Course(Base):
     owners_ids = Column(JSON, nullable=False)
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)
+    ico_url = Column(String)
     created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
     is_active = Column(Boolean, default=False, nullable=False)
+    passing = Column(Integer, default=0)
+    passed = Column(Integer, default=0)
+    likes = Column(Integer, default=0)
+    rating = Column(FLOAT, default=.0)
     course_data = Column(JSON, default=[])
 
 engine = create_async_engine(DATABASE_URL)

@@ -35,8 +35,6 @@ services:
     depends_on:
       - postgres
     user: root
-    env_file:
-      - ./.env.dev
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
@@ -70,11 +68,28 @@ services:
       - 5001:5001
     volumes:
       - ./backend:/app
+    
+  frontend-dev:
+    depends_on:
+      - backend-dev
+    hostname: frontend
+    env_file: 
+      - ./.env.dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    networks:
+      - postgres
+      - nginx
+    ports:
+      - 5002:5002
+    volumes:
+      - ./frontend:/app
 
   nginx:
     depends_on:
-      - frontend-dev
       - backend-dev
+      - frontend-dev
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
