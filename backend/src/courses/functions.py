@@ -36,7 +36,7 @@ async def create_new_course(title: str, description: str, user: User) -> int:
         # Fix me: Добавить возвращение присвоенного id
 
 
-async def get_course_by_param(param: str, value: Any) -> Course:
+async def get_course_by_param_func(param: str, value: Any) -> Course:
     if param == 'id':
         value = int(value)
     logger.warning(f'{param=}, {value=}')
