@@ -6,9 +6,9 @@ from fastapi.responses import JSONResponse
 from ..auth.database import User
 from ..auth.auth import fastapi_users
 from .functions import (
-    get_course_by_id,
+    get_course_by_id as func_get_course_by_id,
     create_new_course,
-    get_course_by_param,
+    get_course_by_param_func,
     json_by_course_obj,
     get_top_of_courses,
 )
@@ -24,7 +24,7 @@ courses_router = APIRouter(prefix='/course')
 
 @courses_router.get('/get/{course_id}')
 async def get_course_by_id(course_id: int) -> dict:
-    course = await get_course_by_id(course_id)
+    course = await func_get_course_by_id(course_id)
     return await json_by_course_obj(course)
 
 
@@ -44,15 +44,15 @@ async def get_course_by_param(
     if param not in ('id', 'titel'):
         return JSONResponse({'message': 'error'}, status_code=400)
 
-    course = await get_course_by_param(param, value)
-    
+    course = await get_course_by_param_func(param, value)
+
     if course:
         return await json_by_course_obj(course)
     return JSONResponse(
         {'message': 'error'},
         status_code=400,
     )
-    
+
 
 @courses_router.get('/most_popular')
 async def get_popular_courses(

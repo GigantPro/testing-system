@@ -32,12 +32,13 @@ async def create_new_course(title: str, description: str, user: User) -> int:
             )
         )
         await connection.commit()
-        
-        ...  # Fix me: Добавить возвращение присвоенного id
+
+        # Fix me: Добавить возвращение присвоенного id
 
 
 async def get_course_by_param(param: str, value: Any) -> Course:
-    if param == 'id': value = int(value)
+    if param == 'id':
+        value = int(value)
     logger.warning(f'{param=}, {value=}')
     async with engine.connect() as connection:
         db_answer = await connection.execute(select(Course).where(param == value))
@@ -48,7 +49,7 @@ async def get_top_of_courses(count: int) -> list[Course]:
     async with engine.connect() as connection:
         db_answer = await connection.execute(
             select(Course)
-            .where(Course.is_active == True)
+            .where(Course.is_active is True)
             .order_by(Course.passed, Course.likes, Course.passing, Course.rating)
             .limit(count)
         )
