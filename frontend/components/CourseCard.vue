@@ -1,24 +1,14 @@
-<script>
-export default {
-    name: 'CourseCard',
-    props: [
-        'img_url',
-        'titel',
-        'description',
-        'id',
-    ],
-}
+<script setup>
+const props = defineProps(['item_'])
 </script>
 
 <template>
-    <div>
-    <div v-if="titel" class="card">
-        <img :src="img_url" class="card-img-top" alt="Картинка">
-
+    <div v-if="props.item_" class="card">
+        <img :src="item_.img_url" class="card-img-top" alt="Картинка">
         <div class="card-body">
-            <h5 class="card-title">{{ titel }}</h5>
-            <p class="card-text">{{ description }}</p>
-            <a href="#" class="btn btn-primary">Перейти к курсу</a>
+            <h5 class="card-title">{{ item_.titel }}</h5>
+            <p class="card-text">{{ item_.description }}</p>
+            <NuxtLink :to="'/courses/course/' + item_.id" class="btn btn-primary text-white btn-secondary">Перейти к курсу</NuxtLink>
         </div>
     </div>
     <div v-else class="card">
@@ -34,8 +24,14 @@ export default {
                 <span class="placeholder col-6"></span>
                 <span class="placeholder col-8"></span>
             </p>
-            <a class="btn btn-primary disabled placeholder col-6"></a>
+            <a class="btn btn-primary disabled placeholder col-6 text-white btn-secondary"></a>
         </div>
     </div>
-    </div>
 </template>
+
+<style scoped>
+.card {
+    background-color: #53774B;
+    color: #fff;
+}
+</style>

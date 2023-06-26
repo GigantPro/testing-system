@@ -29,7 +29,7 @@
                     </li>
                 </ul>
 
-                <button type="button" class="btn btn-dark rounded border-white" @click="onPushedLoginButton">Войти</button>
+                <NuxtLink class="btn btn-dark rounded border-white" to="/auth/login">Войти</NuxtLink>
             </div>
 
         </div>
