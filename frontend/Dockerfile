@@ -10,6 +10,4 @@ COPY . .
 
 RUN yarn build
 
-EXPOSE 5002
-
 CMD [ "node", ".output/server/index.mjs" ]

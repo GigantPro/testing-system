@@ -6,6 +6,7 @@ Description=Docker project for edu.xiver.ru
 Type=simple
 ExecStart=/opt/xiver/testing-system/scripts/start.sh
 ExecStop=/opt/xiver/testing-system/scripts/stop.sh
+WorkingDirectory=/opt/xiver/testing-system
 Restart=always
 RestartSec=3
 

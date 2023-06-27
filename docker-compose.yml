@@ -52,8 +52,6 @@ services:
     hostname: frontend
     networks:
       - nginx
-    ports:
-      - 3000:5002
 
   nginx:
     depends_on:
