@@ -83,6 +83,7 @@ services:
       - nginx
     ports:
       - 5002:5002
+      - 24678:24678
     volumes:
       - ./frontend:/app
 

@@ -1,6 +1,6 @@
 <script setup>
 
-const { data: top_of_courses, pending, error } = await useFetch('/api/course/most_popular')
+const { data: top_of_courses, pending, error } = await useFetch('/api/course/most_popular', {server: false})
 </script>
 
 <template>

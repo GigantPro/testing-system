@@ -1,16 +1,16 @@
 <template>
-    <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark" style="height: 70px;">
         <div class="container-fluid">
             <NuxtLink class="navbar-brand" to="/">
-                <img src="/favicon.ico" alt="Education"
-                    class="d-inline-block align-text-top rounded">
+                <img src="~/assets/brand.png" alt="Education"
+                    class="d-inline-block align-text-top rounded" height="50">
             </NuxtLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse">
                 <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                     <li class="nav-item text-light">
                         <NuxtLink class="nav-link active" aria-current="page" to="/">На главную</NuxtLink>
@@ -29,7 +29,8 @@
                     </li>
                 </ul>
 
-                <NuxtLink class="btn btn-dark rounded border-white" to="/auth/login">Войти</NuxtLink>
+                <NuxtLink class="btn btn-dark rounded border-white" to="/auth?auth=login">Войти</NuxtLink>
+                <NuxtLink class="btn btn-dark rounded border-white" to="/auth?auth=registration">Регистрация</NuxtLink>
             </div>
 
         </div>

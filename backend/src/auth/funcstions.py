@@ -11,18 +11,7 @@ async def _get_user_by_id(user_id: int) -> None | User:
             select(User) \
             .where(User.id == user_id)
         )
-        user = user.fetchone()
-
-        if not user:
-            return None
-
-        user_cfg = {}
-        columns = inspect(User).c.keys()
-
-        for i in range(len(columns)):
-            user_cfg[columns[i]] = user[i]
-
-        return User(**user_cfg)
+        return user.fetchone()
 
 async def _get_user_read_by_user(user: User) -> UserRead:
     userread_cfg = {}
@@ -35,3 +24,11 @@ async def _get_user_read_by_user(user: User) -> UserRead:
             userread_cfg[columns_user[id_]] = user.__getattribute__(columns_user[id_])
 
     return UserRead(**userread_cfg)
+
+async def _get_user_by_username(username: str) -> None | User:
+    async with engine.connect() as connection:
+        user = await connection.execute(
+            select(User) \
+            .where(User.username == username)
+        )
+        return user.fetchone()

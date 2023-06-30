@@ -8,14 +8,12 @@
         <hr style="">
         <div class="login_registration text-center d-block align-items-center">
             <p><u>Чтобы начать обучение, войдите в аккаунт</u></p>
-            <p id="welcome_login_btn"><NuxtLink to="/auth/login" class="btn btn-primary rounded login_btn">Войти</NuxtLink></p> <!-- Fix me: Надо, чтобы кнопка была по размеру зарегистрироваться -->
-            <p id="welcome_registration_btn"><NuxtLink to="/auth/registration" class="registration_btn">Зарегистрироваться</NuxtLink></p>
+            <p id="welcome_login_btn"><NuxtLink to="/auth?auth=login" class="btn btn-primary rounded login_btn">Войти</NuxtLink></p> <!-- Fix me: Надо, чтобы кнопка была по размеру зарегистрироваться -->
+            <p id="welcome_registration_btn"><NuxtLink to="/auth?auth=registration" class="registration_btn">Зарегистрироваться</NuxtLink></p>
         </div>
         <div class="top_courses text-reset">
             <h4 class="display-7 text-center top_courses_text">Популярные курсы</h4>
-            <ClientOnly fallback="Loading courses cards">
-                <CoursesCarusel />
-            </ClientOnly>
+            <CoursesCarusel />
         </div>
     </div>
 </template>
