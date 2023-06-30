@@ -36,9 +36,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         user_create: schemas.UC,
         safe: bool = False,
         request: Optional[Request] = None,
-    ) -> models.UP:        
+    ) -> models.UP:
         await self.validate_password(user_create.password, user_create)
-        
+
         user_dict = (
             user_create.create_update_dict()
             if safe
@@ -50,11 +50,11 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         if existing_user:
             raise exceptions.UserAlreadyExists()
 
-        
         password = user_dict.pop('password')
         user_dict['hashed_password'] = self.password_helper.hash(password)
         user_dict['role_id'] = 1
-        user_dict['ico_url'] = user_dict['ico_url'] if user_dict.get('ico_url', None) else '/api/static/standart_ico.png'
+        user_dict['ico_url'] = user_dict['ico_url'] if user_dict.get('ico_url', None) else \
+            '/api/static/standart_ico.png'
 
         created_user = await self.user_db.create(user_dict)
 
