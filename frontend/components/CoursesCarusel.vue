@@ -1,5 +1,4 @@
 <script setup>
-
 const { data: top_of_courses, pending, error } = await useFetch('http://backend:5001/course/most_popular')
 </script>
 

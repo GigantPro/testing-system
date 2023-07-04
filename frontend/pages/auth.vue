@@ -131,10 +131,10 @@ const onFormSubmit = async (values, actions) => {
             {
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 method: 'POST',
-                body: {
-                    username: email_inp.value,
-                    password: password_inp.value,
-                }
+                body: new URLSearchParams({
+                    'username': email_inp.value,
+                    'password': password_inp.value,
+                })
             }
         )
         await router.push('/')
