@@ -124,20 +124,33 @@ const onFormSubmit = async (values, actions) => {
         password_state.value = ''
         password_err_message.value = ''
 
-        await router.push('/auth')
+        await useFetch(
+            '/api/auth/login',
+            {
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                method: 'POST',
+                body: new URLSearchParams({
+                    'username': email_inp.value,
+                    'password': password_inp.value,
+                })
+            }
+        )
+        await router.push('/')
+        await router.go()
     } else if (flag && route.query.auth === 'login') {  // Fix me: указание правильности / неправильности логина и пароля
         await useFetch(
             '/api/auth/login',
             {
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 method: 'POST',
-                body: {
-                    username: email_inp.value,
-                    password: password_inp.value,
-                }
+                body: new URLSearchParams({
+                    'username': email_inp.value,
+                    'password': password_inp.value,
+                })
             }
         )
         await router.push('/')
+        await router.go()
     }
 }
 
