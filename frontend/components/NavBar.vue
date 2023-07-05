@@ -1,8 +1,8 @@
 <script setup>
-const headers = useRequestHeaders();
+const headers = useRequestHeaders()
 const { data: user_data } = await useFetch(
-    "/api/user/self/who_am_i",
-    { headers: headers }
+    "http://backend:5001/user/self/who_am_i",
+    { headers: headers, server: true }
 );
 const user_value = user_data.value;
 
@@ -13,29 +13,29 @@ const router = useRouter()
     <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark text-white" height="70">
         <div class="container-fluid">
             <div class="col-2 ms-2">
-                <NuxtLink class="navbar-brand  align-items-center  text-decoration-none" to="/">
+                <a class="navbar-brand  align-items-center  text-decoration-none" href="/">
                     <img src="~/assets/brand.png" alt="Education" class="d-inline-block align-text-top rounded"
                         height="50" />
-                </NuxtLink>
+                </a>
             </div>
 
             <div class="collapse navbar-collapse col-10" id="navbarNav">
 
                 <ul class="nav col-lg-9 d-flex justify-content-center text-center">
                     <li>
-                        <NuxtLink class="nav-link active" aria-current="page" to="/">На главную</NuxtLink>
+                        <a class="nav-link" aria-current="page" href="/">На главную</a>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link active" aria-current="page" to="/courses/list">Курсы</NuxtLink>
+                        <NuxtLink class="nav-link" aria-current="page" to="/courses/list">Курсы</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link active" aria-current="page" to="/me/stats">Успеваемость</NuxtLink>
+                        <NuxtLink class="nav-link" aria-current="page" to="/me/stats">Успеваемость</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link active" aria-current="page" to="/menu">Меню</NuxtLink>
+                        <NuxtLink class="nav-link" aria-current="page" to="/menu">Меню</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link active" aria-current="page" to="/courses/create">Создать свой курс
+                        <NuxtLink class="nav-link" aria-current="page" to="/courses/create">Создать свой курс
                         </NuxtLink>
                     </li>
                 </ul>
@@ -48,7 +48,7 @@ const router = useRouter()
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li>
-                                <NuxtLink class="dropdown-item" :to="'/user/' + user_value.username">Мой профиль</NuxtLink>
+                                <a class="dropdown-item" :href="'/@' + user_value.username">Мой профиль</a>
                             </li>
                             <li>
                                 <NuxtLink class="dropdown-item" to="/user/settings">Настройки</NuxtLink>
@@ -61,7 +61,7 @@ const router = useRouter()
                             </li>
                             <li>
                                 <button class="dropdown-item"
-                                    @click="async () => { await useFetch('/api/auth/logout', { server: false, method: 'POST' }); await router.go(); }">Выйти</button>
+                                    @click="async () => { await useFetch('/api/auth/logout', { server: false, method: 'POST' }); await router.go(); await router.push('/');}">Выйти</button>
                             </li>
                         </ul>
                     </div>
