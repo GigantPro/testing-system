@@ -10,7 +10,7 @@ const router = useRouter()
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark text-white" height="70">
+    <nav class="navbar navbar-expand-lg rounded navbar-dark bg-dark text-white shadow" height="70">
         <div class="container-fluid">
             <div class="col-2 ms-2">
                 <a class="navbar-brand  align-items-center  text-decoration-none" href="/">
@@ -26,17 +26,17 @@ const router = useRouter()
                         <a class="nav-link" aria-current="page" href="/">На главную</a>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link" aria-current="page" to="/courses/list">Курсы</NuxtLink>
+                        <a class="nav-link" aria-current="page" href="/courses/list">Курсы</a>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link" aria-current="page" to="/me/stats">Успеваемость</NuxtLink>
+                        <a class="nav-link" aria-current="page" href="/me/stats">Успеваемость</a>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link" aria-current="page" to="/menu">Меню</NuxtLink>
+                        <a class="nav-link" aria-current="page" href="/menu">Меню</a>
                     </li>
                     <li>
-                        <NuxtLink class="nav-link" aria-current="page" to="/courses/create">Создать свой курс
-                        </NuxtLink>
+                        <a class="nav-link" aria-current="page" href="/courses/create">Создать свой курс
+                        </a>
                     </li>
                 </ul>
 
@@ -51,10 +51,10 @@ const router = useRouter()
                                 <a class="dropdown-item" :href="'/@' + user_value.username">Мой профиль</a>
                             </li>
                             <li>
-                                <NuxtLink class="dropdown-item" to="/user/settings">Настройки</NuxtLink>
+                                <a class="dropdown-item" href="/user/settings">Настройки</a>
                             </li>
                             <li>
-                                <NuxtLink class="dropdown-item disabled" to="#">Мои классы</NuxtLink>
+                                <a class="dropdown-item disabled" href="#">Мои классы</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider" />
@@ -67,9 +67,9 @@ const router = useRouter()
                     </div>
                 </div>
                 <div v-else class="col-lg-3 text-end d-flex justify-content-end">
-                    <NuxtLink class="btn btn-dark rounded border-white" to="/auth?auth=login">Войти</NuxtLink>
-                    <NuxtLink class="btn btn-dark rounded border-white me-3" to="/auth?auth=registration">Регистрация
-                    </NuxtLink>
+                    <a class="btn btn-dark rounded border-white" href="/auth?auth=login">Войти</a>
+                    <a class="btn btn-dark rounded border-white me-3" href="/auth?auth=registration">Регистрация
+                    </a>
                 </div>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
