@@ -56,8 +56,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         user_dict['ico_url'] = user_dict['ico_url'] if user_dict.get('ico_url', None) else \
             '/api/static/standart_ico.png'
 
-            
-        user_dict['is_verified'] = True  # !Fix me: up an email service and delete this line 
+        user_dict['is_verified'] = True  # !Fix me: up an email service and delete this line
 
         created_user = await self.user_db.create(user_dict)
 
