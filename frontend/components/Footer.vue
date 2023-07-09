@@ -4,7 +4,7 @@
   </section>
 
   <section class="">
-    <div class="container text-center text-md-start mt-5">
+    <div class="container text-center text-md-start mt-5 shadow">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
