@@ -1,4 +1,8 @@
 <script setup>
+useHead({
+    title: 'Настройки пользователя | Xiver education',
+})
+
 const router = useRouter()
 
 const headers = useRequestHeaders()

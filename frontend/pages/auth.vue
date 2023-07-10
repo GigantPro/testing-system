@@ -2,9 +2,19 @@
 const route = useRoute()
 const router = useRouter()
 
+const prefix = route.query.auth === 'registration' ? 'Регистрация' : 'Вход'
+useHead({
+    title: prefix + ' | Xiver education',
+})
+
 if (!route.query.auth) {
     route.query.auth = 'login'
+    useHead({
+        title: 'Вход | Xiver education',
+    })
 }
+
+
 
 const default_err_msg = "Поле не может быть пустым!"
 

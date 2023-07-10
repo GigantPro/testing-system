@@ -12,7 +12,7 @@ const props = defineProps(['item_'])
         </div>
     </div>
     <div v-else class="card">
-        <img src="https://media.tenor.com/7t8foti8FG8AAAAC/loading-screen-cat.gif" class="card-img-top" alt="Картинка">
+        <img src="~/assets/loading-screen-cat.gif" class="card-img-top" alt="Картинка">
         <div class="card-body">
             <h5 class="card-title placeholder-glow">
                 <span class="placeholder col-6"></span>

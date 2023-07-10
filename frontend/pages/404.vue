@@ -1,3 +1,10 @@
+<script setup>
+useHead({
+    title: '404 | Xiver education',
+})
+</script>
+
+
 <template>
     <div class="d-flex align-items-center justify-content-center vh-10">
         <div class="text-center">
@@ -7,7 +14,7 @@
                 Похоже, что страницу, которую вы ищите, котик не нашел...
             </p>
             <p class="lead">
-                <img src="https://media.tenor.com/7t8foti8FG8AAAAC/loading-screen-cat.gif" alt="">
+                <img src="~/assets/loading-screen-cat.gif" alt="">
             </p>
             <NuxtLink to="/" class="btn btn-primary">Домой</NuxtLink>
         </div>
