@@ -1,10 +1,10 @@
 <template>
-<footer class="text-center text-lg-start rounded-top bg-dark text-white">
+<footer class="text-center text-lg-start rounded-top bg-dark text-white shadow">
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
   </section>
 
   <section class="">
-    <div class="container text-center text-md-start mt-5 shadow">
+    <div class="container text-center text-md-start mt-5">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
