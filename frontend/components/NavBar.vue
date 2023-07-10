@@ -93,7 +93,8 @@ a {
 a:hover,
 a:active,
 a:link,
-a:focus-visible {
+a:focus-visible,
+a:focus {
     color: #53774B;
 }
 </style>
