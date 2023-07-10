@@ -29,8 +29,7 @@
 
 <style>
 body {
-  background-image: url("~/assets/background.svg");
-  background-repeat: no-repeat;
+  background: url("~/assets/background.svg") right top no-repeat;
 }
 
 .main_content {
