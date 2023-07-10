@@ -86,14 +86,14 @@ const router = useRouter()
     margin: 0.3rem 0.6rem 1rem 0.6rem;
 }
 
-.nav-link {
+a {
     color: white;
 }
 
-.nav-link:hover,
-.nav-link:active,
-.nav-link:link,
-.nav-link:focus-visible {
+a:hover,
+a:active,
+a:link,
+a:focus-visible {
     color: #53774B;
 }
 </style>
