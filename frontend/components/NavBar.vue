@@ -54,6 +54,9 @@ const router = useRouter()
                                 <a class="dropdown-item" href="/user/settings">Настройки</a>
                             </li>
                             <li>
+                                <a class="dropdown-item" href="/user/courses">Мои курсы</a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item disabled" href="#">Мои классы</a>
                             </li>
                             <li>

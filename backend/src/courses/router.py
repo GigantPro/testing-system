@@ -1,6 +1,6 @@
-from typing import Any
+from typing import Any, Annotated
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Form
 from fastapi.responses import JSONResponse
 
 from ..auth.database import User
@@ -74,6 +74,6 @@ async def get_popular_courses(
 
 
 @courses_router.post('/create')
-async def create_course(title: str, description: str, user: User = Depends(current_active_verified_user)) -> Any:
+async def create_course(title: str = Form(), description: str = Form(), user: User = Depends(current_active_verified_user)) -> Any:
     await create_new_course(title, description, user)
     return JSONResponse({'message': 'success'}, 200)

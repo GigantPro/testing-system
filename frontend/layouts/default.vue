@@ -40,4 +40,10 @@ body {
     padding: .3rem;
     margin: auto .5rem auto .5rem;
 }
+
+.input-required::after {
+    color: red;
+    content: '*';
+    margin-left: .2rem;
+}
 </style>
