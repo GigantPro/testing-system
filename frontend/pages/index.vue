@@ -15,6 +15,7 @@
             <h4 class="display-7 text-center top_courses_text">Популярные курсы</h4>
             <CoursesCarusel />
         </div>
+        <ModalDevelopingWarning />
     </div>
 </template>
 
