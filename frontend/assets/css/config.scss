@@ -1,0 +1,17 @@
+
+// * Config variables
+
+$sec-float-bc: #ece9e9b9;
+$sec-float-border-radius: 1px solid #adadad7e;
+
+
+// * Global custom styles
+.second-float {
+    background-color: $sec-float-bc;
+    border: $sec-float-border-radius;
+}
+
+
+// * bootstrap variables
+
+// $form-check-input-checked-bg-color: #e90b0b;

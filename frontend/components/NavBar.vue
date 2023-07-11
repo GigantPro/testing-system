@@ -32,7 +32,7 @@ const router = useRouter()
                         <a class="nav-link" aria-current="page" href="/me/stats">Успеваемость</a>
                     </li>
                     <li>
-                        <a class="nav-link" aria-current="page" href="/menu">Меню</a>
+                        <a class="nav-link" aria-current="page" href="/user/courses">Учеба</a>
                     </li>
                     <li>
                         <a class="nav-link" aria-current="page" href="/courses/create">Создать свой курс
