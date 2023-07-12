@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: 'unlogged-users-only'
+})
+
 const route = useRoute()
 const router = useRouter()
 

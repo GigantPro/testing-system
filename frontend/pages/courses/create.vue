@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: 'logged-users-only'
+})
+
 useHead({
     title: 'Создать свой курс | Xiver education',
 })

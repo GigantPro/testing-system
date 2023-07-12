@@ -1,7 +1,14 @@
 <script setup>
+definePageMeta({
+  middleware: 'logged-users-only'
+})
+
 useHead({
     title: 'Мои курсы | Xiver education',
 })
+
+const headers = useRequestHeaders()
+
 </script>
 
 
