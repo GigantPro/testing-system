@@ -60,7 +60,7 @@ const onFormSubmit = async (e) => {
 
 <template>
     <form class="row justify-content-center text-center mt-5 mb-5" @submit.prevent="onFormSubmit">
-        <div v-if="!pending.value" class="col-8">
+        <div v-if="!pending.value" class="col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 class="mb-5">Создание нового курса</h1>
             <div class="input-group has-validation mb-3">
                 <div :class="'shadow form-floating ' + course_name_state">
@@ -93,7 +93,7 @@ const onFormSubmit = async (e) => {
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <div v-else class="col-8 text-center text-danger">
+        <div v-else class="col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12 text-center text-danger">
             Произошла какая-то ошибка, повторите позже!
         </div>
     </form>

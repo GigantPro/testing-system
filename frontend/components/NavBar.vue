@@ -92,7 +92,7 @@ a {
 }
 
 li {
-    margin: auto .5rem auto .5rem;
+    margin: auto .9rem auto .9rem;
 }
 
 a:hover,
