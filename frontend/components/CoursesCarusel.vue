@@ -3,7 +3,7 @@ const { data: top_of_courses, pending, error } = await useFetch('http://backend:
 </script>
 
 <template>
-    <div class="container-fluid text-center">
+    <div class="container text-center">
         <div v-if="top_of_courses" class="row align-items-center justify-center justify-content-center">
             <div v-for="item of top_of_courses" :key="item" class="col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-6">
                 <CourseCard :item_="item" />
