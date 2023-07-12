@@ -64,15 +64,13 @@ const router = useRouter()
                             </li>
                             <li>
                                 <button class="dropdown-item"
-                                    @click="async () => { await useFetch('/api/auth/logout', { server: false, method: 'POST' }); await router.go(); await router.push('/');}">Выйти</button>
+                                    @click="async () => { await useFetch('/api/auth/logout', { server: false, method: 'POST' }); await router.push('/'); await router.go();}">Выйти</button>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div v-else class="col-lg-3 text-end d-flex justify-content-end">
-                    <a class="btn btn-dark rounded border-white" href="/auth?auth=login">Войти</a>
-                    <a class="btn btn-dark rounded border-white me-3" href="/auth?auth=registration">Регистрация
-                    </a>
+                <div v-else class="col-lg-3 text-end d-flex justify-content-end pe-3">
+                    <a class="btn rounded border-dark" href="/auth?auth=login" id="loginBtn">Войти</a>
                 </div>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -84,7 +82,7 @@ const router = useRouter()
     </nav>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar {
     margin: 0.3rem 0.6rem 1rem 0.6rem;
 }
@@ -93,11 +91,27 @@ a {
     color: white;
 }
 
+li {
+    margin: auto .5rem auto .5rem;
+}
+
 a:hover,
 a:active,
 a:link,
 a:focus-visible,
 a:focus {
     color: #53774B;
+}
+
+#loginBtn {
+    background-color: #53774B;
+}
+#loginBtn:hover,
+#loginBtn:active,
+#loginBtn:link,
+#loginBtn:focus-visible,
+#loginBtn:focus {
+    color: #fff;
+    background-color: #486841;
 }
 </style>

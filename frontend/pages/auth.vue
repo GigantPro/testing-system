@@ -169,7 +169,7 @@ const onFormSubmit = async (values, actions) => {
 
 <template>
     <form class="row justify-content-center" @submit.prevent="onFormSubmit">
-        <div v-if="$route.query.auth == 'registration'" class="items-center col-8">
+        <div v-if="$route.query.auth == 'registration'" class="items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 class="text-center" style="margin: 3rem auto 2rem auto;">Регистрация</h1>
 
             <div :v-bind="name_state" class="input-group has-validation mb-3">
@@ -234,11 +234,15 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="text-center">
+                <a href="/auth?auth=login">Войти</a>
+            </div>
+            
+            <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onRegistration">Зарегистрироваться</button>
             </div>
         </div>
-        <div v-else class="text-center items-center col-8">
+        <div v-else class="text-center items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 style="margin: 3rem auto 2rem auto;">Вход</h1>
 
             <div class="input-group has-validation mb-3">
@@ -263,6 +267,10 @@ const onFormSubmit = async (values, actions) => {
                 </div>
             </div>
 
+            <div class="text-center">
+                <a href="/auth?auth=registration">Зарегистрироваться</a>
+            </div>
+            
             <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onLogin">Войти</button>
