@@ -9,6 +9,7 @@ useHead({
 
 const headers = useRequestHeaders()
 
+const { data: courses_data, error } = await useFetch('http://bakchain:5001/course/me/when_am_i')
 </script>
 
 
@@ -23,11 +24,11 @@ const headers = useRequestHeaders()
 
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Учеба</label>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Учусь</label>
                     </div>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Преподавание</label>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Преподаю</label>
                     </div>
 
                 </div>

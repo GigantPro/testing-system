@@ -11,6 +11,7 @@ from .functions import (
     get_course_by_param_func,
     json_by_course_obj,
     get_top_of_courses,
+    get_courses_by_role,
 )
 
 
@@ -71,6 +72,19 @@ async def get_popular_courses(
         course_res = await json_by_course_obj(course)
         res.append(course_res)
     return res
+
+
+@courses_router.get('/me/when_am_i')
+async def get_mine_courses(
+    role: str = Query(
+        default='student',
+        title='The role of the user (student | teacher | all_in)',
+        description='Will return the courses of the user',
+    ),
+    user: User = Depends(current_active_verified_user)
+):
+    courses = await get_courses_by_role(role, user)
+    return courses
 
 
 @courses_router.post('/create')

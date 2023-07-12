@@ -53,10 +53,11 @@ const onFormSubmit = async (e) => {
     data.value = data_src
     error.value = error_src
 
-    console.log(data_src.value);
     if (data_src.value.message === "success") {
         await router.push('/user/courses')
         await router.go()
+    } else {
+        course_name_error_msg.value = 'Какая-то ошибка'
     }
 }
 </script>
