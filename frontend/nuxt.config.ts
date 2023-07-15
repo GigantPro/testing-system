@@ -5,5 +5,8 @@ export default defineNuxtConfig({
     public: {
       apiBase: '/nuxt-api'
     }
-  }
+  },
+  css: [
+    '~/assets/css/config.scss',
+  ],
 })

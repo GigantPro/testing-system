@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async () => {
         { headers: headers, server: true }
     );
     const user = user_data.value;
-    if (!user) {
-        return '/auth?auth=login';
+    if (user) {
+        return '/';
     }
 })

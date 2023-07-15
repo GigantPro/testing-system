@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: 'unlogged-users-only'
+})
+
 const route = useRoute()
 const router = useRouter()
 
@@ -169,21 +173,21 @@ const onFormSubmit = async (values, actions) => {
 
 <template>
     <form class="row justify-content-center" @submit.prevent="onFormSubmit">
-        <div v-if="$route.query.auth == 'registration'" class="items-center col-8">
+        <div v-if="$route.query.auth == 'registration'" class="items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 class="text-center" style="margin: 3rem auto 2rem auto;">Регистрация</h1>
 
             <div :v-bind="name_state" class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + name_state">
+                <div :class="'shadow form-floating ' + name_state">
                     <input type="text" :class="'form-control ' + name_state" id="name-input" placeholder="Иван">
-                    <label for="name-input">Имя</label>
+                    <label class="input-required" for="name-input">Имя</label>
                 </div>
                 <div class="invalid-feedback">{{ name_err_message }}</div>
             </div>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + surname_state">
+                <div :class="'shadow form-floating ' + surname_state">
                     <input type="text" :class="'form-control ' + surname_state" id="surname-input" placeholder="Петров">
-                    <label for="surname-input">Фамилия</label>
+                    <label class="input-required" for="surname-input">Фамилия</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ surname_err_message }}
@@ -192,19 +196,19 @@ const onFormSubmit = async (values, actions) => {
 
             <div class="input-group has-validation mb-3">
                 <span class="input-group-text">@</span>
-                <div :class="'form-floating ' + username_state">
+                <div :class="'shadow form-floating ' + username_state">
                     <input type="text" :class="'form-control ' + username_state" id="username-inp" placeholder="Username">
-                    <!-- Fix me: проверка на существующий юзернейм -->
-                    <label for="username-inp">Имя пользователя</label>
+                    <!-- ! Fix me: проверка на существующий юзернейм -->
+                    <label class="input-required" for="username-inp">Имя пользователя</label>
                 </div>
                 <div class="invalid-feedback">{{ username_err_message }}</div>
             </div>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + email_state">
+                <div :class="'shadow form-floating ' + email_state">
                     <input type="email" :class="'form-control ' + email_state" id="email-input"
                         placeholder="name@example.com">
-                    <label for="email-input">Адрес электронной почты</label>
+                    <label class="input-required" for="email-input">Адрес электронной почты</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ email_err_message }}
@@ -212,10 +216,10 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + password_state">
+                <div :class="'shadow form-floating ' + password_state">
                     <input type="password" :class="'form-control ' + password_state" id="password-input"
                         placeholder="Пароль">
-                    <label for="password-input">Пароль</label>
+                    <label class="input-required" for="password-input">Пароль</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ password_err_message }}
@@ -223,10 +227,10 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + second_password_state">
+                <div :class="'shadow form-floating ' + second_password_state">
                     <input type="password" :class="'form-control ' + second_password_state" id="repeat-password"
                         placeholder="Пароль">
-                    <label for="repeat-password">Подтвердите пароль</label>
+                    <label class="input-required" for="repeat-password">Подтвердите пароль</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ second_err_message }}
@@ -234,19 +238,22 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="text-center">
+                <a href="/auth?auth=login">Войти</a>
+            </div>
+            
+            <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onRegistration">Зарегистрироваться</button>
-                <p class="text-danger" id="under-button-text"></p>
             </div>
         </div>
-        <div v-else class="text-center items-center col-8">
+        <div v-else class="text-center items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 style="margin: 3rem auto 2rem auto;">Вход</h1>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + email_state">
+                <div :class="'shadow form-floating ' + email_state">
                     <input type="email" :class="'form-control ' + email_state" id="email-input"
                         placeholder="name@example.com">
-                    <label for="email-input">Адрес электронной почты</label>
+                    <label class="input-required" for="email-input">Адрес электронной почты</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ email_err_message }}
@@ -254,10 +261,10 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="input-group has-validation mb-3">
-                <div :class="'form-floating ' + password_state">
+                <div :class="'shadow form-floating ' + password_state">
                     <input type="password" :class="'form-control ' + password_state" id="password-input"
                         placeholder="Пароль">
-                    <label for="password-input">Пароль</label>
+                    <label class="input-required" for="password-input">Пароль</label>
                 </div>
                 <div class="invalid-feedback">
                     {{ password_err_message }}
@@ -265,9 +272,12 @@ const onFormSubmit = async (values, actions) => {
             </div>
 
             <div class="text-center">
+                <a href="/auth?auth=registration">Зарегистрироваться</a>
+            </div>
+            
+            <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onLogin">Войти</button>
-                <p class="text-danger" id="under-button-text"></p>
             </div>
         </div>
     </form>

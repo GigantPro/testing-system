@@ -1,0 +1,62 @@
+
+// * Config variables
+
+$sec-float-bc: #ece9e9b9;
+$sec-float-border-radius: 1px solid #adadad7e;
+
+$brand-color: #53774B;
+$brand-color-hover: #425e3b;
+
+// * Switches
+$switch-border-color-focus: rgba(0, 0, 0, 0.25);
+$switch-box-shadow-focus: rgba(0, 0, 0, 0);
+$switch-background-image-focus: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.25)'/></svg>");
+$switch-background-color-checked: $brand-color;
+$switch-border-color-focus-checked: $brand-color-hover;
+$switch-background-image-checked: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+
+
+
+// * Global custom styles
+.second-float {
+    background-color: $sec-float-bc;
+    border: $sec-float-border-radius;
+}
+
+a {
+    color: $brand-color;
+}
+
+a:hover,
+a:active,
+a:link,
+a:focus-visible,
+a:focus {
+    color: $brand-color-hover;
+}
+
+// * Switch
+.form-switch .form-check-input {
+    height: 24px;
+    width: 48px;
+}
+.form-switch .form-check-input:focus {
+    border-color: $switch-border-color-focus;
+    outline: 0;
+    box-shadow: 0 0 0 0 $switch-box-shadow-focus;
+    background-image: $switch-background-image-focus;
+}
+.form-switch .form-check-input:checked {
+    background-color: $switch-background-color-checked;
+    border-color: $switch-border-color-focus-checked;
+    border: none;
+    background-image: $switch-background-image-checked;
+}
+
+.form-check.form-switch label {
+    padding-left: 1rem;
+}
+
+
+// * bootstrap variables
+

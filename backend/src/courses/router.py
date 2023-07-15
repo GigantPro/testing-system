@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Form
 from fastapi.responses import JSONResponse
 
 from ..auth.database import User
@@ -11,6 +11,7 @@ from .functions import (
     get_course_by_param_func,
     json_by_course_obj,
     get_top_of_courses,
+    get_courses_by_role,
 )
 
 
@@ -73,7 +74,24 @@ async def get_popular_courses(
     return res
 
 
+@courses_router.get('/me/where_am_i')
+async def get_mine_courses(
+    role: str = Query(
+        default='student',
+        title='The role of the user (student | teacher | all)',
+        description='Will return the courses of the user',
+    ),
+    user: User = Depends(current_active_verified_user)
+):
+    courses = await get_courses_by_role(role, user)
+    return courses
+
+
 @courses_router.post('/create')
-async def create_course(title: str, description: str, user: User = Depends(current_active_verified_user)) -> Any:
+async def create_course(
+    title: str = Form(),
+    description: str = Form(),
+    user: User = Depends(current_active_verified_user),
+) -> Any:
     await create_new_course(title, description, user)
     return JSONResponse({'message': 'success'}, 200)

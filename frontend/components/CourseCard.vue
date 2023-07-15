@@ -3,7 +3,7 @@ const props = defineProps(['item_'])
 </script>
 
 <template>
-    <div v-if="props.item_" class="card">
+    <div v-if="props.item_" class="card text-center justifycontent-center">
         <img :src="item_.img_url" class="card-img-top" alt="Картинка">
         <div class="card-body">
             <h5 class="card-title">{{ item_.titel }}</h5>
@@ -11,7 +11,7 @@ const props = defineProps(['item_'])
             <NuxtLink :to="'/courses/course/' + item_.id" class="btn btn-primary text-white btn-secondary">Перейти к курсу</NuxtLink>
         </div>
     </div>
-    <div v-else class="card">
+    <div v-else class="card text-center justifycontent-center">
         <img src="~/assets/loading-screen-cat.gif" class="card-img-top" alt="Картинка">
         <div class="card-body">
             <h5 class="card-title placeholder-glow">

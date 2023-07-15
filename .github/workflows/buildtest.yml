@@ -1,4 +1,4 @@
-name: Build and Test React Application
+name: Build and Test Nuxt Application
 
 on: [push, pull_request]
 
