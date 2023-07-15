@@ -86,6 +86,7 @@ const onFlagChanged = async () => {
                 </div>
             </div>
         </div>
+        <ModalPageDevelopingWarning />
     </div>
 </template>
 
