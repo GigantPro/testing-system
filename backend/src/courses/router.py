@@ -1,4 +1,4 @@
-from typing import Any, Annotated
+from typing import Any
 
 from fastapi import APIRouter, Depends, Query, Form
 from fastapi.responses import JSONResponse
@@ -88,6 +88,10 @@ async def get_mine_courses(
 
 
 @courses_router.post('/create')
-async def create_course(title: str = Form(), description: str = Form(), user: User = Depends(current_active_verified_user)) -> Any:
+async def create_course(
+    title: str = Form(),
+    description: str = Form(),
+    user: User = Depends(current_active_verified_user),
+) -> Any:
     await create_new_course(title, description, user)
     return JSONResponse({'message': 'success'}, 200)
