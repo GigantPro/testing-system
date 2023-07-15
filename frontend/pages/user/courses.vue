@@ -1,15 +1,59 @@
 <script setup>
 definePageMeta({
-  middleware: 'logged-users-only'
-})
+    middleware: "logged-users-only",
+});
 
 useHead({
-    title: 'Мои курсы | Xiver education',
-})
+    title: "Мои курсы | Xiver education",
+});
 
-const headers = useRequestHeaders()
+const headers = useRequestHeaders();
 
-const { data: courses_data, error } = await useFetch('http://bakchain:5001/course/me/when_am_i')
+const coursesPlateMsg = ref("");
+const coursesData = ref(null);
+
+const { data: courses_data } = await useFetch(
+    "http://backend:5001/course/me/where_am_i",
+    { server: true }
+);
+
+console.log(courses_data.value);
+
+if (!courses_data.value) {
+    coursesPlateMsg.value = "Нет курсов, удовлетворяющих вашим условиям.";
+} else {
+    coursesData.value = courses_data.value;
+}
+
+const onFlagChanged = async () => {
+    let filtr = null;
+
+    const studing = document.getElementById("studingSwitch").checked;
+    const teaching = document.getElementById("teachingSwitch").checked;
+
+    if (studing && teaching) {
+        filtr = "all";
+    } else if (studing) {
+        filtr = "student";
+    } else if (teaching) {
+        filtr = "teacher";
+    }
+
+    if (filtr) {
+        const { data: courses_data } = await useFetch(
+            "/api/course/me/where_am_i",
+            { query: { role: filtr } }
+        );
+        coursesData.value = courses_data.value;
+        if (coursesData.value) {
+            coursesPlateMsg.value = null;
+        } else {
+            coursesData.value = "Нет курсов, удовлетворяющих вашим условиям.";
+        }
+    } else {
+        coursesPlateMsg.value = "Нет курсов, удовлетворяющих вашим условиям.";
+    }
+};
 </script>
 
 
@@ -23,18 +67,22 @@ const { data: courses_data, error } = await useFetch('http://bakchain:5001/cours
                     <h4 class="mb-3">Фильтры</h4>
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Учусь</label>
+                        <input id="studingSwitch" class="form-check-input" type="checkbox" role="switch" checked
+                            @change="onFlagChanged" />
+                        <label class="form-check-label" for="studingSwitch">Учусь</label>
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Преподаю</label>
+                        <input id="teachingSwitch" class="form-check-input" type="checkbox" role="switch"
+                            @change="onFlagChanged" />
+                        <label class="form-check-label" for="teachingSwitch">Преподаю</label>
                     </div>
-
                 </div>
                 <div class="col-1"></div>
-                <div class="col-9 shadow rounded ml-5 p-3 second-float">
-                    Список курсов...
+                <div v-if="coursesPlateMsg" class="col-9 shadow rounded ml-5 p-3 second-float">
+                    {{ coursesPlateMsg }}
+                </div>
+                <div v-else class="col-9 shadow rounded ml-5 p-3 second-float">
+                    <ListCoursesCarusel :data="coursesData" />
                 </div>
             </div>
         </div>

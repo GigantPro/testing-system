@@ -87,7 +87,7 @@ async def json_by_course_obj(course_obj: Course) -> dict[Any]:
 
 
 async def get_courses_by_role(role: str, user: User) -> list[dict[Any]] | JSONResponse:
-    if role not in ['student', 'teacher', 'all_in']:
+    if role not in ['student', 'teacher', 'all']:
         return JSONResponse({'message': 'invalid role'}, status_code=400)
 
     async with engine.connect() as connection:

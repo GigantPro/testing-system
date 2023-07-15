@@ -74,11 +74,11 @@ async def get_popular_courses(
     return res
 
 
-@courses_router.get('/me/when_am_i')
+@courses_router.get('/me/where_am_i')
 async def get_mine_courses(
     role: str = Query(
         default='student',
-        title='The role of the user (student | teacher | all_in)',
+        title='The role of the user (student | teacher | all)',
         description='Will return the courses of the user',
     ),
     user: User = Depends(current_active_verified_user)

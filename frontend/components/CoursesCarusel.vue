@@ -20,7 +20,7 @@ const { data: top_of_courses, pending, error } = await useFetch('http://backend:
                 <CourseCard />
             </div>
         </div>
-        <div v-else class="card-group text-center align-items-center justify-content-cente">
+        <div v-else class="card-group text-center align-items-center justify-content-center">
             <h5 class="display-7 text-danger">Ошибка загрузки {{ error }}</h5>
         </div>
     </div>
