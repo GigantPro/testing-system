@@ -44,6 +44,7 @@ services:
       - nginx
     ports:
       - 5001:5001
+    restart: "on-failure"
 
   frontend:
     build:
@@ -52,6 +53,7 @@ services:
     hostname: frontend
     networks:
       - nginx
+    restart: "on-failure"
 
   nginx:
     depends_on:
@@ -64,6 +66,7 @@ services:
       - nginx
     ports:
        - 83:80
+    restart: "on-failure"
   
   service-test:
     image: alpine
