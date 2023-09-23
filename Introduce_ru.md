@@ -1,0 +1,1 @@
+Внедрить в команду [agile](https://www.atlassian.com/ru/agile)/[scrum](https://www.atlassian.com/ru/agile/scrum)/[kanban](https://scrumtrek.ru/blog/kanban/1360/chto-takoe-kanban-metod-maksimalno-korotko/)
