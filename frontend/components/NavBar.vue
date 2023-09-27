@@ -87,6 +87,12 @@ const router = useRouter()
     margin: 0.3rem 0.6rem 1rem 0.6rem;
 }
 
+a:hover,
+a:active,
+a:focus-visible,
+a:focus {
+    color: #53774B;
+}
 a {
     color: white;
 }
@@ -95,13 +101,6 @@ li {
     margin: auto .9rem auto .9rem;
 }
 
-a:hover,
-a:active,
-a:link,
-a:focus-visible,
-a:focus {
-    color: #53774B;
-}
 
 #loginBtn {
     background-color: #53774B;
