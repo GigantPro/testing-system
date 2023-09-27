@@ -26,7 +26,7 @@ class json_array_length(FunctionElement):
 
 
 @compiles(json_array_length)
-def compile(element, compiler, **kw):
+def compile(element, compiler, **_):
     return f"json_array_length({compiler.process(element.clauses)})"
 
 
