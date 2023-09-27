@@ -101,6 +101,9 @@ li {
     margin: auto .9rem auto .9rem;
 }
 
+a.dropdown-item:hover {
+    color: #77a86c;
+}
 
 #loginBtn {
     background-color: #53774B;
