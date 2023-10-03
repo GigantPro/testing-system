@@ -1,22 +1,24 @@
 <script setup>
-const headers = useRequestHeaders()
-// const url = useRequestURL()
+const { data: user_data } = await useAsyncData(
+    'who_am_i',
+    () => {
+        const headers = useRequestHeaders()
 
-// const api_url = url.protocol + '//' + url.hostname + "/api/user/self/who_am_i"
-// console.log(api_url);
-
-const { data: user_data } = await useFetch(
-    // api_url,
-    'http://backend:5001/user/self/who_am_i',
-    { headers: headers }
+        let api_url = ''
+        if (process.server) api_url = process.env.SSR_API_BASE_URL + "/user/self/who_am_i"
+        else api_url = "/api/user/self/who_am_i"
+        return $fetch( 
+            api_url,
+            { headers: headers },
+        )
+    },
 );
-const user_value = user_data.value;
-console.log(user_value);
-
+console.log(user_data);
+console.log(user_data.ico_url);
 const router = useRouter()
 
 let logged = false
-if (user_value) logged = true
+if (user_data.value) logged = true
 </script>
 
 <template>
@@ -54,11 +56,11 @@ if (user_value) logged = true
                     <div class="dropdown text-white me-3">
                         <a class="d-block link-light text-decoration-none dropdown-toggle" href="#"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="rounded-circle" :src="user_value.ico_url" alt="ico" height="40" />
+                            <img class="rounded-circle" :src="user_data.ico_url" alt="ico" height="40" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li>
-                                <NuxtLink exact no-prefetch class="dropdown-item" :to="'/@' + user_value.username">Мой профиль</NuxtLink>
+                                <NuxtLink exact no-prefetch class="dropdown-item" :to="'/@' + user_data.username">Мой профиль</NuxtLink>
                             </li>
                             <li>
                                 <NuxtLink exact no-prefetch class="dropdown-item" to="/user/settings">Настройки</NuxtLink>

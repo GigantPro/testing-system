@@ -9,10 +9,19 @@ useHead({
 
 const router = useRouter()
 
-const headers = useRequestHeaders()
-const { data: user_data } = await useFetch(
-  "http://backend:5001/user/self/who_am_i",
-  { headers: headers, server: true }
+const { data: user_data } = await useAsyncData(
+    'who_am_i',
+    () => {
+        const headers = useRequestHeaders()
+
+        let api_url = ''
+        if (process.server) api_url = process.env.SSR_API_BASE_URL + "/user/self/who_am_i"
+        else api_url = "/api/user/self/who_am_i"
+        return $fetch(
+            api_url,
+            { headers: headers },
+        )
+    },
 );
 const user_value = user_data.value;
 

@@ -1,5 +1,18 @@
 <script setup>
-const { data: top_of_courses, pending, error } = await useFetch('http://backend:5001/course/most_popular', { server: true })
+const { data: top_of_courses, pending, error } = await useAsyncData(
+    'most_popular',
+    () => {
+        const headers = useRequestHeaders()
+
+        let api_url = ''
+        if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/most_popular"
+        else api_url = "/api/course/most_popular"
+        return $fetch( 
+            api_url,
+            { headers: headers },
+        )
+    },
+);
 </script>
 
 <template>
