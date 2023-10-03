@@ -1,12 +1,24 @@
 <script setup>
-const headers = useRequestHeaders()
-const { data: user_data } = await useFetch(
-    "http://backend:5001/user/self/who_am_i",
-    { headers: headers, server: true }
-);
-const user_value = user_data.value;
+const { data: user_data } = await useAsyncData(
+    'who_am_i',
+    () => {
+        const headers = useRequestHeaders()
 
+        let api_url = ''
+        if (process.server) api_url = process.env.SSR_API_BASE_URL + "/user/self/who_am_i"
+        else api_url = "/api/user/self/who_am_i"
+        return $fetch( 
+            api_url,
+            { headers: headers },
+        )
+    },
+);
+console.log(user_data);
+console.log(user_data.ico_url);
 const router = useRouter()
+
+let logged = false
+if (user_data.value) logged = true
 </script>
 
 <template>
@@ -23,41 +35,41 @@ const router = useRouter()
 
                 <ul class="nav col-lg-9 d-flex justify-content-center text-center">
                     <li>
-                        <a class="nav-link" aria-current="page" href="/">На главную</a>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/">На главную</NuxtLink>
                     </li>
                     <li>
-                        <a class="nav-link" aria-current="page" href="/courses/list">Курсы</a>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/courses/list">Курсы</NuxtLink>
                     </li>
                     <li>
-                        <a class="nav-link" aria-current="page" href="/me/stats">Успеваемость</a>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/me/stats">Успеваемость</NuxtLink>
                     </li>
                     <li>
-                        <a class="nav-link" aria-current="page" href="/user/courses">Учеба</a>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/user/courses">Учеба</NuxtLink>
                     </li>
                     <li>
-                        <a class="nav-link" aria-current="page" href="/courses/create">Создать свой курс
-                        </a>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/courses/create">Создать свой курс
+                        </NuxtLink>
                     </li>
                 </ul>
 
-                <div v-if="user_value" class="col-lg-3 d-flex justify-content-end">
+                <div v-if="logged" class="col-lg-3 d-flex justify-content-end">
                     <div class="dropdown text-white me-3">
                         <a class="d-block link-light text-decoration-none dropdown-toggle" href="#"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="rounded-circle" :src="user_value.ico_url" alt="ico" height="40" />
+                            <img class="rounded-circle" :src="user_data.ico_url" alt="ico" height="40" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li>
-                                <a class="dropdown-item" :href="'/@' + user_value.username">Мой профиль</a>
+                                <NuxtLink exact no-prefetch class="dropdown-item" :to="'/@' + user_data.username">Мой профиль</NuxtLink>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/user/settings">Настройки</a>
+                                <NuxtLink exact no-prefetch class="dropdown-item" to="/user/settings">Настройки</NuxtLink>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/user/courses">Мои курсы</a>
+                                <NuxtLink exact no-prefetch class="dropdown-item" to="/user/courses">Мои курсы</NuxtLink>
                             </li>
                             <li>
-                                <a class="dropdown-item disabled" href="#">Мои классы</a>
+                                <NuxtLink exact no-prefetch class="dropdown-item disabled" to="#">Мои классы</NuxtLink>
                             </li>
                             <li>
                                 <hr class="dropdown-divider" />
@@ -87,6 +99,12 @@ const router = useRouter()
     margin: 0.3rem 0.6rem 1rem 0.6rem;
 }
 
+a:hover,
+a:active,
+a:focus-visible,
+a:focus {
+    color: #53774B;
+}
 a {
     color: white;
 }
@@ -95,12 +113,8 @@ li {
     margin: auto .9rem auto .9rem;
 }
 
-a:hover,
-a:active,
-a:link,
-a:focus-visible,
-a:focus {
-    color: #53774B;
+a.dropdown-item:hover {
+    color: #77a86c;
 }
 
 #loginBtn {

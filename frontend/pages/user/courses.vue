@@ -7,17 +7,23 @@ useHead({
     title: "Мои курсы | Xiver education",
 });
 
-const headers = useRequestHeaders();
-
 const coursesPlateMsg = ref("");
 const coursesData = ref(null);
 
-const { data: courses_data } = await useFetch(
-    "http://backend:5001/course/me/where_am_i",
-    { server: true }
-);
+const { data: courses_data } = await useAsyncData(
+    'where_am_i',
+    () => {
+        const headers = useRequestHeaders()
 
-console.log(courses_data.value);
+        let api_url = ''
+        if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/me/where_am_i"
+        else api_url = "/api/course/me/where_am_i"
+        return $fetch( 
+            api_url,
+            { headers: headers },
+        )
+    },
+);
 
 if (!courses_data.value) {
     coursesPlateMsg.value = "Нет курсов, удовлетворяющих вашим условиям.";
@@ -40,9 +46,19 @@ const onFlagChanged = async () => {
     }
 
     if (filtr) {
-        const { data: courses_data } = await useFetch(
-            "/api/course/me/where_am_i",
-            { query: { role: filtr } }
+        const { data: courses_data } = await useAsyncData(
+            'where_am_i',
+            () => {
+                const headers = useRequestHeaders()
+
+                let api_url = ''
+                if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/me/where_am_i"
+                else api_url = "/api/course/me/where_am_i"
+                return $fetch( 
+                    api_url,
+                    { headers: headers, query: { role: filtr } },
+                )
+            },
         );
         coursesData.value = courses_data.value;
         if (coursesData.value) {
