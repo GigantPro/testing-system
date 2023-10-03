@@ -51,6 +51,8 @@ services:
       dockerfile: Dockerfile
       context: ./frontend
     hostname: frontend
+    env_file: 
+      - ./.env
     networks:
       - nginx
     restart: "on-failure"
