@@ -36,6 +36,8 @@ const username_err_message = ref("")
 const password_err_message = ref("")
 const second_err_message = ref("")
 
+const loading = ref(false)
+
 
 const onFormSubmit = async (values, actions) => {
     const name_inp = document.getElementById('name-input')
@@ -117,54 +119,55 @@ const onFormSubmit = async (values, actions) => {
     }
 
     if (flag && route.query.auth === 'registration') {
-        await useFetch(
-            '/api/auth/register',
-            {
-                headers: { "Content-type": "application/json" },
-                method: 'POST',
-                body: {
-                    email: email_inp.value,
-                    password: password_inp.value,
-                    username: username_inp.value,
-                    name: name_inp.value,
-                    surname: surname_inp.value,
-                    role_id: 0,
-                }
-            }
-        )
+        loading.value = true
+        // const {data: data_s, pending: pending_s, error_s} = await useFetch(
+        //     '/api/auth/register',
+        //     {
+        //         headers: { "Content-type": "application/json" },
+        //         method: 'POST',
+        //         body: {
+        //             email: email_inp.value,
+        //             password: password_inp.value,
+        //             username: username_inp.value,
+        //             name: name_inp.value,
+        //             surname: surname_inp.value,
+        //             role_id: 0,
+        //         }
+        //     }
+        // )
 
-        name_state.value = ''
-        name_err_message.value = ''
-        password_state.value = ''
-        password_err_message.value = ''
+        // name_state.value = ''
+        // name_err_message.value = ''
+        // password_state.value = ''
+        // password_err_message.value = ''
 
-        await useFetch(
-            '/api/auth/login',
-            {
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                method: 'POST',
-                body: new URLSearchParams({
-                    'username': email_inp.value,
-                    'password': password_inp.value,
-                })
-            }
-        )
-        await router.push('/')
-        await router.go()
+        // await useFetch(
+        //     '/api/auth/login',
+        //     {
+        //         headers: { "Content-type": "application/x-www-form-urlencoded" },
+        //         method: 'POST',
+        //         body: new URLSearchParams({
+        //             'username': email_inp.value,
+        //             'password': password_inp.value,
+        //         })
+        //     }
+        // )
+        // await router.push('/')
+        // await router.go()
     } else if (flag && route.query.auth === 'login') {  // Fix me: указание правильности / неправильности логина и пароля
-        await useFetch(
-            '/api/auth/login',
-            {
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                method: 'POST',
-                body: new URLSearchParams({
-                    'username': email_inp.value,
-                    'password': password_inp.value,
-                })
-            }
-        )
-        await router.push('/')
-        await router.go()
+        // await useFetch(
+        //     '/api/auth/login',
+        //     {
+        //         headers: { "Content-type": "application/x-www-form-urlencoded" },
+        //         method: 'POST',
+        //         body: new URLSearchParams({
+        //             'username': email_inp.value,
+        //             'password': password_inp.value,
+        //         })
+        //     }
+        // )
+        // await router.push('/')
+        // await router.go()
     }
 }
 
@@ -280,5 +283,6 @@ const onFormSubmit = async (values, actions) => {
                     @click="onLogin">Войти</button>
             </div>
         </div>
+        <LoadingSpinner v-if="loading" />
     </form>
 </template>
