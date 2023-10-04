@@ -9,6 +9,7 @@ from .funcstions import (
     _get_user_by_id,
     _get_user_read_by_user,
     _get_user_by_username,
+    _get_user_by_email,
 )
 from ..verification.verification import verification_router
 from .self_get import self_router
@@ -30,6 +31,16 @@ user_get_router.include_router(
     self_router
 )
 
+
+@user_get_router.get('/check', description='Return True if username / email is busy.')
+async def get_check_of_registration(username: str, email: str):
+    user_by_username = await _get_user_by_username(username)
+    user_by_email = await _get_user_by_email(email)
+
+    return {
+        'username': True if user_by_username else False,
+        'email': True if user_by_email else False,
+    }
 
 @user_get_router.get('/{user_id}')
 async def get_user_by_id(user_id: int) -> dict:
