@@ -13,8 +13,6 @@ const { data: user_data } = await useAsyncData(
         )
     },
 );
-console.log(user_data);
-console.log(user_data.ico_url);
 const router = useRouter()
 
 let logged = false
