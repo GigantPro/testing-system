@@ -10,7 +10,7 @@ const props = defineProps(['data'])
         <div class="card more-courses-card text-center justifycontent-center col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
             <div class="row"></div>
             <div class="row card-body text-center align-items-center justify-content-center">
-                <NuxtLink to="/courses/list" class="btn btn-info text-white btn-secondary">Больше
+                <NuxtLink to="/courses/list" class="btn text-white btn-secondary">Больше
                     курсов</NuxtLink>
             </div>
             <div class="row"></div>

@@ -8,7 +8,7 @@ const props = defineProps(['item_'])
         <div class="card-body">
             <h5 class="card-title">{{ item_.titel }}</h5>
             <p class="card-text">{{ item_.description }}</p>
-            <NuxtLink :to="'/courses/course/' + item_.id" class="btn btn-primary text-white btn-secondary">Перейти к курсу</NuxtLink>
+            <NuxtLink :to="'/courses/course/' + item_.id" class="btn text-white btn-secondary">Перейти к курсу</NuxtLink>
         </div>
     </div>
     <div v-else class="card text-center justifycontent-center">
@@ -24,7 +24,7 @@ const props = defineProps(['item_'])
                 <span class="placeholder col-6"></span>
                 <span class="placeholder col-8"></span>
             </p>
-            <a class="btn btn-primary disabled placeholder col-6 text-white btn-secondary"></a>
+            <a class="btn disabled placeholder col-6 text-white btn-secondary"></a>
         </div>
     </div>
 </template>

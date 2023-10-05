@@ -42,6 +42,15 @@ async def get_check_of_registration(username: str, email: str):
         'email': True if user_by_email else False,
     }
 
+@user_get_router.get('/username/{username}')
+async def get_user_user_by_username(username: str) -> UserRead:
+    user = await _get_user_by_username(username)
+
+    if not user:
+        return JSONResponse('User not found', status_code=404)
+
+    return await _get_user_read_by_user(user)
+
 @user_get_router.get('/{user_id}')
 async def get_user_by_id(user_id: int) -> dict:
     user = await _get_user_by_id(user_id)
@@ -61,12 +70,3 @@ async def get_user_email_user_by_id(user_id: int) -> str:
         return JSONResponse('User not found', status_code=404)
 
     return user.email
-
-@user_get_router.get('/username/{username}')
-async def get_user_user_by_username(username: str) -> UserRead:
-    user = await _get_user_by_username(username)
-
-    if not user:
-        return JSONResponse('User not found', status_code=404)
-
-    return await _get_user_read_by_user(user)
