@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  middleware: 'unlogged-users-only'
+    middleware: 'unlogged-users-only'
 })
 
 const route = useRoute()
@@ -35,6 +35,8 @@ const email_err_message = ref("")
 const username_err_message = ref("")
 const password_err_message = ref("")
 const second_err_message = ref("")
+
+const loading = ref(false)
 
 
 const onFormSubmit = async (values, actions) => {
@@ -93,16 +95,8 @@ const onFormSubmit = async (values, actions) => {
             username_err_message.value = default_err_msg
             flag = false
         } else {
-            const dataTwice = $fetch('/api/user/username/' + username_inp.value)
-            console.log(dataTwice);
-            if (dataTwice["detail"] === "REGISTER_USER_ALREADY_EXISTS") {
-                flag = false
-                username_state.value = "is-invalid"
-                username_err_message.value = "Этот пользователь уже существует!"
-            } else if (!dataTwice["detail"]) {
-                username_state.value = "is-valid"
-                username_err_message.value = ""
-            }
+            username_state.value = "is-valid"
+            username_err_message.value = ""
         }
         if (repeat_password.value != password_inp.value || !repeat_password.value) {
             password_state.value = "is-invalid"
@@ -117,54 +111,125 @@ const onFormSubmit = async (values, actions) => {
     }
 
     if (flag && route.query.auth === 'registration') {
-        await useFetch(
-            '/api/auth/register',
-            {
-                headers: { "Content-type": "application/json" },
-                method: 'POST',
-                body: {
-                    email: email_inp.value,
-                    password: password_inp.value,
-                    username: username_inp.value,
-                    name: name_inp.value,
-                    surname: surname_inp.value,
-                    role_id: 0,
+        loading.value = true
+        const { data: registred_answer, error: register_error } = useLazyAsyncData(
+            'register',
+            () => {
+                return $fetch(
+                    '/api/auth/register',
+                    {
+                        headers: { "Content-type": "application/json" },
+                        method: 'POST',
+                        body: {
+                            email: email_inp.value,
+                            password: password_inp.value,
+                            username: username_inp.value,
+                            name: name_inp.value,
+                            surname: surname_inp.value,
+                            role_id: 0,
+                        }
+                    }
+                )
+            },
+        )
+
+        watch(registred_answer, async (answer) => {
+            if (answer) {
+                name_state.value = ''
+                name_err_message.value = ''
+                password_state.value = ''
+                password_err_message.value = ''
+                username_err_message.value = ''
+                email_err_message.value = ''
+
+                await useFetch(
+                    '/api/auth/login',
+                    {
+                        headers: { "Content-type": "application/x-www-form-urlencoded" },
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            'username': email_inp.value,
+                            'password': password_inp.value,
+                        })
+                    }
+                )
+                await router.push('/')
+                await router.go()
+            }
+
+            loading.value = false
+        })
+
+        watch(register_error, async (error) => {
+            const { data: answer } = useLazyAsyncData(
+                'check_free_username_email',
+                () => $fetch('/api/user/check',
+                {
+                    headers: { "Content-type": "application/json" },
+                    query: {
+                        email: email_inp.value,
+                        username: username_inp.value,
+                    }
+                })
+            )
+            watch(answer, (answer) => {
+                if (answer.username) {
+                    username_err_message.value = 'Этот никнейм уже занят!'
+                    username_state.value = 'is-invalid'
                 }
-            }
+                if (answer.email) {
+                    email_err_message.value = 'Этот никнейм уже занят!'
+                    email_state.value = 'is-invalid'
+                }
+                loading.value = false
+            })
+        })
+    } else if (flag && route.query.auth === 'login') {
+        loading.value = true
+        const { data: login_answer, error: login_error, pending: login_pending } = useLazyAsyncData(
+            'login',
+            () => {
+                return $fetch(
+                    '/api/auth/login',
+                    {
+                        headers: { "Content-type": "application/x-www-form-urlencoded" },
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            'username': email_inp.value,
+                            'password': password_inp.value,
+                        })
+                    }
+                )
+            },
         )
 
-        name_state.value = ''
-        name_err_message.value = ''
-        password_state.value = ''
-        password_err_message.value = ''
+        watch(login_pending, async (pending) => {
+            setTimeout(async () => {
+                if (!pending && email_state.value !== 'is-invalid') {
+                    name_state.value = ''
+                    name_err_message.value = ''
+                    password_state.value = ''
+                    password_err_message.value = ''
+                    username_err_message.value = ''
+                    email_err_message.value = ''
 
-        await useFetch(
-            '/api/auth/login',
-            {
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                method: 'POST',
-                body: new URLSearchParams({
-                    'username': email_inp.value,
-                    'password': password_inp.value,
-                })
-            }
-        )
-        await router.push('/')
-        await router.go()
-    } else if (flag && route.query.auth === 'login') {  // Fix me: указание правильности / неправильности логина и пароля
-        await useFetch(
-            '/api/auth/login',
-            {
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                method: 'POST',
-                body: new URLSearchParams({
-                    'username': email_inp.value,
-                    'password': password_inp.value,
-                })
-            }
-        )
-        await router.push('/')
-        await router.go()
+                    await router.push('/')
+                    await router.go()
+                }
+
+                loading.value = false
+            }, 100);
+        })
+
+        watch(login_error, async (error) => {
+            email_err_message.value = 'Не правильная почта или пароль!'
+            email_state.value = 'is-invalid'
+
+            password_err_message.value = 'Не правильная почта или пароль!'
+            password_state.value = 'is-invalid'
+
+            loading.value = false
+        })
     }
 }
 
@@ -173,7 +238,8 @@ const onFormSubmit = async (values, actions) => {
 
 <template>
     <form class="row justify-content-center" @submit.prevent="onFormSubmit">
-        <div v-if="$route.query.auth == 'registration'" class="items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
+        <div v-if="$route.query.auth == 'registration'"
+            class="items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 class="text-center" style="margin: 3rem auto 2rem auto;">Регистрация</h1>
 
             <div :v-bind="name_state" class="input-group has-validation mb-3">
@@ -240,12 +306,13 @@ const onFormSubmit = async (values, actions) => {
             <div class="text-center">
                 <a href="/auth?auth=login">Войти</a>
             </div>
-            
+
             <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onRegistration">Зарегистрироваться</button>
             </div>
         </div>
+
         <div v-else class="text-center items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 style="margin: 3rem auto 2rem auto;">Вход</h1>
 
@@ -274,11 +341,11 @@ const onFormSubmit = async (values, actions) => {
             <div class="text-center">
                 <a href="/auth?auth=registration">Зарегистрироваться</a>
             </div>
-            
+
             <div class="text-center">
                 <button type="submit" class="btn btn-dark rounded border-white" style="margin: 1.5rem auto 3rem auto;"
                     @click="onLogin">Войти</button>
             </div>
-        </div>
-    </form>
-</template>
+    </div>
+    <LoadingSpinner v-if="loading" />
+</form></template>

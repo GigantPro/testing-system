@@ -32,3 +32,11 @@ async def _get_user_by_username(username: str) -> None | User:
             .where(User.username == username)
         )
         return user.fetchone()
+
+async def _get_user_by_email(email: str) -> None | User:
+    async with engine.connect() as connection:
+        user = await connection.execute(
+            select(User) \
+            .where(User.email == email)
+        )
+        return user.fetchone()
