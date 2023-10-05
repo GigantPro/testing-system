@@ -184,20 +184,52 @@ const onFormSubmit = async (values, actions) => {
                 loading.value = false
             })
         })
-    } else if (flag && route.query.auth === 'login') {  // Fix me: указание правильности / неправильности логина и пароля
-        // await useFetch(
-        //     '/api/auth/login',
-        //     {
-        //         headers: { "Content-type": "application/x-www-form-urlencoded" },
-        //         method: 'POST',
-        //         body: new URLSearchParams({
-        //             'username': email_inp.value,
-        //             'password': password_inp.value,
-        //         })
-        //     }
-        // )
-        // await router.push('/')
-        // await router.go()
+    } else if (flag && route.query.auth === 'login') {
+        loading.value = true
+        const { data: login_answer, error: login_error, pending: login_pending } = useLazyAsyncData(
+            'login',
+            () => {
+                return $fetch(
+                    '/api/auth/login',
+                    {
+                        headers: { "Content-type": "application/x-www-form-urlencoded" },
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            'username': email_inp.value,
+                            'password': password_inp.value,
+                        })
+                    }
+                )
+            },
+        )
+
+        watch(login_pending, async (pending) => {
+            setTimeout(async () => {
+                if (!pending && email_state.value !== 'is-invalid') {
+                    name_state.value = ''
+                    name_err_message.value = ''
+                    password_state.value = ''
+                    password_err_message.value = ''
+                    username_err_message.value = ''
+                    email_err_message.value = ''
+
+                    await router.push('/')
+                    await router.go()
+                }
+
+                loading.value = false
+            }, 100);
+        })
+
+        watch(login_error, async (error) => {
+            email_err_message.value = 'Не правильная почта или пароль!'
+            email_state.value = 'is-invalid'
+
+            password_err_message.value = 'Не правильная почта или пароль!'
+            password_state.value = 'is-invalid'
+
+            loading.value = false
+        })
     }
 }
 
@@ -280,6 +312,7 @@ const onFormSubmit = async (values, actions) => {
                     @click="onRegistration">Зарегистрироваться</button>
             </div>
         </div>
+
         <div v-else class="text-center items-center col-xxl-5 col-xl-6 col-lg-10 col-md-11 col-sm-12">
             <h1 style="margin: 3rem auto 2rem auto;">Вход</h1>
 
