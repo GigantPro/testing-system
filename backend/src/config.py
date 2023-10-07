@@ -76,4 +76,20 @@ class Config:
     mail_password: str = get_str_env('MAIL_PASSWORD')
 
 
+@dataclass(slots=True, frozen=True)
+class DBConfig:
+    """Config class."""
+    POSTGRES_PASSWORD = get_str_env('POSTGRES_PASSWORD')
+    POSTGRES_USER = get_str_env('POSTGRES_USER')
+    POSTGRES_DB = get_str_env('POSTGRES_DB')
+
+    DB_HOST = get_str_env('DB_HOST', 'postgres')
+    DB_PORT = get_int_env('DB_PORT')
+
+    SECRET = get_str_env('SECRET')
+    SECRET_MANAGER = get_str_env('SECRET_MANAGER')
+
+    TTL_COOKIE_DAYS = get_int_env('TTL_COOKIE_DAYS', 30) * 24 * 60
+
 config = Config()
+db_config = DBConfig()

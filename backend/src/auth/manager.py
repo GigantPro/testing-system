@@ -5,9 +5,9 @@ from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, s
 
 from ..database import User, get_user_db
 from .funcstions import _get_user_by_username
-from ..db_config import config
+from ..config import db_config
 
-SECRET = config.SECRET_MANAGER
+SECRET = db_config.SECRET_MANAGER
 
 
 class CustomUserAlreadyExist(exceptions.FastAPIUsersException):
