@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from .init_db import init_db
-from .auth.database import async_session_maker
+from .database import async_session_maker
 from .auth.schemas import UserCreate, UserRead
 from .auth.users_get import user_get_router
 from .auth.auth import auth_backend, fastapi_users

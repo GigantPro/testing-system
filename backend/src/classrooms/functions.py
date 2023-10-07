@@ -6,8 +6,13 @@ from datetime import datetime, timedelta
 from sqlalchemy import select, insert, update
 from fastapi.responses import JSONResponse
 
-from ..auth.database import User, Role
-from .database import engine, ClassInvite, Classroom
+from ..database import (
+    engine,
+    User,
+    Role,
+    Classroom,
+    ClassInvite,
+)
 
 
 async def has_permission(user: User, permission: str) -> Any | None:

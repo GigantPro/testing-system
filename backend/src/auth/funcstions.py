@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.inspection import inspect
 
-from .database import User, engine
+from ..database import User, engine
 from .schemas import UserRead
 
 

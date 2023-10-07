@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, Query, Form
 from fastapi.responses import JSONResponse
 
-from ..auth.database import User
+from ..database import User
 from ..auth.auth import fastapi_users
 from .functions import (
     get_course_by_id as func_get_course_by_id,

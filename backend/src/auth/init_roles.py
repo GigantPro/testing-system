@@ -1,6 +1,6 @@
 from sqlalchemy import select, insert, update
 
-from .database import engine, Role
+from ..database import engine, Role
 
 
 __standart_roles = [
