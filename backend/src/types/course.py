@@ -1,7 +1,7 @@
-from typing import Any, Optional
+from typing import Optional
 from datetime import datetime
 
-from pydantic import validator, BaseModel, json
+from pydantic import BaseModel, json
 
 
 __all__ = (
