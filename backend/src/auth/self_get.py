@@ -6,7 +6,7 @@ from ..database import User
 from .funcstions import (
     _get_user_read_by_user,
 )
-from src.const import current_active_user
+from const import current_active_user
 
 self_router = APIRouter(prefix='/self')
 

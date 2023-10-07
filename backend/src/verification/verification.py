@@ -10,7 +10,7 @@ from ..database import User
 from ..config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
 from .functions import __update_verification_status
-from src.const import current_active_user
+from const import current_active_user
 
 
 verification_router = APIRouter(prefix='/verification')
