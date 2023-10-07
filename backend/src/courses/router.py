@@ -13,12 +13,7 @@ from .functions import (
     get_top_of_courses,
     get_courses_by_role,
 )
-
-
-current_user = fastapi_users.current_user()
-current_active_user = fastapi_users.current_user(active=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
-current_superuser = fastapi_users.current_user(active=True, superuser=True)
+from src.const import current_active_verified_user
 
 courses_router = APIRouter(prefix='/course')
 

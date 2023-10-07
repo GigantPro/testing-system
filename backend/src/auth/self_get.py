@@ -3,16 +3,10 @@ import json
 from fastapi import APIRouter, Depends
 
 from ..database import User
-from .auth import fastapi_users
 from .funcstions import (
     _get_user_read_by_user,
 )
-
-
-current_user = fastapi_users.current_user()
-current_active_user = fastapi_users.current_user(active=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
-current_superuser = fastapi_users.current_user(active=True, superuser=True)
+from src.const import current_active_user
 
 self_router = APIRouter(prefix='/self')
 

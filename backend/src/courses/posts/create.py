@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from ..router import courses_router
 from database import User
-from user_types import current_active_verified_user
+from backend.const.user_types import current_active_verified_user
 from ..functions import create_new_course
 
 

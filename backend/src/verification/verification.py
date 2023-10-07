@@ -7,16 +7,11 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from ..database import User
-from ..auth.auth import fastapi_users
 from ..config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
 from .functions import __update_verification_status
+from src.const import current_active_user
 
-
-current_user = fastapi_users.current_user()
-current_active_user = fastapi_users.current_user(active=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
-current_superuser = fastapi_users.current_user(active=True, superuser=True)
 
 verification_router = APIRouter(prefix='/verification')
 
