@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 
 from .schemas import UserRead
 
-from .auth import fastapi_users
 from .funcstions import (
     _get_user_by_id,
     _get_user_read_by_user,
@@ -15,6 +14,14 @@ from ..verification.verification import verification_router
 from .self_get import self_router
 from .upload import upload_router
 
+
+__all__ = (
+    "get_user_by_id",
+    "user_get_router",
+    "get_check_of_registration",
+    "get_user_user_by_username",
+    "get_user_email_user_by_id",
+)
 
 user_get_router = APIRouter(prefix='/user')
 user_get_router.include_router(upload_router)

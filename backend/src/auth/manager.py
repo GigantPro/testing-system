@@ -7,16 +7,20 @@ from ..database import User, get_user_db
 from .funcstions import _get_user_by_username
 from ..config import db_config
 
-SECRET = db_config.SECRET_MANAGER
 
+__all__ = (
+    "CustomUserAlreadyExist",
+    "UserManager",
+    "get_user_manager",
+)
 
 class CustomUserAlreadyExist(exceptions.FastAPIUsersException):
     pass
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
-    reset_password_token_secret = SECRET
-    verification_token_secret = SECRET
+    reset_password_token_secret = db_config.SECRET_MANAGER
+    verification_token_secret = db_config.SECRET_MANAGER
 
     async def on_after_register(self, user: User, request: Optional[Request] = None):
         print(f'User {user.id} has registered.')

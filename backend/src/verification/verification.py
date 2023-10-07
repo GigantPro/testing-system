@@ -6,11 +6,17 @@ import random
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from ..database import User
-from ..config import config
+from src.database import User
+from src.config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
 from .functions import __update_verification_status
-from const import current_active_user
+from src.const import current_active_user
+
+
+__all__ = (
+    "verification_router",
+    "send_verif_mail",
+)
 
 
 verification_router = APIRouter(prefix='/verification')

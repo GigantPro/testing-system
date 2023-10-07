@@ -3,6 +3,8 @@ from sqlalchemy import select, insert, update
 from ..database import engine, Role
 
 
+__all__ = ("init_roles", "__standart_roles")
+
 __standart_roles = [
     {
         'id': 1,

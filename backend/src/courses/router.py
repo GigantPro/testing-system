@@ -13,7 +13,17 @@ from .functions import (
     get_top_of_courses,
     get_courses_by_role,
 )
-from const import current_active_verified_user
+from src.const import current_active_verified_user
+
+
+__all__ = (
+    "courses_router",
+    "get_course_by_id",
+    "get_course_by_param",
+    "get_popular_courses",
+    "get_mine_courses",
+    "create_course",
+)
 
 courses_router = APIRouter(prefix='/course')
 

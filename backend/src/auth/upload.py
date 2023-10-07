@@ -8,8 +8,12 @@ from fastapi.responses import JSONResponse
 from ..config import config
 
 
-upload_router = APIRouter(prefix='/upload')
+__all__ = (
+    "upload_router",
+    "get_user_by_id",
+)
 
+upload_router = APIRouter(prefix='/upload')
 
 @upload_router.post('/avatar')
 async def get_user_by_id(file_type: str = Form(...), filedata: str = Form(...)) -> str:

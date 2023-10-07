@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 
 from ..database import User
-from auth.auth import fastapi_users
 from .functions import (
     has_permission,
     generate_invite_class_chars,
@@ -10,12 +9,14 @@ from .functions import (
     check_for_valid_invite,
     activate_invite,
 )
+from src.const import current_active_user
 
 
-current_user = fastapi_users.current_user()
-current_active_user = fastapi_users.current_user(active=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
-current_superuser = fastapi_users.current_user(active=True, superuser=True)
+__all__ = (
+    "classrooms_router",
+    "create_class_room",
+    "join_class_room"
+)
 
 classrooms_router = APIRouter(prefix='/classroom')
 

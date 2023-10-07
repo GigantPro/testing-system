@@ -5,6 +5,13 @@ from ..database import User, engine
 from .schemas import UserRead
 
 
+__all__ = (
+    "_get_user_by_id",
+    "_get_user_read_by_user",
+    "_get_user_by_username",
+    "_get_user_by_email",
+)
+
 async def _get_user_by_id(user_id: int) -> None | User:
     async with engine.connect() as connection:
         user = await connection.execute(

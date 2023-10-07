@@ -14,6 +14,14 @@ from ..database import (
     ClassInvite,
 )
 
+__all__ = (
+    "has_permission",
+    "generate_invite_class_chars",
+    "save_generated_class",
+    "check_for_valid_invite",
+    "activate_invite",
+)
+
 
 async def has_permission(user: User, permission: str) -> Any | None:
     """Checks if the user has permission
