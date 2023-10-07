@@ -11,10 +11,10 @@ class Course(Base):
     __tablename__ = 'course'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    teachers_ids = Column(JSON, nullable=False)
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)
     ico_url = Column(String)
+    teachers_ids = Column(JSON, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
     is_active = Column(Boolean, default=False, nullable=False)
     passing_id = Column(JSON, default=[])
