@@ -71,5 +71,9 @@ class Config:
     static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
     debug: bool = get_bool_env('DEBUG', False)
 
+    mail_server: str = get_str_env('MAIL_SERVICE')
+    email: str = get_str_env('EMAIL')
+    mail_password: str = get_str_env('MAIL_PASSWORD')
+
 
 config = Config()
