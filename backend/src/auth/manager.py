@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
-from .database import User, get_user_db
+from ..database import User, get_user_db
 from .funcstions import _get_user_by_username
 from ..db_config import config
 

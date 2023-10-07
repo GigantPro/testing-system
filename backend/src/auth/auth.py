@@ -3,7 +3,7 @@ from fastapi_users.authentication import CookieTransport
 from fastapi_users.authentication import AuthenticationBackend, JWTStrategy
 
 from .manager import get_user_manager
-from .database import User
+from ..database import User
 from ..db_config import config
 
 

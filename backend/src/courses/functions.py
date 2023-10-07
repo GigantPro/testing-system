@@ -7,8 +7,7 @@ from sqlalchemy.sql.expression import FunctionElement
 from fastapi.responses import JSONResponse
 from loguru import logger
 
-from ..auth.database import User
-from .database import Course, engine
+from ..database import User, Course, engine
 
 
 __all__ = (

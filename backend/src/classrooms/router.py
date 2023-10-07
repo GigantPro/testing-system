@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 
-from ..auth.database import User
+from ..database import User
 from ..auth.auth import fastapi_users
 from .functions import (
     has_permission,

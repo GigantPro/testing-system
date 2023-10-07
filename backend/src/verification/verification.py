@@ -6,7 +6,7 @@ import random
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from ..auth.database import User
+from ..database import User
 from ..auth.auth import fastapi_users
 from .config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED

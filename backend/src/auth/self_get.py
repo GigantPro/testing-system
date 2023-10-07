@@ -2,7 +2,7 @@ import json
 
 from fastapi import APIRouter, Depends
 
-from .database import User
+from ..database import User
 from .auth import fastapi_users
 from .funcstions import (
     _get_user_read_by_user,

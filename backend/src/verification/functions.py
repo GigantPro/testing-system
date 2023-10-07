@@ -1,6 +1,6 @@
 from sqlalchemy import update
 
-from ..auth.database import User, engine
+from ..database import User, engine
 
 
 async def __update_verification_status(user_id: int) -> None:
