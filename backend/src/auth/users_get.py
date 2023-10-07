@@ -4,11 +4,11 @@ from fastapi.responses import JSONResponse
 
 from .schemas import UserRead
 
-from .funcstions import (
-    _get_user_by_id,
-    _get_user_read_by_user,
-    _get_user_by_username,
-    _get_user_by_email,
+from src.functions import (
+    get_user_by_id as _get_user_by_id,
+    get_user_read_by_user as _get_user_read_by_user,
+    get_user_by_username as _get_user_by_username,
+    get_user_by_email as _get_user_by_email,
 )
 from ..verification.verification import verification_router
 from .self_get import self_router
@@ -62,13 +62,3 @@ async def get_user_by_id(user_id: int) -> dict:
 
     user_read = await _get_user_read_by_user(user)
     return json.loads(user_read.json())
-
-
-@user_get_router.get('/{user_id}/email')
-async def get_user_email_user_by_id(user_id: int) -> str:
-    user = await _get_user_by_id(user_id)
-
-    if not user:
-        return JSONResponse('User not found', status_code=404)
-
-    return user.email

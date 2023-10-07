@@ -3,13 +3,11 @@ from typing import Any
 from fastapi import APIRouter, Depends, Query, Form
 from fastapi.responses import JSONResponse
 
-from ..database import User
-from ..auth.auth import fastapi_users
-from .functions import (
+from ..database import User, Course
+from src.functions import (
     get_course_by_id as func_get_course_by_id,
     create_new_course,
     get_course_by_param_func,
-    json_by_course_obj,
     get_top_of_courses,
     get_courses_by_role,
 )
@@ -29,9 +27,9 @@ courses_router = APIRouter(prefix='/course')
 
 
 @courses_router.get('/get/{course_id}')
-async def get_course_by_id(course_id: int) -> dict:
+async def get_course_by_id(course_id: int):
     course = await func_get_course_by_id(course_id)
-    return await json_by_course_obj(course)
+    return course
 
 
 @courses_router.get('/course_by/{param}')
@@ -53,7 +51,7 @@ async def get_course_by_param(
     course = await get_course_by_param_func(param, value)
 
     if course:
-        return await json_by_course_obj(course)
+        return course
     return JSONResponse(
         {'message': 'error'},
         status_code=400,
@@ -72,11 +70,7 @@ async def get_popular_courses(
         return JSONResponse({'message': 'error'}, 400)
 
     top_courses = await get_top_of_courses(count)
-    res = []
-    for course in top_courses:
-        course_res = await json_by_course_obj(course)
-        res.append(course_res)
-    return res
+    return top_courses
 
 
 @courses_router.get('/me/where_am_i')

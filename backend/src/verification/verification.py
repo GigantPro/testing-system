@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from src.database import User
 from src.config import config
 from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
-from .functions import __update_verification_status
+from src.functions import update_verification_status
 from src.const import current_active_user
 
 
@@ -32,7 +32,7 @@ async def send_verif_mail(
         if verification_orders.get(user.id, -1) != verification_code:
             return JSONResponse({'message': 'The code is incorrect or you didn`t ask for it'}, 404)
 
-        await __update_verification_status(user.id)
+        await update_verification_status(user.id)
         verification_orders.pop(user.id)
 
         return RedirectResponse(URL_FOR_REDIRRECT_AFTER_VERIF_PASSED, 303)

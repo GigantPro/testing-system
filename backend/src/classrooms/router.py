@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 
 from ..database import User
-from .functions import (
+from src.functions import (
     has_permission,
     generate_invite_class_chars,
     save_generated_class,

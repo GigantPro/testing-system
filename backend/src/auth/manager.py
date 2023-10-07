@@ -4,7 +4,7 @@ from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
 from ..database import User, get_user_db
-from .funcstions import _get_user_by_username
+from src.functions import get_user_by_username as _get_user_by_username
 from ..config import db_config
 
 
