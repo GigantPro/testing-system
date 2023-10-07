@@ -4,14 +4,19 @@ from loguru import logger
 from sqlalchemy import select
 
 from src.database import engine, Course
+from src.types import CourseFullModel
 
 
 __all__ = ("get_course_by_param_func",)
 
-async def get_course_by_param_func(param: str, value: Any) -> Course:
+async def get_course_by_param_func(param: str, value: Any) -> CourseFullModel | None:
     if param == 'id':
         value = int(value)
-    logger.warning(f'{param=}, {value=}')
+
     async with engine.connect() as connection:
-        db_answer = await connection.execute(select(Course).where(param == value))
-        return db_answer.fetchone()
+        db_answer = await connection.execute(select(Course).where(Course.__dict__[param] == value))
+    
+    answer = db_answer.fetchone()
+    if answer:
+        return CourseFullModel.from_orm(answer)
+    return None

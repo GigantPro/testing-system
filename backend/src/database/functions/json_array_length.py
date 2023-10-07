@@ -6,6 +6,7 @@ __all__ = ("json_array_length", "compile")
 
 class json_array_length(FunctionElement):
     name = 'json_array_len'
+    inherit_cache = True
 
 
 @compiles(json_array_length)

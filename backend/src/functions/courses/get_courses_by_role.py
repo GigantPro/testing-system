@@ -4,11 +4,12 @@ from sqlalchemy import select
 from fastapi.responses import JSONResponse
 
 from src.database import engine, Course, User
+from src.types import CourseFullModel
 
 
 __all__ = ("get_courses_by_role",)
 
-async def get_courses_by_role(role: str, user: User) -> list[Course] | JSONResponse:
+async def get_courses_by_role(role: str, user: User) -> list[CourseFullModel] | JSONResponse:
     if role not in ['student', 'teacher', 'all']:
         return JSONResponse({'message': 'invalid role'}, status_code=400)
 
@@ -26,7 +27,7 @@ async def get_courses_by_role(role: str, user: User) -> list[Course] | JSONRespo
 
     res = []
     for i in db_answer:
-        res.append(i)
+        res.append(CourseFullModel.from_orm(i))
         if user.id in i.teachers_ids:
             res[-1].role = 'teacher'
         elif user.id in i.reviewspassing_id:
