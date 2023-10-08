@@ -29,6 +29,10 @@ COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-interaction --no-cache --with dev
 
-COPY ./src ./src
+COPY ./src ./
+
+# WORKDIR /app/src
 
 CMD ["poetry", "run", "uvicorn",  "--reload",  "--host", "0.0.0.0",  "--port", "5001", "src.app:app"]
+# CMD [ "ls", "-la", "${POETRY_VENV}" ]
+# CMD $POETRY_VENV/bin/poetry run uvicorn --reload --host 0.0.0.0 --port 5001 app:app

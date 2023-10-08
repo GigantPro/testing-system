@@ -3,7 +3,7 @@ from typing import NoReturn
 from dataclasses import dataclass
 
 
-__all__ = ('config',)
+__all__ = ('config', 'db_config')
 
 
 class EnvVariableUndefined(Exception):

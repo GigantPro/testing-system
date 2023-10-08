@@ -1,9 +1,13 @@
 from sqlalchemy import update
 
-from ..database import User, engine
+from src.database import User, engine
 
 
-async def __update_verification_status(user_id: int) -> None:
+__all__ = (
+    "update_verification_status",
+)
+
+async def update_verification_status(user_id: int) -> None:
     async with engine.connect() as connection:
         await connection.execute(
             update(User) \

@@ -3,22 +3,21 @@ from email.mime.text import MIMEText
 import smtplib
 import random
 
-from fastapi import APIRouter, Depends
+from fastapi import Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from ..database import User
-from ..auth.auth import fastapi_users
-from ..config import config
-from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
-from .functions import __update_verification_status
+from src.database import User
+from src.config import config
+from ..const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
+from src.functions import update_verification_status
+from src.const import current_active_user
+from ..router import verification_router
 
 
-current_user = fastapi_users.current_user()
-current_active_user = fastapi_users.current_user(active=True)
-current_active_verified_user = fastapi_users.current_user(active=True, verified=True)
-current_superuser = fastapi_users.current_user(active=True, superuser=True)
-
-verification_router = APIRouter(prefix='/verification')
+__all__ = (
+    "verification_orders",
+    "send_verif_mail"
+)
 
 verification_orders = {}
 
@@ -31,7 +30,7 @@ async def send_verif_mail(
         if verification_orders.get(user.id, -1) != verification_code:
             return JSONResponse({'message': 'The code is incorrect or you didn`t ask for it'}, 404)
 
-        await __update_verification_status(user.id)
+        await update_verification_status(user.id)
         verification_orders.pop(user.id)
 
         return RedirectResponse(URL_FOR_REDIRRECT_AFTER_VERIF_PASSED, 303)
