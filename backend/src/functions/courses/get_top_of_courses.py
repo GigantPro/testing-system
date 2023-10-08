@@ -6,7 +6,7 @@ from src.database import engine, Course, json_array_length
 
 __all__ = ("get_top_of_courses",)
 
-async def get_top_of_courses(count: int) -> list[Course]:
+async def get_top_of_courses(start_index: int, count: int) -> list[Course]:
     async with engine.connect() as connection:
         db_answer = await connection.execute(
             select(Course)
@@ -14,5 +14,6 @@ async def get_top_of_courses(count: int) -> list[Course]:
             .order_by(func.json_array_length(Course.passed_id), Course.rating, \
                 json_array_length(Course.reviews), json_array_length(Course.passing_id))
             .limit(count)
+            .offset(start_index)
         )
         return db_answer.fetchall()

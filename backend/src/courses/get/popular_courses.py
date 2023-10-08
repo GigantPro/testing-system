@@ -10,6 +10,11 @@ __all__ = ("popular_courses",)
 
 @courses_router.get('/most_popular')
 async def popular_courses(
+    start_index: int = Query(
+        default=0,
+        title='Start inxed for popular courses',
+        description='Will return courses from this index',
+    ),
     count: int = Query(
         default=10,
         title='Count of returned courses',
@@ -19,5 +24,5 @@ async def popular_courses(
     if count > 50 or count <= 0:
         return JSONResponse({'message': 'error'}, 400)
 
-    top_courses = await get_top_of_courses(count)
+    top_courses = await get_top_of_courses(start_index, count)
     return [CourseUserReadModel.from_orm(course) for course in top_courses]
