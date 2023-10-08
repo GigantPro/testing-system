@@ -8,7 +8,6 @@ useHead({
 });
 
 const coursesPlateMsg = ref("");
-const coursesData = ref(null);
 
 const { data: courses_data } = await useAsyncData(
     'where_am_i',
@@ -27,8 +26,6 @@ const { data: courses_data } = await useAsyncData(
 
 if (!courses_data.value) {
     coursesPlateMsg.value = "Нет курсов, удовлетворяющих вашим условиям.";
-} else {
-    coursesData.value = courses_data.value;
 }
 
 const onFlagChanged = async () => {
@@ -60,11 +57,11 @@ const onFlagChanged = async () => {
                 )
             },
         );
-        coursesData.value = courses_data.value;
-        if (coursesData.value) {
+        courses_data.value = courses_data.value;
+        if (courses_data.value) {
             coursesPlateMsg.value = null;
         } else {
-            coursesData.value = "Нет курсов, удовлетворяющих вашим условиям.";
+            courses_data.value = "Нет курсов, удовлетворяющих вашим условиям.";
         }
     } else {
         coursesPlateMsg.value = "Нет курсов, удовлетворяющих вашим условиям.";
@@ -98,18 +95,9 @@ const onFlagChanged = async () => {
                     {{ coursesPlateMsg }}
                 </div>
                 <div v-else class="col-9 shadow rounded ml-5 p-3 second-float">
-                    <ListCoursesCarusel :data="coursesData" />
+                    <ListCoursesCarusel :data="courses_data" />
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-
-<!-- <script>
-export default {
-    mounted() {
-        
-    }
-}
-</script> -->
