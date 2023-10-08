@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 
 
 from ..router import courses_router
-from src.functions import get_top_of_courses_by
+from src.functions import get_top_of_courses_by, get_top_of_courses
 from src.types import CourseUserReadModel
 from src.database import Course, json_array_length
 
@@ -16,6 +16,7 @@ dict_ = {
     'reviews_count': json_array_length(Course.reviews),
     'passed_count':  json_array_length(Course.passed_id),
     'passing_count': json_array_length(Course.passing_id),
+    'popularity': None
 }
 
 @courses_router.get('/popular_by')
@@ -32,11 +33,14 @@ async def popular_courses_by(
     ),
     by_: str = Query(
         title='The parameter by which you need to get filtered snare',
-        description='Must be one of thees: [created_time, passed_count, passing_count, reviews_count, rating]',
+        description='Must be one of thees: [created_time, passed_count, passing_count, reviews_count, rating, popularity]',
     ),
 ) -> list[CourseUserReadModel]:
     if count > 50 or count <= 0 or by_ not in dict_:
-        return JSONResponse({'message': 'error'}, 400)
+        return JSONResponse({'message': 'error'}, 401)
+    
+    if by_ == 'popular':
+        return await get_top_of_courses(start_index, count)
 
-    top_courses = await get_top_of_courses_by(start_index, count, dict_[by_])
-    return [CourseUserReadModel.from_orm(course) for course in top_courses]
+    return [CourseUserReadModel.from_orm(course) for course in \
+        await get_top_of_courses_by(start_index, count, dict_[by_])]
