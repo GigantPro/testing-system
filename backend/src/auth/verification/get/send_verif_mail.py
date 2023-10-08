@@ -3,23 +3,21 @@ from email.mime.text import MIMEText
 import smtplib
 import random
 
-from fastapi import APIRouter, Depends
+from fastapi import Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from src.database import User
 from src.config import config
-from .const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
+from ..const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
 from src.functions import update_verification_status
 from src.const import current_active_user
+from ..router import verification_router
 
 
 __all__ = (
-    "verification_router",
-    "send_verif_mail",
+    "verification_orders",
+    "send_verif_mail"
 )
-
-
-verification_router = APIRouter(prefix='/verification')
 
 verification_orders = {}
 

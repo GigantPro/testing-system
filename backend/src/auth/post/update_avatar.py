@@ -2,21 +2,17 @@ import base64
 from random import randint
 from datetime import datetime
 
-from fastapi import APIRouter, Form
+from fastapi import Form
 from fastapi.responses import JSONResponse
 
-from ..config import config
+from src.config import config
+from ..router import upload_router
 
 
-__all__ = (
-    "upload_router",
-    "get_user_by_id",
-)
-
-upload_router = APIRouter(prefix='/upload')
+__all__ = ("update_avatar",)
 
 @upload_router.post('/avatar')
-async def get_user_by_id(file_type: str = Form(...), filedata: str = Form(...)) -> str:
+async def update_avatar(file_type: str = Form(...), filedata: str = Form(...)) -> str:
     if file_type not in ['png', 'jpeg']:
         return JSONResponse({'message': 'Incorrect file format.'}, 400)
 
