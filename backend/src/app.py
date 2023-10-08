@@ -9,7 +9,7 @@ from .auth.schemas import UserCreate, UserRead
 from .auth import user_get_router
 from .auth.auth import auth_backend, fastapi_users
 from .config import config
-from .classrooms.router import classrooms_router
+from .classrooms import classrooms_router
 from .courses.router import courses_router
 
 
