@@ -7,9 +7,9 @@ from src.database import engine, Course
 from src.types import CourseFullModel
 
 
-__all__ = ("get_course_by_param_func",)
+__all__ = ("get_course_by_param",)
 
-async def get_course_by_param_func(param: str, value: Any) -> CourseFullModel | None:
+async def get_course_by_param(param: str, value: Any) -> CourseFullModel | None:
     if param == 'id':
         value = int(value)
 

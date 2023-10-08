@@ -6,7 +6,7 @@ const props = defineProps(['item_'])
     <div v-if="props.item_" class="card text-center justifycontent-center">
         <img :src="item_.img_url" class="card-img-top" alt="Картинка">
         <div class="card-body">
-            <h5 class="card-title">{{ item_.titel }}</h5>
+            <h5 class="card-title">{{ item_.title }}</h5>
             <p class="card-text">{{ item_.description }}</p>
             <NuxtLink :to="'/courses/course/' + item_.id" class="btn text-white btn-secondary">Перейти к курсу</NuxtLink>
         </div>
