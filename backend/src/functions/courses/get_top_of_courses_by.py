@@ -1,6 +1,6 @@
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from src.database import engine, Course
 
@@ -18,6 +18,7 @@ async def get_top_of_courses_by(start_index: int, count: int, by_: Any) -> list[
     Returns:
         list[Course]: result of database fetch
     """
+    print(f'{by_=}')
     async with engine.connect() as connection:
         db_answer = await connection.execute(
             select(Course)

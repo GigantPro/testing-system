@@ -11,11 +11,11 @@ from src.database import Course, json_array_length
 __all__ = ("popular_courses_by",)
 
 dict_ = {
-    'rating':        Course.rating,
-    'created_time':  Course.created_at,
-    'reviews_count': json_array_length(Course.reviews),
-    'passed_count':  json_array_length(Course.passed_id),
-    'passing_count': json_array_length(Course.passing_id),
+    'rating':        Course.__table__.c.rating.desc(),
+    'created_time':  Course.__table__.c.created_at.desc(),
+    'reviews_count': json_array_length(Course.__table__.c.reviews).desc(),
+    'passed_count':  json_array_length(Course.__table__.c.passed_id).desc(),
+    'passing_count': json_array_length(Course.__table__.c.passing_id).desc(),
     'popularity': None
 }
 

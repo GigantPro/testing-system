@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, validator
 
 
 __all__ = (
@@ -44,11 +44,19 @@ class CourseUserReadModel(BaseModel):
     teachers_ids: list
     created_at: datetime
     is_active: bool
-    reviews: list
+    reviews_count: int = Field(alias='reviews')
+    passing_count: int = Field(alias='passing_id')
+    passed_count: int = Field(alias='passed_id')
     rating: float
 
     role: Optional[str]
     course_type: str = 'read'
+
+    @validator('reviews_count', 'passing_count', 'passed_count', pre=True)
+    def validation_counts(cls, value):
+        if isinstance(value, int):
+            return value
+        return len(value)
 
 
 class CourseWithDataModel(BaseModel):
