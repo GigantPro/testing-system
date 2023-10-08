@@ -78,7 +78,7 @@ const onFlagChanged = async () => {
         <h1 class="text-center mt-5 mb-5">Список курсов</h1>
         <div class="container align-items-center justify-content-center items-center">
             <div class="row">
-                <div class="col-2 rounded shadow btn-group-vertical mr-5 p-2 second-float" role="group"
+                <div class="col-2 rounded shadow btn-group-vertical mr-5 p-2 second-float justify-content-start" role="group"
                     aria-label="Basic checkbox toggle button group">
                     <h4 class="mb-3">Фильтры</h4>
 
@@ -102,7 +102,6 @@ const onFlagChanged = async () => {
                 </div>
             </div>
         </div>
-        <ModalPageDevelopingWarning />
     </div>
 </template>
 
