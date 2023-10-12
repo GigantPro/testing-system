@@ -4,11 +4,9 @@ const onModalClose = () => {
     cookie_flag.value = true
 }
 
-if (process.client) {
+if (process.client && !cookie_flag.value) {
     const modal = new bootstrap.Modal(document.getElementById('developingWarningModal'))
-    if (!cookie_flag.value) {
-        modal.show()
-    }
+    modal.show()
 }
 
 </script>
