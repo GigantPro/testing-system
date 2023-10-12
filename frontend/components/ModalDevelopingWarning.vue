@@ -1,5 +1,21 @@
+<script setup>
+const cookie_flag = useCookie('cookie_flag', {sameSite: true})
+const onModalClose = () => {
+    cookie_flag.value = true
+}
+
+if (process.client) {
+    const modal = new bootstrap.Modal(document.getElementById('developingWarningModal'))
+    if (!cookie_flag.value) {
+        modal.show()
+    }
+}
+
+</script>
+
+
 <template>
-    <div class="modal fade" id="developingWarningModal" tabindex="-1" aria-labelledby="developingWarningModalLabel">
+    <div class="modal fade" id="developingWarningModal" tabindex="-1" aria-labelledby="developingWarningModalLabel" @click="onModalClose">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -18,12 +34,3 @@
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    mounted() {
-        const modal = new bootstrap.Modal(document.getElementById('developingWarningModal'))
-        modal.show()
-    }
-}
-</script>
