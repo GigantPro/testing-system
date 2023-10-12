@@ -3,7 +3,7 @@ const props = defineProps(['item_'])
 </script>
 
 <template>
-    <div v-if="props.item_" class="card text-center justifycontent-center">
+    <div v-if="props.item_" class="card text-center justifycontent-center m-1">
         <img :src="props.item_.ico_url" class="card-img-top rounded mx-auto d-block" alt="Картинка">
         <div class="card-body">
             <h5 class="card-title">{{ item_.title }}</h5>

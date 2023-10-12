@@ -1,8 +1,7 @@
-export default defineNuxtRouteMiddleware(async () => {
-    const route = useRoute()
+export default defineNuxtRouteMiddleware(async (to) => {
 
     const { data: course_data } = await useAsyncData(
-        'course_data_' + route.params.id,
+        'course_data_' + to.params.id,
         () => {
             const headers = useRequestHeaders()
     
@@ -10,7 +9,7 @@ export default defineNuxtRouteMiddleware(async () => {
             if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/get/"
             else api_url = "/api/course/get/"
     
-            api_url = api_url + route.params.id
+            api_url = api_url + to.params.id
     
             return $fetch( 
                 api_url,
