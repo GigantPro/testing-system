@@ -28,7 +28,6 @@ async def course_by_param(
 
     course = await get_course_by_param(param, value)
 
-    print(course)
     if course:
         return course
 
