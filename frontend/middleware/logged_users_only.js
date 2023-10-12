@@ -13,8 +13,7 @@ export default defineNuxtRouteMiddleware(async () => {
             )
         },
     );
-    const user = user_data.value;
-    if (!user) {
+    if (!user_data.value) {
         return '/auth?auth=login';
     }
 })
