@@ -27,7 +27,7 @@ def get_bool_env(env_name: str, default: bool | None = None) -> bool | NoReturn:
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
 
-    if default:
+    if env_value is None and not (default is None):
         return default
 
     if env_value.lower() in ("1", "true", "t", "y", "yes"):
