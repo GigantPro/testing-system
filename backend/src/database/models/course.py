@@ -17,7 +17,7 @@ class Course(Base):
     teachers_ids = Column(JSON, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
     is_active = Column(Boolean, default=False, nullable=False)
-    passing_id = Column(JSON, default=[])
+    passing_id = Column(JSON[int], default=[])
     passed_id = Column(JSON, default=[])
     reviews = Column(JSON, default=[])
     rating = Column(FLOAT, default=.0)

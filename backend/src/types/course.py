@@ -83,12 +83,12 @@ class CourseUpdateModel(BaseModel):
         orm_mode = True
 
     id: int
-    title: str
-    description: str
+    title: Optional[str]
+    description: Optional[str]
     ico_url: Optional[str]
-    teachers_ids: list
-    is_active: bool
-    course_data: dict
+    teachers_ids: Optional[list[int]]
+    is_active: Optional[bool]
+    course_data: Optional[dict]
 
 
 class CourseCreateModel(BaseModel):
