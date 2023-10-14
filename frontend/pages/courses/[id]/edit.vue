@@ -33,7 +33,7 @@ const { data: course_data } = await useAsyncData(
 
 <template>
     <div>
-        <h1 class="text-center mt-5 mb-5">Описание курса</h1>
+        <h1 class="text-center mt-5 mb-5">Настройки курса</h1>
         <div class="container align-items-center justify-content-center items-center">
             <div class="row">
                 <div class="col-3 rounded shadow btn-group-vertical mr-5 p-2 second-float justify-content-start" role="group"
