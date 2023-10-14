@@ -1,4 +1,4 @@
-FROM python:3.10.10-alpine3.17 as python-base
+FROM python:3.11-alpine3.17 as python-base
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -29,8 +29,8 @@ COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-interaction --no-cache --without dev
 
-COPY ./src ./
+COPY ./src ./src
 COPY ./public ./public
 
-CMD ["poetry", "run", "uvicorn",  "--reload",  "--host", "0.0.0.0",  "--port", "5001", "src.app:app"]
-
+CMD ["poetry", "run", "uvicorn", "--host", "0.0.0.0", "--port", "5001", "src.app:app"]
+#CMD ls -la

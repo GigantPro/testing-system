@@ -16,6 +16,5 @@ __all__ = (
     "CourseCreateModel",
     "CourseUpdateModel",
     "CourseFullModel",
-    
     "ClassInviteModel",
 )
