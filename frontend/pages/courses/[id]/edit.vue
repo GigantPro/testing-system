@@ -39,7 +39,7 @@ const { data: course_data } = await useAsyncData(
                 <div class="col-3 rounded shadow btn-group-vertical mr-5 p-2 second-float justify-content-start" role="group"
                     aria-label="Basic checkbox toggle button group">
                     <div class="text-center">
-                        <img :src="course_data.ico_url" alt="Course icon" class="rounded-circle mx-auto d-block shadow" width="70%" >
+                        <img :src="course_data.ico_url" alt="Course icon" class="rounded-circle mx-auto d-block shadow" id="courseImg" >
                         <h4 class="pt-4">{{ course_data.title }}</h4>
                     </div>
                     <hr class="rounded" width="100%">
@@ -55,3 +55,9 @@ const { data: course_data } = await useAsyncData(
         </div>
     </div>
 </template>
+
+<style scoped>
+#courseImg {
+    width: 70%;
+}
+</style>
