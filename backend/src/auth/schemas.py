@@ -2,6 +2,12 @@ from typing import Optional
 from fastapi_users import schemas
 
 
+__all__ = (
+    "UserRead",
+    "UserCreate",
+    "UserUpdate",
+)
+
 class UserRead(schemas.BaseUser[int]):
     id: int
     email: str

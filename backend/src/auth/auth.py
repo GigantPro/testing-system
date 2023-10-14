@@ -7,16 +7,21 @@ from ..database import User
 from ..config import db_config
 
 
+__all__ = (
+    "cookie_transport",
+    "get_jwt_strategy",
+    "auth_backend",
+    "fastapi_users",
+)
+
 cookie_transport = CookieTransport(
     cookie_name='auth_key',
     cookie_max_age=db_config.TTL_COOKIE_DAYS,
 )
 
-SECRET = db_config.SECRET
-
 
 def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret=SECRET, lifetime_seconds=db_config.TTL_COOKIE_DAYS)
+    return JWTStrategy(secret=db_config.SECRET, lifetime_seconds=db_config.TTL_COOKIE_DAYS)
 
 
 auth_backend = AuthenticationBackend(

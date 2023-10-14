@@ -6,11 +6,11 @@ from fastapi.staticfiles import StaticFiles
 from .init_db import init_db
 from .database import async_session_maker
 from .auth.schemas import UserCreate, UserRead
-from .auth.users_get import user_get_router
-from .auth.auth import auth_backend, fastapi_users
+from .auth import user_get_router
+from .auth import auth_backend, fastapi_users
 from .config import config
-from .classrooms.router import classrooms_router
-from .courses.router import courses_router
+from .classrooms import classrooms_router
+from .courses import courses_router
 
 
 app = FastAPI(

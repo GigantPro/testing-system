@@ -36,7 +36,7 @@ if (user_data.value) logged = true
                         <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/">На главную</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/courses/list">Курсы</NuxtLink>
+                        <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/courses">Курсы</NuxtLink>
                     </li>
                     <li>
                         <NuxtLink exact no-prefetch class="nav-link" aria-current="page" to="/me/stats">Успеваемость</NuxtLink>
