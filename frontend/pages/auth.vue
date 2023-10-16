@@ -161,6 +161,7 @@ const onFormSubmit = async (values, actions) => {
         })
 
         watch(register_error, async (error) => {
+            if(!error) return
             const { data: answer } = useLazyAsyncData(
                 'check_free_username_email',
                 () => $fetch('/api/user/check',
@@ -222,6 +223,7 @@ const onFormSubmit = async (values, actions) => {
         })
 
         watch(login_error, async (error) => {
+            if(!error) return
             email_err_message.value = 'Не правильная почта или пароль!'
             email_state.value = 'is-invalid'
 
