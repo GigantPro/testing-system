@@ -12,7 +12,6 @@ from .config import config
 from .classrooms import classrooms_router
 from .courses import courses_router
 
-asd
 
 app = FastAPI(
     title='Edu.Xiver',
