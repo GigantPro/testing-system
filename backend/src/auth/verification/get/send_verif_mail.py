@@ -49,7 +49,7 @@ async def send_verif_mail(
         msg['From'] = config.email
         msg['To'] = user.email
 
-        with open('./src/verification/static/verefication_msg.html', 'r', encoding='utf-8') as verif_msg:
+        with open('./src/verification/static/verefication_msg.html', encoding='utf-8') as verif_msg:
             html = verif_msg.read().format(url=url)
 
         part1 = MIMEText('In order to verify your email, you need to click on this link', 'plain')

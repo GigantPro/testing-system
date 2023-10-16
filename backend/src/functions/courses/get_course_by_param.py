@@ -1,6 +1,5 @@
 from typing import Any
 
-from loguru import logger
 from sqlalchemy import select
 
 from src.database import engine, Course
