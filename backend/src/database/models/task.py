@@ -6,7 +6,7 @@ from ..base import Base
 __all__ = ("Task",)
 
 class Task(Base):
-    __tablename__ = 'Task'
+    __tablename__ = 'tasks'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     type = Column(String)

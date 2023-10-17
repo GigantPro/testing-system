@@ -8,7 +8,7 @@ from ..base import Base
 __all__ = ("Course",)
 
 class Course(Base):
-    __tablename__ = 'course'
+    __tablename__ = 'courses'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     title = Column(String, nullable=False)
