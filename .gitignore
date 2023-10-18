@@ -107,3 +107,4 @@ backend/public
 test.py
 
 .npmrc
+scylla
