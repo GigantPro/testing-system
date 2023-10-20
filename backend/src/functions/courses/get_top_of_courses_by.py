@@ -1,7 +1,6 @@
 from typing import Any
 
-from sqlalchemy import select, func
-
+from sqlalchemy import select
 from src.database import engine, Course
 
 
@@ -21,7 +20,7 @@ async def get_top_of_courses_by(start_index: int, count: int, by_: Any) -> list[
     async with engine.connect() as connection:
         db_answer = await connection.execute(
             select(Course)
-            .where(Course.is_active == True)
+            .where(Course.is_active is True)
             .order_by(by_)
             .limit(count)
             .offset(start_index)

@@ -1,5 +1,3 @@
-from typing import Any
-
 from sqlalchemy import select
 from fastapi.responses import JSONResponse
 

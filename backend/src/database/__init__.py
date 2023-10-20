@@ -1,3 +1,5 @@
+# ruff: noqa: F403, F401
+
 """Model to working with database"""
 
 from .base import (

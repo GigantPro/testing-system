@@ -10,7 +10,7 @@ from ..base import Base
 __all__ = ("ClassInvite",)
 
 class ClassInvite(Base):
-    __tablename__ = 'classinvite'
+    __tablename__ = 'classinvites'
 
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     invite_code = Column(String, primary_key=True, nullable=False)

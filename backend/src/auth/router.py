@@ -7,6 +7,7 @@ __all__ = (
     "self_router",
     "upload_router",
     "user_get_router",
+    "verification_router",
 )
 
 self_router     = APIRouter(prefix='/self')

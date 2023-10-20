@@ -1,3 +1,5 @@
+# ruff: noqa: F403, F405
+
 from .router import *
 from .verification import *
 from .get import *

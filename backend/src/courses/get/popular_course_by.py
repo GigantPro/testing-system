@@ -33,7 +33,8 @@ async def popular_courses_by(
     ),
     by_: str = Query(
         title='The parameter by which you need to get filtered snare',
-        description='Must be one of thees: [created_time, passed_count, passing_count, reviews_count, rating, popularity]',
+        description='Must be one of thees: [created_time, passed_count, '
+                    'passing_count, reviews_count, rating, popularity]',
     ),
 ) -> list[CourseUserReadModel]:
     if count > 50 or count <= 0 or by_ not in dict_:
