@@ -30,5 +30,6 @@ select = [
   "E",   # pycodestyle
   "F",   # pyflakes
   "UP",  # pyupgrade
+  "N",   # pep8-naming
 ]
 line-length = 120

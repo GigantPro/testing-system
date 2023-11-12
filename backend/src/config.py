@@ -6,7 +6,7 @@ from dataclasses import dataclass
 __all__ = ('config', 'db_config')
 
 
-class EnvVariableUndefined(Exception):
+class EnvVariableUndefined(Exception):  # noqa: N818
     """Raise when cannot read env variable and getenv return None."""
 
     def __init__(self, env_name: str) -> None:
@@ -14,7 +14,7 @@ class EnvVariableUndefined(Exception):
         super().__init__(msg)
 
 
-class CannotRecognizeBoolEnv(Exception):
+class CannotRecognizeBoolEnv(Exception):  # noqa: N818
     """Raise when cannot recognize bool env as python bool varialble."""
 
     def __init__(self, env_name: str, env_value: str) -> None:

@@ -53,7 +53,7 @@ class CourseUserReadModel(BaseModel):
     course_type: str = 'read'
 
     @validator('reviews_count', 'passing_count', 'passed_count', pre=True)
-    def validation_counts(cls, value):
+    def validation_counts(cls, value):  # noqa: N805
         if isinstance(value, int):
             return value
         return len(value)
