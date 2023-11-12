@@ -4,7 +4,12 @@ from .course import Course
 from .role import Role
 from .user import User
 from .lesson import Lesson
-from .task import Task
+
+from .course_data import (
+    CourseData,
+    Module,
+    Task,
+)
 
 
 __all__ = (
@@ -14,5 +19,7 @@ __all__ = (
     "Role",
     "User",
     "Lesson",
+    "CourseData",
+    "Module",
     "Task",
 )

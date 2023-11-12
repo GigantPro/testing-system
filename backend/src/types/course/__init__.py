@@ -1,10 +1,10 @@
-from .course import (
-    ModuleModel,
-    CourseDataModel,
-    TaskModel,
-)
+from .module import ModuleModel
 
-from .course.course import (
+from .course_data import CourseDataModel
+
+from .task import TaskModel
+
+from .course import (
     CourseWithDataModel,
     CourseUserReadModel,
     CourseCreateModel,
@@ -12,18 +12,13 @@ from .course.course import (
     CourseFullModel,
 )
 
-from .class_invite import (
-    ClassInviteModel,
-)
-
 __all__ = (
+    "ModuleModel",
+    "CourseDataModel",
+    "TaskModel",
     "CourseWithDataModel",
     "CourseUserReadModel",
     "CourseCreateModel",
     "CourseUpdateModel",
     "CourseFullModel",
-    "ModuleModel",
-    "CourseDataModel",
-    "TaskModel",
-    "ClassInviteModel",
 )
