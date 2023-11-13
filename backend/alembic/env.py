@@ -14,8 +14,14 @@ try:
 except:
     print('W: cannot found db env. Load ../.env.dev')
     load_dotenv('../.env.dev')
-    from src.database import Base
-    from src.config import db_config
+
+    try:
+        from src.database import Base
+        from src.config import db_config
+    
+    except:
+        print('W: cannot found db env. Load ../.env')
+        load_dotenv('../.env')
 
 
 # this is the Alembic Config object, which provides
