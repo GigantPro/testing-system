@@ -9,7 +9,7 @@ from ..base import Base
 __all__ = ("Classroom",)
 
 class Classroom(Base):
-    __tablename__ = 'classroom'
+    __tablename__ = 'classrooms'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     class_name = Column(String, nullable=False)

@@ -9,28 +9,49 @@ const description = ref(null)
 
 watch(refresh, async (val) => {
     if (!val) return
-    const { data: course_data } = useAsyncData(
-        'course_data_' + route.params.id,
-        () => {
-            const headers = useRequestHeaders()
-
-            let api_url = ''
-            if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/get/"
-            else api_url = "/api/course/get/"
-
-            api_url = api_url + route.params.id
-
-            return $fetch(
-                api_url,
-                { headers: headers },
-            )
-        },
-    );
-    watch(course_data, (course_data) => {
-        console.log(course_data);
+    if (process.server) {
+        const { data: course_data } = await useAsyncData(
+            'course_data_' + route.params.id,
+            () => {
+                const headers = useRequestHeaders()
+    
+                let api_url = ''
+                if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/get/"
+                else api_url = "/api/course/get/"
+    
+                api_url = api_url + route.params.id
+    
+                return $fetch(
+                    api_url,
+                    { headers: headers },
+                )
+            },
+        );
         title.value = course_data.title
         description.value = course_data.description
-    })
+    } else {
+        const { data: course_data } = useAsyncData(
+            'course_data_' + route.params.id,
+            () => {
+                const headers = useRequestHeaders()
+    
+                let api_url = ''
+                if (process.server) api_url = process.env.SSR_API_BASE_URL + "/course/get/"
+                else api_url = "/api/course/get/"
+    
+                api_url = api_url + route.params.id
+    
+                return $fetch(
+                    api_url,
+                    { headers: headers },
+                )
+            },
+        );
+        watch(course_data, (course_data) => {
+            title.value = course_data.title
+            description.value = course_data.description
+        })
+    }
     refresh.value = false
 })
 
@@ -114,6 +135,11 @@ const onSaveChanges = async (e) => {
 </template>
 
 <style scoped>
+textarea {
+    height: 20rem;
+}
+
+
 #successNotifyImg {
     width: 10%;
 }

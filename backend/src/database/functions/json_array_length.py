@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import FunctionElement
 
 __all__ = ("json_array_length", "compile")
 
-class json_array_length(FunctionElement):
+class json_array_length(FunctionElement):  # noqa: N801
     name = 'json_array_len'
     inherit_cache = True
 

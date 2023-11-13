@@ -6,7 +6,7 @@ from dataclasses import dataclass
 __all__ = ('config', 'db_config')
 
 
-class EnvVariableUndefined(Exception):
+class EnvVariableUndefined(Exception):  # noqa: N818
     """Raise when cannot read env variable and getenv return None."""
 
     def __init__(self, env_name: str) -> None:
@@ -14,7 +14,7 @@ class EnvVariableUndefined(Exception):
         super().__init__(msg)
 
 
-class CannotRecognizeBoolEnv(Exception):
+class CannotRecognizeBoolEnv(Exception):  # noqa: N818
     """Raise when cannot recognize bool env as python bool varialble."""
 
     def __init__(self, env_name: str, env_value: str) -> None:
@@ -27,7 +27,7 @@ def get_bool_env(env_name: str, default: bool | None = None) -> bool | NoReturn:
     if env_value is None and default is None:
         raise EnvVariableUndefined(env_name)
 
-    if env_value is None and not (default is None):
+    if env_value is None and default is not None:
         return default
 
     if env_value.lower() in ("1", "true", "t", "y", "yes"):

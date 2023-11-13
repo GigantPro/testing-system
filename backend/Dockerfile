@@ -29,8 +29,10 @@ COPY poetry.lock pyproject.toml ./
 
 RUN poetry install --no-interaction --no-cache --without dev
 
-COPY ./src ./src
 COPY ./public ./public
+COPY ./alembic ./alembic
+COPY ./alembic.ini ./alembic.ini
+COPY ./src ./src
 
 CMD ["poetry", "run", "uvicorn", "--host", "0.0.0.0", "--port", "5001", "src.app:app"]
 #CMD ls -la

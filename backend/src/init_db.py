@@ -1,9 +1,10 @@
+from os import system
+
 from .auth.init_roles import init_roles
-from .database import create_db_and_tables
 
 
 __all__ = ("init_db",)
 
 async def init_db() -> None:
-    await create_db_and_tables()
+    system('alembic upgrade head')
     await init_roles()

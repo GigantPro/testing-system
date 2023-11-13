@@ -7,7 +7,7 @@ const props = defineProps(['item_'])
         <img :src="props.item_.ico_url" class="card-img-top rounded mx-auto d-block" alt="Картинка">
         <div class="card-body">
             <h5 class="card-title">{{ item_.title }}</h5>
-            <p class="card-text">{{ item_.description }}</p>
+            <p class="card-text" id="course_description">{{ item_.description }}</p>
             <NuxtLink :to="'/courses/' + item_.id" class="btn text-white btn-secondary">Перейти к курсу</NuxtLink>
         </div>
     </div>
@@ -33,5 +33,22 @@ const props = defineProps(['item_'])
 .card {
     background-color: #53774B;
     color: #fff;
+}
+
+#course_description {
+    width: 100%;
+    height: 2.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+#course_description::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: .5rem;
+    background: linear-gradient(180deg, transparent, #53774b94 50%);
 }
 </style>

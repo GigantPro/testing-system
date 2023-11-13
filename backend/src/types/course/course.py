@@ -3,6 +3,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, validator
 
+from .course_data import CourseDataModel
+
 
 __all__ = (
     "CourseFullModel",
@@ -27,7 +29,7 @@ class CourseFullModel(BaseModel):
     passed_id: list
     reviews: list
     rating: float
-    course_data: dict
+    course_data: Optional[CourseDataModel]
 
     role: Optional[str]
     course_type: str = 'full'
@@ -53,7 +55,7 @@ class CourseUserReadModel(BaseModel):
     course_type: str = 'read'
 
     @validator('reviews_count', 'passing_count', 'passed_count', pre=True)
-    def validation_counts(cls, value):
+    def validation_counts(cls, value):  # noqa: N805
         if isinstance(value, int):
             return value
         return len(value)
@@ -71,7 +73,7 @@ class CourseWithDataModel(BaseModel):
     created_at: datetime
     is_active: bool
     reviews: list
-    course_data: dict
+    course_data: Optional[CourseDataModel]
     rating: float
 
     role: Optional[str]
@@ -88,7 +90,7 @@ class CourseUpdateModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: Optional[list[int]]
     is_active: Optional[bool]
-    course_data: Optional[dict]
+    course_data: Optional[CourseDataModel]
 
 
 class CourseCreateModel(BaseModel):
