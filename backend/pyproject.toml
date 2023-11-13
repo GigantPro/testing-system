@@ -16,6 +16,8 @@ psycopg2-binary = "^2.9.5"
 fastapi-users = {extras = ["sqlalchemy"], version = "^10.4.1"}
 asyncpg = "^0.27.0"
 loguru = "^0.7.0"
+alembic = {extras = ["sqlalchemy"], version = "^1.12.1"}
+load-dotenv = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.292"

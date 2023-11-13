@@ -11,3 +11,4 @@ from .base import (
 
 from .models import *
 from .functions import *
+from .base import Base
