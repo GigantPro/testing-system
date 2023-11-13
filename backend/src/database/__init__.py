@@ -6,7 +6,6 @@ from .base import (
     engine,
     async_session_maker,
     get_async_session,
-    create_db_and_tables
 )
 
 from .models import *
