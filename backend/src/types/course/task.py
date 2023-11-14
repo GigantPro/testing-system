@@ -2,14 +2,15 @@ from typing import Optional
 
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 __all__ = (
     "TaskModel",
+    "ReadTaskModel",
 )
 
-class TaskModel(BaseModel):
+class FullTaskModel(BaseModel):
     id: int
     changed_time: datetime
     created_time: datetime
@@ -22,3 +23,15 @@ class TaskModel(BaseModel):
     simple_test_data: Optional[dict]
     solution: Optional[str]
     solution_for_testing: Optional[str]
+
+
+class ReadTaskModel(BaseModel):
+    id: int
+    changed_time: datetime
+    created_time: datetime
+    type: int
+    title: Optional[str]
+    text: Optional[str]
+    description: Optional[str]
+    video_url: Optional[str]
+    tests_type: Optional[int]

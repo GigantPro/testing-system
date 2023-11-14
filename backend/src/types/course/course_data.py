@@ -3,15 +3,22 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from .module import ModuleModel
+from .module import FullModuleModel, ReadModuleModel
 
 
 __all__ = (
     "CourseDataModel",
 )
 
-class CourseDataModel(BaseModel):
+class FullCourseDataModel(BaseModel):
     id: int
     changed_time: datetime
     created_time: datetime
-    modules: Optional[ModuleModel]
+    modules: Optional[list[FullModuleModel]]
+
+
+class ReadCourseDataModel(BaseModel):
+    id: int
+    changed_time: datetime
+    created_time: datetime
+    modules: Optional[list[ReadModuleModel]]

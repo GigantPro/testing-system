@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, validator
 
-from .course_data import CourseDataModel
+from .course_data import ReadCourseDataModel, FullCourseDataModel
 
 
 __all__ = (
@@ -29,7 +29,7 @@ class CourseFullModel(BaseModel):
     passed_id: list
     reviews: list
     rating: float
-    course_data: Optional[CourseDataModel]
+    course_data: Optional[ReadCourseDataModel]
 
     role: Optional[str]
     course_type: str = 'full'
@@ -73,7 +73,7 @@ class CourseWithDataModel(BaseModel):
     created_at: datetime
     is_active: bool
     reviews: list
-    course_data: Optional[CourseDataModel]
+    course_data: Optional[ReadCourseDataModel]
     rating: float
 
     role: Optional[str]
@@ -90,7 +90,7 @@ class CourseUpdateModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: Optional[list[int]]
     is_active: Optional[bool]
-    course_data: Optional[CourseDataModel]
+    course_data: Optional[FullCourseDataModel]
 
 
 class CourseCreateModel(BaseModel):

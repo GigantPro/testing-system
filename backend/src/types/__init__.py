@@ -1,7 +1,10 @@
 from .course import (
-    ModuleModel,
-    CourseDataModel,
-    TaskModel,
+    FullModuleModel,
+    ReadModuleModel,
+    FullCourseDataModel,
+    ReadCourseDataModel,
+    FullTaskModel,
+    ReadTaskModel,
 )
 
 from .course.course import (
@@ -22,8 +25,11 @@ __all__ = (
     "CourseCreateModel",
     "CourseUpdateModel",
     "CourseFullModel",
-    "ModuleModel",
-    "CourseDataModel",
-    "TaskModel",
+    "FullModuleModel",
+    "ReadModuleModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
+    "FullTaskModel",
+    "ReadTaskModel",
     "ClassInviteModel",
 )

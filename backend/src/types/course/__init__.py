@@ -1,8 +1,8 @@
-from .module import ModuleModel
+from .module import FullModuleModel, ReadModuleModel
 
-from .course_data import CourseDataModel
+from .course_data import FullCourseDataModel, ReadCourseDataModel
 
-from .task import TaskModel
+from .task import FullTaskModel, ReadTaskModel
 
 from .course import (
     CourseWithDataModel,
@@ -13,9 +13,12 @@ from .course import (
 )
 
 __all__ = (
-    "ModuleModel",
-    "CourseDataModel",
-    "TaskModel",
+    "FullModuleModel",
+    "ReadModuleModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
+    "FullTaskModel",
+    "ReadTaskModel",
     "CourseWithDataModel",
     "CourseUserReadModel",
     "CourseCreateModel",
