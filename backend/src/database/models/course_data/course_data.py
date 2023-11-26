@@ -14,3 +14,4 @@ class CourseData(Base):
     changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     created_time = Column(TIMESTAMP, server_default=func.now(), nullable=False)
     modules = Column(JSON[ForeignKey(Module.id)], default=[])
+    course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
