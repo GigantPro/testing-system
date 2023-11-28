@@ -58,4 +58,5 @@ async def on_startup():
 
 @app.on_event('shutdown')
 async def on_shutdown():
-    await async_session_maker.begin().async_session.close_all()
+    for session in async_session_maker.begin().async_session.registry():
+        await session.close()
