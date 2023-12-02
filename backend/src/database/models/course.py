@@ -4,7 +4,6 @@ from sqlalchemy import Column, Integer, String, TIMESTAMP, JSON, Boolean, FLOAT,
 from sqlalchemy.orm import relationship
 
 from ..base import Base
-from .course_data import CourseData
 
 
 __all__ = ("Course",)
@@ -23,4 +22,4 @@ class Course(Base):
     passed_id = Column(JSON, default=[])
     reviews = Column(JSON, default=[])
     rating = Column(FLOAT, default=.0)
-    course_data = relationship(CourseData)
+    course_data_id = Column(Integer, ForeignKey('courses_data.id'))

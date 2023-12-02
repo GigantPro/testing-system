@@ -1,5 +1,6 @@
 from sqlalchemy import TIMESTAMP, Column, Integer, ForeignKey, JSON
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 from ...base import Base
 from .module import Module
@@ -14,4 +15,4 @@ class CourseData(Base):
     changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     created_time = Column(TIMESTAMP, server_default=func.now(), nullable=False)
     modules = Column(JSON[ForeignKey(Module.id)], default=[])
-    course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
+    course_id = Column(Integer, ForeignKey("courses.id"))
