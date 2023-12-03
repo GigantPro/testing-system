@@ -11,7 +11,7 @@ try:
     from src.database import Base
     from src.config import db_config
 
-except:
+except:  # noqa: E722
     print('W: cannot found db env. Load ../.env.dev')
     load_dotenv('../.env.dev')
 
@@ -19,7 +19,7 @@ except:
         from src.database import Base
         from src.config import db_config
     
-    except:
+    except:  # noqa: E722
         print('W: cannot found db env. Load ../.env')
         load_dotenv('../.env')
 

@@ -1,7 +1,7 @@
 from sqlalchemy import insert, update
 
 from src.database import get_async_session, User, Course, CourseData
-from src.types import CourseUserReadModel, CourseFullModel
+from src.types import CourseUserReadModel
 
 
 __all__ = ("create_new_course",)

@@ -2,11 +2,11 @@ from typing import Optional
 
 from datetime import datetime
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel
 
 
 __all__ = (
-    "TaskModel",
+    "FullTaskModel",
     "ReadTaskModel",
 )
 

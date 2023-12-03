@@ -8,7 +8,7 @@ from .auth import *
 from .init_roles import *
 from .manager import *
 from .schemas import *
-from .standart_roles import standart_roles
+from .standart_roles import standart_roles  # noqa: F401
 
 
 user_get_router.include_router(

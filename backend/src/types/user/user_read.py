@@ -23,6 +23,6 @@ class UserReadModel(BaseModel):
     ico_url: str
     
     @validator("role")
-    def validate_role(cls, value):
+    def validate_role(cls, value):  # noqa: N805
         value = int(value)
         return [i for i in standart_roles if i['id'] == value][0]['name']

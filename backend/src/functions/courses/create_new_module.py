@@ -7,7 +7,7 @@ from src.types import CreateModuleModel, CourseFullModel, FullCourseDataModel, R
 
 __all__ = ("create_new_module",)
 
-async def create_new_module(course_id: int, new_module: CreateModuleModel, user: User) -> JSONResponse | ReadModuleModel:
+async def create_new_module(course_id: int, new_module: CreateModuleModel, user: User) -> JSONResponse | ReadModuleModel:  # noqa: E501
     async with engine.connect() as connection:
         course = await connection.execute(
             select(Course)

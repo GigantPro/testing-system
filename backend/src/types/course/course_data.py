@@ -5,7 +5,8 @@ from pydantic import BaseModel, Field
 
 
 __all__ = (
-    "CourseDataModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
 )
 
 class FullCourseDataModel(BaseModel):

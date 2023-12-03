@@ -7,7 +7,7 @@ from .task import FullTaskModel, ReadTaskModel
 
 
 __all__ = (
-    "ModuleModel",
+    "FullModuleModel",
     "ReadModuleModel",
     "CreateModuleModel",
 )

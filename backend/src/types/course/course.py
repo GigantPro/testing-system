@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, validator
 
-from .course_data import ReadCourseDataModel, FullCourseDataModel
+from .course_data import ReadCourseDataModel
 
 
 __all__ = (

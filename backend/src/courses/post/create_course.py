@@ -1,5 +1,4 @@
 from fastapi import Depends, Form
-from fastapi.responses import JSONResponse
 
 from src.functions import create_new_course
 from src.database import User
