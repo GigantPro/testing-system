@@ -8,5 +8,5 @@ from .base import (
     engine,
     get_async_session,
 )
-from .functions import *
+from .functions import get_user_db, json_array_length
 from .models import *

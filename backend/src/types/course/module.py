@@ -18,6 +18,7 @@ class FullModuleModel(BaseModel):
     title: str
     description: Optional[str]
     tasks: Optional[list[FullTaskModel]]
+    course_id: int
 
 class ReadModuleModel(BaseModel):
     class Config:
@@ -27,6 +28,7 @@ class ReadModuleModel(BaseModel):
     changed_time: datetime
     created_time: datetime
     tasks: Optional[list[ReadTaskModel]]
+    course_id: int
 
 class CreateModuleModel(BaseModel):
     title: str

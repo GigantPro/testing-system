@@ -15,3 +15,5 @@ class Module(Base):
     title = Column(String, nullable=False)
     description = Column(String, nullable=True)
     tasks = Column(JSON[ForeignKey(Task.id)], default=[])
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    course_data_id = Column(Integer, ForeignKey('courses_data.id'))

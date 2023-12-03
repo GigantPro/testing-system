@@ -5,7 +5,7 @@ from ..router import user_get_router
 __all__ = ("check_of_registration",)
 
 @user_get_router.get('/check', description='Return True if username / email is busy.')
-async def check_of_registration(username: str, email: str) -> dict[str: bool]:
+async def check_of_registration(username: str, email: str) -> dict:
     user_by_username = await get_user_by_username(username)
     user_by_email = await get_user_by_email(email)
 

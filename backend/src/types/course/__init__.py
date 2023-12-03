@@ -11,7 +11,7 @@ from .module import (
     FullModuleModel,
     ReadModuleModel,
 )
-from .task import FullTaskModel, ReadTaskModel
+from .task import CreateTaskModel, FullTaskModel, ReadTaskModel, UpdateTaskModel
 
 __all__ = (
     "FullModuleModel",
@@ -19,8 +19,12 @@ __all__ = (
     "CreateModuleModel",
     "FullCourseDataModel",
     "ReadCourseDataModel",
+
     "FullTaskModel",
     "ReadTaskModel",
+    "CreateTaskModel",
+    "UpdateTaskModel",
+
     "CourseWithDataModel",
     "CourseUserReadModel",
     "CourseCreateModel",

@@ -34,6 +34,7 @@ async def create_new_module(course_id: int, new_module: CreateModuleModel, user:
             .values(
                 title=new_module.title,
                 description=new_module.description,
+                course_id=course_id,
             )
             .returning(Module)
         )

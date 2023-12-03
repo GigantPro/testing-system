@@ -3,12 +3,14 @@ from .class_invite import (
 )
 from .course import (
     CreateModuleModel,
+    CreateTaskModel,
     FullCourseDataModel,
     FullModuleModel,
     FullTaskModel,
     ReadCourseDataModel,
     ReadModuleModel,
     ReadTaskModel,
+    UpdateTaskModel,
 )
 from .course.course import (
     CourseCreateModel,
@@ -36,4 +38,6 @@ __all__ = (
     "ClassInviteModel",
     "CreateModuleModel",
     "UserReadModel",
+    "CreateTaskModel",
+    "UpdateTaskModel",
 )
