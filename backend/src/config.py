@@ -1,7 +1,6 @@
+from dataclasses import dataclass
 from os import getenv
 from typing import NoReturn
-from dataclasses import dataclass
-
 
 __all__ = ('config', 'db_config')
 

@@ -1,11 +1,10 @@
 from datetime import datetime
 
-from sqlalchemy import Column, ForeignKey, Integer, String, TIMESTAMP, DateTime, Boolean, func
+from sqlalchemy import TIMESTAMP, Boolean, Column, DateTime, ForeignKey, Integer, String, func
 
-from .user import User
-from .classroom import Classroom
 from ..base import Base
-
+from .classroom import Classroom
+from .user import User
 
 __all__ = ("ClassInvite",)
 

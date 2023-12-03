@@ -4,9 +4,8 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
 from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 
-from .role import Role
 from ..base import Base
-
+from .role import Role
 
 __all__ = ("User",)
 

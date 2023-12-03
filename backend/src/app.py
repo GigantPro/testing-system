@@ -3,14 +3,12 @@ from os import makedirs
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from .init_db import init_db
+from .auth import auth_backend, fastapi_users, user_get_router
 from .auth.schemas import UserCreate, UserRead
-from .auth import user_get_router
-from .auth import auth_backend, fastapi_users
-from .config import config
 from .classrooms import classrooms_router
+from .config import config
 from .courses import courses_router
-
+from .init_db import init_db
 
 app = FastAPI(
     title='Edu.Xiver',
@@ -51,10 +49,10 @@ app.include_router(
 )
 
 @app.on_event('startup')
-async def on_startup():
+async def on_startup() -> None:
     await init_db()
 
 
 @app.on_event('shutdown')
-async def on_shutdown():
+async def on_shutdown() -> None:
     ...

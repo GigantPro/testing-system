@@ -1,9 +1,8 @@
-from sqlalchemy import TIMESTAMP, Column, Integer, ForeignKey, JSON
+from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer
 from sqlalchemy.sql import func
 
 from ...base import Base
 from .module import Module
-
 
 __all__ = ("CourseData",)
 

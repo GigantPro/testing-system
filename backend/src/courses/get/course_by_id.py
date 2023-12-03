@@ -1,7 +1,7 @@
 from src.functions import get_course_by_id
 from src.types import CourseFullModel
-from ..router import courses_router
 
+from ..router import courses_router
 
 __all__ = ("course_by_id",)
 

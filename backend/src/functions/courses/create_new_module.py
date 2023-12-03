@@ -1,9 +1,8 @@
 from fastapi.responses import JSONResponse
-from sqlalchemy import update, select, insert
+from sqlalchemy import insert, select, update
 
-from src.database import engine, Course, User, CourseData, Module
-from src.types import CreateModuleModel, CourseFullModel, FullCourseDataModel, ReadModuleModel
-
+from src.database import Course, CourseData, Module, User, engine
+from src.types import CourseFullModel, CreateModuleModel, FullCourseDataModel, ReadModuleModel
 
 __all__ = ("create_new_module",)
 
@@ -14,15 +13,15 @@ async def create_new_module(course_id: int, new_module: CreateModuleModel, user:
             .where(Course.id == course_id)
         )
         course = course.fetchone()
-        
+
         if not course:
             return JSONResponse(status_code=404, content={"message": "Course not found"})
 
         course = CourseFullModel.from_orm(course)
-        
+
         if user.id not in course.teachers_ids:
             return JSONResponse(status_code=403, content={"message": "User is not a teacher of the course"})
-        
+
         course_data = await connection.execute(
             select(CourseData)
             .where(CourseData.id == course.course_data_id)
@@ -44,7 +43,7 @@ async def create_new_module(course_id: int, new_module: CreateModuleModel, user:
         await connection.execute(
             update(CourseData)
             .where(CourseData.id == course.course_data.id)
-            .values(modules = course.course_data.modules_ids + [_new_module.id])
+            .values(modules = [*course.course_data.modules_ids, _new_module.id])
         )
 
         await connection.commit()

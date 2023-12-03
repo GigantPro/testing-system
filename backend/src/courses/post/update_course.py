@@ -1,12 +1,12 @@
 from fastapi import Depends
 from fastapi.responses import JSONResponse
 
-from src.functions import update_course as update_course_func
-from src.database import User
-from src.types import CourseUpdateModel
 from src.const import current_active_verified_user
-from ..router import courses_router
+from src.database import User
+from src.functions import update_course as update_course_func
+from src.types import CourseUpdateModel
 
+from ..router import courses_router
 
 __all__ = ("update_course",)
 

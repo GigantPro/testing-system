@@ -1,8 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.sql.expression import func
 
-from src.database import engine, Course, json_array_length
-
+from src.database import Course, engine, json_array_length
 
 __all__ = ("get_top_of_courses",)
 

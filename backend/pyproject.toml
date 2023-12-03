@@ -29,10 +29,25 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 select = [
-  "E",   # pycodestyle
-  "F",   # pyflakes
-  "UP",  # pyupgrade
-  "N",   # pep8-naming
+    "F",   # https://beta.ruff.rs/docs/rules/#pyflakes-f
+    "W",   # https://beta.ruff.rs/docs/rules/#warning-w
+    "E",   # https://beta.ruff.rs/docs/rules/#error-e
+    "I",   # https://beta.ruff.rs/docs/rules/#isort-i
+    "N",   # https://beta.ruff.rs/docs/rules/#pep8-naming-n
+    "ANN", # https://beta.ruff.rs/docs/rules/#flake8-annotations-ann
+    "B",   # https://beta.ruff.rs/docs/rules/#flake8-bugbear-b
+    "RUF", # https://beta.ruff.rs/docs/rules/#ruff-specific-rules-ruf
+    "PT",  # https://beta.ruff.rs/docs/rules/#flake8-pytest-style-pt
 ]
+include = ["*.py"]
+force-exclude = true
+fixable = ["ALL"]
+
+exclude = [".mypy_cache", ".ruff_cache", ".venv", "__pypackages__", "alembic"]
 line-length = 120
-exclude = ["alembic"]
+
+ignore = [
+    "B008",  # do not perform function calls in argument defaults
+    "ANN101",  # Missing type annotation for `self` in method
+    "RUF009",  # Do not perform function call `get_str_env` in dataclass defaults
+]

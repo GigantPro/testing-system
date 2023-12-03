@@ -1,10 +1,9 @@
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, Field, validator
 
 from .course_data import ReadCourseDataModel
-
 
 __all__ = (
     "CourseFullModel",
@@ -58,7 +57,7 @@ class CourseUserReadModel(BaseModel):
     course_type: str = 'read'
 
     @validator('reviews_count', 'passing_count', 'passed_count', pre=True)
-    def validation_counts(cls, value):  # noqa: N805
+    def validation_counts(cls, value):  # noqa: N805, ANN201, ANN001
         if isinstance(value, int):
             return value
         return len(value)

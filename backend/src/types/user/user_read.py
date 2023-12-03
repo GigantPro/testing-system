@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field, validator
 
 from src.auth.standart_roles import standart_roles
 
-
 __all__ = (
     "UserReadModel",
 )
@@ -21,8 +20,8 @@ class UserReadModel(BaseModel):
     name: str
     surname: str
     ico_url: str
-    
+
     @validator("role")
-    def validate_role(cls, value):  # noqa: N805
+    def validate_role(cls, value):  # noqa: N805, ANN201, ANN001
         value = int(value)
-        return [i for i in standart_roles if i['id'] == value][0]['name']
+        return next(i for i in standart_roles if i['id'] == value)['name']

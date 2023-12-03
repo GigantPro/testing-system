@@ -3,11 +3,10 @@
 """Model to working with database"""
 
 from .base import (
-    engine,
+    Base,
     async_session_maker,
+    engine,
     get_async_session,
 )
-
-from .models import *
 from .functions import *
-from .base import Base
+from .models import *

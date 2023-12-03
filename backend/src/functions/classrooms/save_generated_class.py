@@ -2,8 +2,7 @@ from datetime import datetime, timedelta
 
 from sqlalchemy import insert, select
 
-from src.database import engine, User, Classroom, ClassInvite
-
+from src.database import ClassInvite, Classroom, User, engine
 
 __all__ = ("save_generated_class",)
 

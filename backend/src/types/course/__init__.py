@@ -1,20 +1,17 @@
+from .course import (
+    CourseCreateModel,
+    CourseFullModel,
+    CourseUpdateModel,
+    CourseUserReadModel,
+    CourseWithDataModel,
+)
+from .course_data import FullCourseDataModel, ReadCourseDataModel
 from .module import (
     CreateModuleModel,
     FullModuleModel,
     ReadModuleModel,
 )
-
-from .course_data import FullCourseDataModel, ReadCourseDataModel
-
 from .task import FullTaskModel, ReadTaskModel
-
-from .course import (
-    CourseWithDataModel,
-    CourseUserReadModel,
-    CourseCreateModel,
-    CourseUpdateModel,
-    CourseFullModel,
-)
 
 __all__ = (
     "FullModuleModel",

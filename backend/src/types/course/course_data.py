@@ -1,8 +1,7 @@
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, Field
-
 
 __all__ = (
     "FullCourseDataModel",

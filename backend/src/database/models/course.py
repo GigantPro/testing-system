@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, String, TIMESTAMP, JSON, Boolean, FLOAT, ForeignKey, func
+from sqlalchemy import FLOAT, JSON, TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, func
 
 from ..base import Base
-
 
 __all__ = ("Course",)
 

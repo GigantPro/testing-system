@@ -1,6 +1,5 @@
 from ..auth.auth import fastapi_users
 
-
 __all__ = (
     'current_user',
     'current_superuser',

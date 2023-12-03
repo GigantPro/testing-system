@@ -1,8 +1,7 @@
 from sqlalchemy import insert, update
 
-from src.database import get_async_session, User, Course, CourseData
+from src.database import Course, CourseData, User, get_async_session
 from src.types import CourseUserReadModel
-
 
 __all__ = ("create_new_course",)
 
@@ -13,7 +12,7 @@ async def create_new_course(title: str, description: str, user: User) -> CourseU
             title = title,
             description = description,
         )
-        
+
         session.add(course)
         await session.commit()
 

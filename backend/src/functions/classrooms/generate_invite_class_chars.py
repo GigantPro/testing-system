@@ -1,10 +1,9 @@
-from string import ascii_lowercase, ascii_uppercase
 import random
+from string import ascii_lowercase, ascii_uppercase
 
 from sqlalchemy import select
 
 from src.database import ClassInvite, engine
-
 
 __all__ = ("generate_invite_class_chars",)
 

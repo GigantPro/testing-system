@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import Column, ForeignKey, Integer, String, TIMESTAMP, JSON, func
+from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String, func
 
-from .user import User
 from ..base import Base
-
+from .user import User
 
 __all__ = ("Classroom",)
 

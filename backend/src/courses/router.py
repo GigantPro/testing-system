@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 
-
 __all__ = (
     "courses_router",
 )

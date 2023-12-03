@@ -1,12 +1,12 @@
 from fastapi import Depends
 from fastapi.responses import JSONResponse
 
-from src.functions import create_new_module
-from src.database import User
-from src.types import CreateModuleModel
 from src.const import current_active_verified_user
-from ..router import courses_router
+from src.database import User
+from src.functions import create_new_module
+from src.types import CreateModuleModel
 
+from ..router import courses_router
 
 __all__ = ("create_course_module",)
 

@@ -3,11 +3,11 @@ from typing import Optional
 from fastapi import Depends, Request, Response
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
-from ..database import User, get_user_db
 from src.functions import get_user_by_username as _get_user_by_username
-from ..config import db_config
 from src.types import UserReadModel
 
+from ..config import db_config
+from ..database import User, get_user_db
 
 __all__ = (
     "CustomUserAlreadyExist",
@@ -38,12 +38,12 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
     async def on_after_forgot_password(
         self, user: User, token: str, request: Optional[Request] = None
-    ):
+    ) -> None:
         print(f'User {user.id} has forgot their password. Reset token: {token}')
 
     async def on_after_request_verify(
         self, user: User, token: str, request: Optional[Request] = None
-    ):
+    ) -> None:
         print(f'Verification requested for user {user.id}. Verification token: {token}')
 
     async def create(
@@ -80,5 +80,5 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         return created_user
 
 
-async def get_user_manager(user_db=Depends(get_user_db)):
+async def get_user_manager(user_db = Depends(get_user_db)) -> UserManager:  # noqa: ANN001
     yield UserManager(user_db)

@@ -1,13 +1,13 @@
 import base64
-from random import randint
 from datetime import datetime
+from random import randint
 
 from fastapi import Form
 from fastapi.responses import JSONResponse
 
 from src.config import config
-from ..router import upload_router
 
+from ..router import upload_router
 
 __all__ = ("update_avatar",)
 

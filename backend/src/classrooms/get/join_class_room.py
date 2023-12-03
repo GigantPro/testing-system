@@ -1,14 +1,14 @@
 from fastapi import Depends
 from fastapi.responses import JSONResponse
 
+from src.const import current_active_user
 from src.database import User
 from src.functions import (
-    check_for_valid_invite,
     activate_invite,
+    check_for_valid_invite,
 )
-from src.const import current_active_user
-from ..router import classrooms_router
 
+from ..router import classrooms_router
 
 
 @classrooms_router.get('/join/{invite_code}')

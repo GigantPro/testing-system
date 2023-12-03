@@ -1,7 +1,7 @@
-from .who_am_i import who_am_i
+from .check_of_registration import check_of_registration
 from .user_by_id import user_by_id
 from .user_by_username import user_by_username
-from .check_of_registration import check_of_registration
+from .who_am_i import who_am_i
 
 __all__ = (
     "who_am_i",

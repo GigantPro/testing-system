@@ -1,9 +1,9 @@
 from fastapi.responses import JSONResponse
 
-from ..schemas import UserRead
-from ..router import user_get_router
 from src.functions import get_user_by_username, get_user_read_by_user
 
+from ..router import user_get_router
+from ..schemas import UserRead
 
 __all__ = ("user_by_username",)
 

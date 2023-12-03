@@ -1,9 +1,8 @@
-from sqlalchemy import TIMESTAMP, Column, Integer, ForeignKey, JSON, String
+from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String
 from sqlalchemy.sql import func
 
-from .task import Task
 from ...base import Base
-
+from .task import Task
 
 __all__ = ("Module",)
 

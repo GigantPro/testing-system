@@ -2,12 +2,11 @@ from typing import Any
 
 from sqlalchemy import select
 
-from src.database import User, engine, Role
-
+from src.database import Role, User, engine
 
 __all__ = ("has_permission",)
 
-async def has_permission(user: User, permission: str) -> Any | None:
+async def has_permission(user: User, permission: str) -> Any | None:  # noqa: ANN401
     """Checks if the user has permission
 
     Args:

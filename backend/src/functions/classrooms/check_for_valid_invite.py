@@ -2,8 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import select, update
 
-from src.database import engine, ClassInvite
-
+from src.database import ClassInvite, engine
 
 __all__ = ("check_for_valid_invite",)
 

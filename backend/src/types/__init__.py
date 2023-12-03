@@ -1,25 +1,22 @@
-from .course import (
-    FullModuleModel,
-    ReadModuleModel,
-    FullCourseDataModel,
-    ReadCourseDataModel,
-    FullTaskModel,
-    ReadTaskModel,
-    CreateModuleModel,
-)
-
-from .course.course import (
-    CourseWithDataModel,
-    CourseUserReadModel,
-    CourseCreateModel,
-    CourseUpdateModel,
-    CourseFullModel,
-)
-
 from .class_invite import (
     ClassInviteModel,
 )
-
+from .course import (
+    CreateModuleModel,
+    FullCourseDataModel,
+    FullModuleModel,
+    FullTaskModel,
+    ReadCourseDataModel,
+    ReadModuleModel,
+    ReadTaskModel,
+)
+from .course.course import (
+    CourseCreateModel,
+    CourseFullModel,
+    CourseUpdateModel,
+    CourseUserReadModel,
+    CourseWithDataModel,
+)
 from .user import (
     UserReadModel,
 )

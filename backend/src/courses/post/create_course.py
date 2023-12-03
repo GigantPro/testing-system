@@ -1,11 +1,11 @@
 from fastapi import Depends, Form
 
-from src.functions import create_new_course
-from src.database import User
 from src.const import current_active_verified_user
+from src.database import User
+from src.functions import create_new_course
 from src.types import CourseUserReadModel
-from ..router import courses_router
 
+from ..router import courses_router
 
 __all__ = ("create_course",)
 

@@ -1,8 +1,7 @@
 from sqlalchemy.inspection import inspect
 
-from src.database.models.user import User
 from src.auth.schemas import UserRead
-
+from src.database.models.user import User
 
 __all__ = ("get_user_read_by_user",)
 
