@@ -20,6 +20,10 @@ from .class_invite import (
     ClassInviteModel,
 )
 
+from .user import (
+    UserReadModel,
+)
+
 __all__ = (
     "CourseWithDataModel",
     "CourseUserReadModel",
@@ -34,4 +38,5 @@ __all__ = (
     "ReadTaskModel",
     "ClassInviteModel",
     "CreateModuleModel",
+    "UserReadModel",
 )
