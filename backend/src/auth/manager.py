@@ -1,11 +1,12 @@
 from typing import Optional
 
-from fastapi import Depends, Request
+from fastapi import Depends, Request, Response
 from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, schemas
 
 from ..database import User, get_user_db
 from src.functions import get_user_by_username as _get_user_by_username
 from ..config import db_config
+from src.types import UserReadModel
 
 
 __all__ = (
@@ -22,8 +23,18 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     reset_password_token_secret = db_config.SECRET_MANAGER
     verification_token_secret = db_config.SECRET_MANAGER
 
-    async def on_after_register(self, user: User, request: Optional[Request] = None):
+    async def on_after_register(self, user: User, request: Optional[Request] = None) -> UserReadModel:
         print(f'User {user.id} has registered.')
+        return UserReadModel.from_orm(user)
+
+    async def on_after_login(
+        self,
+        user: User,
+        request: Optional[Request] = None,
+        response: Optional[Response] = None,
+    ) -> UserReadModel:
+        print(f"User {user.id} logged in.")
+        return UserReadModel.from_orm(user)
 
     async def on_after_forgot_password(
         self, user: User, token: str, request: Optional[Request] = None
