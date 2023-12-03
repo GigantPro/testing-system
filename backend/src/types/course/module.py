@@ -21,6 +21,9 @@ class FullModuleModel(BaseModel):
     tasks: Optional[list[FullTaskModel]]
 
 class ReadModuleModel(BaseModel):
+    class Config:
+        orm_mode = True
+
     id: int
     changed_time: datetime
     created_time: datetime

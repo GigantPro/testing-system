@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .module import FullModuleModel, ReadModuleModel
 
@@ -11,14 +11,17 @@ __all__ = (
 )
 
 class FullCourseDataModel(BaseModel):
+    class Config:
+        orm_mode = True
+
     id: int
     changed_time: datetime
     created_time: datetime
-    modules: Optional[list[FullModuleModel]]
+    modules_ids: Optional[list[int]] = Field(alias='modules')
 
 
 class ReadCourseDataModel(BaseModel):
     id: int
     changed_time: datetime
     created_time: datetime
-    modules: Optional[list[ReadModuleModel]]
+    modules_ids: Optional[list[int]] = Field(alias='modules')

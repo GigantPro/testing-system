@@ -29,6 +29,7 @@ class CourseFullModel(BaseModel):
     passed_id: list
     reviews: list
     rating: float
+    course_data_id: int
     course_data: Optional[ReadCourseDataModel]
 
     role: Optional[str]
@@ -73,6 +74,7 @@ class CourseWithDataModel(BaseModel):
     created_at: datetime
     is_active: bool
     reviews: list
+    course_data_id: int
     course_data: Optional[ReadCourseDataModel]
     rating: float
 
@@ -90,7 +92,6 @@ class CourseUpdateModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: Optional[list[int]]
     is_active: Optional[bool]
-    course_data: Optional[FullCourseDataModel]
 
 
 class CourseCreateModel(BaseModel):
