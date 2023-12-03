@@ -24,6 +24,7 @@ class CourseFullModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     passing_id: list
     passed_id: list
@@ -46,6 +47,7 @@ class CourseUserReadModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     reviews_count: int = Field(alias='reviews')
     passing_count: int = Field(alias='passing_id')
@@ -72,6 +74,7 @@ class CourseWithDataModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     reviews: list
     course_data_id: int

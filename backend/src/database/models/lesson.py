@@ -1,4 +1,5 @@
-from sqlalchemy import JSON, Column, Integer, String
+from datetime import datetime
+from sqlalchemy import JSON, TIMESTAMP, Column, Integer, String, func
 
 from ..base import Base
 
@@ -13,3 +14,6 @@ class Lesson(Base):
     title = Column(String, nullable=False)
     description = Column(String)
     tasks_ids = Column(JSON)
+    
+    created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
+    changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())

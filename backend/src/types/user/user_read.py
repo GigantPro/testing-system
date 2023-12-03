@@ -16,6 +16,7 @@ class UserReadModel(BaseModel):
     id: int
     username: str
     registered_at: datetime
+    changed_time: datetime
     role: str = Field(alias="role_id")
     name: str
     surname: str

@@ -3,8 +3,6 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from .module import FullModuleModel, ReadModuleModel
-
 
 __all__ = (
     "CourseDataModel",
