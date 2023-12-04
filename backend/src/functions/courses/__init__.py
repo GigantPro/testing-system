@@ -1,5 +1,6 @@
 from .create_new_course import create_new_course
 from .create_new_module import create_new_module
+from .create_new_task import create_new_task
 from .get_course_by_id import get_course_by_id
 from .get_course_by_param import get_course_by_param
 from .get_courses_by_role import get_courses_by_role
@@ -16,4 +17,5 @@ __all__ = (
     "get_top_of_courses_by",
     "update_course",
     "create_new_module",
+    "create_new_task",
 )

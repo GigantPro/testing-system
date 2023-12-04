@@ -1,4 +1,4 @@
-from sqlalchemy import JSON, TIMESTAMP, Column, Integer, String
+from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String
 from sqlalchemy.sql import func
 
 from ...base import Base
@@ -11,6 +11,7 @@ class Task(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     created_time = Column(TIMESTAMP, server_default=func.now(), nullable=False)
+    module_id = Column(Integer, ForeignKey('modules.id'), nullable=False)
     type = Column(Integer, nullable=False)
     """
     0 - text
