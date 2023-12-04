@@ -8,6 +8,7 @@ from .get_top_of_courses import get_top_of_courses
 from .get_top_of_courses_by import get_top_of_courses_by
 from .update_course import update_course
 from .update_task import update_task
+from .get_task_by_id import get_task_by_id
 
 __all__ = (
     "create_new_course",
@@ -20,4 +21,5 @@ __all__ = (
     "create_new_module",
     "create_new_task",
     "update_task",
+    "get_task_by_id",
 )
