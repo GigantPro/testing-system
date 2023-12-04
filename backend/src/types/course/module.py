@@ -14,7 +14,7 @@ __all__ = (
 class FullModuleModel(BaseModel):
     class Config:
         orm_mode = True
-    
+
     id: int
     changed_time: datetime
     created_time: datetime

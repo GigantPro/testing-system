@@ -2,9 +2,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.database import Course
-from src.database import User, Module, Task
-from src.types import CreateTaskModel, ReadTaskModel, FullModuleModel
+from src.database import Course, Module, Task, User
+from src.types import CreateTaskModel, ReadTaskModel
 
 __all__ = ("create_new_task",)
 
@@ -52,12 +51,12 @@ async def create_new_task(
         solution=new_task.solution,
         solution_for_testing=new_task.solution_for_testing
     )
-    
+
     session.add(task)
 
     await session.commit()
     await session.refresh(task)
-    
+
     print(f'{task.id=}')
-    
+
     return ReadTaskModel.from_orm(task)

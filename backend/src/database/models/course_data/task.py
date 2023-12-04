@@ -17,6 +17,8 @@ class Task(Base):
     0 - text
     1 - video
     2 - test
+    3 - radio test
+    4 - checkbox test
     """
     title = Column(String, nullable=True)
     text = Column(String, nullable=True)
