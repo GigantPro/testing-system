@@ -51,4 +51,4 @@ class CreateTaskModel(BaseModel):
     solution_for_testing: Optional[str]
 
 class UpdateTaskModel(CreateTaskModel):
-    pass
+    type: Optional[int]
