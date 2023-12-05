@@ -10,7 +10,7 @@ async def init_logger() -> None:
         logger.add(
             stdout,
             format="{time:YYYY-MM-DD HH:mm:ss} {level} {message}",
-            level='trace',
+            level=0,
             backtrace=True,
             colorize=True,
             enqueue=True,
