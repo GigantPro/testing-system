@@ -31,7 +31,7 @@ services:
       - postgres
     hostname: backend
     environment:
-      - DEBUG=true
+      - DEBUG=false
       - DB_HOST=postgres
       - DB_PORT=5000
     env_file: 
