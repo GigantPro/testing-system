@@ -12,6 +12,7 @@ class Task(Base):
     changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     created_time = Column(TIMESTAMP, server_default=func.now(), nullable=False)
     module_id = Column(Integer, ForeignKey('modules.id'), nullable=False)
+    course_id = Column(Integer, ForeignKey('courses.id'), nullable=False)
     type = Column(Integer, nullable=False)
     """
     0 - text
