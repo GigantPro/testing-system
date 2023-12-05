@@ -1,16 +1,17 @@
 import json
+
 from telebot.types import Message
 
 from ..bot import bot
 from ..global_tg_vars import passwords, users_ides
 
 __all__ = (
-    "send_welcome",
+    "send_login",
 )
 
 
 @bot.message_handler(commands=['login'])
-async def send_login(message: Message):
+async def send_login(message: Message) -> None:
     passwd = message.text.replace('/login', '').strip()
     if passwd in passwords and message.from_user.id not in users_ides:
         with open('users_ides.json', 'w') as f:
@@ -20,8 +21,10 @@ async def send_login(message: Message):
         await bot.send_message(message.chat.id, "Login success")
 
     elif message.from_user.id in users_ides:
-        try: passwords.remove(passwd)
-        except: pass
+        try:
+            passwords.remove(passwd)
+        except:  # noqa: E722
+            pass
 
         await bot.send_message(message.chat.id, "You are already logged in!\nPassword was removed")
 

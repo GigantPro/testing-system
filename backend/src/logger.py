@@ -27,5 +27,5 @@ async def init_logger() -> None:
             backtrace=True,
             enqueue=True,
         )
-    
+
     logger.info("Logger initialized")

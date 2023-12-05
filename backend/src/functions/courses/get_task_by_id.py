@@ -1,7 +1,7 @@
-from sqlalchemy import select
 from fastapi.responses import JSONResponse
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from sqlalchemy.exc import NoResultFound
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import Task
 from src.types import ReadTaskModel

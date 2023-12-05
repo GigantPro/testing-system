@@ -11,9 +11,10 @@ from .auth.schemas import UserCreate, UserRead
 from .classrooms import classrooms_router
 from .config import config
 from .courses import courses_router
+from .database import async_session_maker
+from .init_db import init_db
 from .logger import init_logger
-from .tgbot import start_bot, send_notify, bot
-
+from .tgbot import bot, send_notify, start_bot
 
 bot_turn = []
 
@@ -71,7 +72,7 @@ async def on_startup() -> None:
 
 
 @app.on_event('shutdown')
-async def on_shutdown():
+async def on_shutdown() -> None:
     await async_session_maker.begin().async_session.close_all()
     await bot.close()
     logger.info('App shut down')

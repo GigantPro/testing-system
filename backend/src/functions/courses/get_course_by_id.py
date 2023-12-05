@@ -1,5 +1,5 @@
-from sqlalchemy import select
 from fastapi.responses import JSONResponse
+from sqlalchemy import select
 
 from src.database import Course, engine
 from src.types import CourseFullModel
