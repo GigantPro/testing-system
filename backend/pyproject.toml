@@ -18,6 +18,8 @@ asyncpg = "^0.27.0"
 loguru = "^0.7.0"
 alembic = {extras = ["sqlalchemy"], version = "^1.12.1"}
 load-dotenv = "^0.1.0"
+pytelegrambotapi = "^4.14.0"
+aiohttp = "^3.9.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.292"
