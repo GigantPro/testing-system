@@ -15,6 +15,8 @@ class FullTaskModel(BaseModel):
     changed_time: datetime
     created_time: datetime
     type: int
+    course_id: int
+    module_id: int
     title: Optional[str]
     text: Optional[str]
     description: Optional[str]
@@ -33,6 +35,8 @@ class ReadTaskModel(BaseModel):
     changed_time: datetime
     created_time: datetime
     type: int
+    course_id: int
+    module_id: int
     title: Optional[str]
     text: Optional[str]
     description: Optional[str]

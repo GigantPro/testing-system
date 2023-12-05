@@ -16,12 +16,7 @@ async def update_task(
         return JSONResponse(status_code=404, content={'message': 'Task not found'})
 
     try:
-        module = (await session.scalars(select(Module).where(Module.id == task.module_id))).one()
-    except NoResultFound:
-        return JSONResponse(status_code=404, content={'message': 'Module not found'})
-
-    try:
-        course = (await session.scalars(select(Course).where(Course.id == module.course_id))).one()
+        course = (await session.scalars(select(Course).where(Course.id == task.course_id))).one()
     except NoResultFound:
         return JSONResponse(status_code=404, content={'message': 'Course not found'})
 
