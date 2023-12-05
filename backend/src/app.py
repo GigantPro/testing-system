@@ -15,7 +15,7 @@ from .config import config
 from .classrooms import classrooms_router
 from .courses import courses_router
 from .logger import init_logger
-from .tgbot import start_bot
+from .tgbot import start_bot, send_notify, bot
 
 
 bot_turn = []
@@ -76,6 +76,7 @@ async def on_startup():
 @app.on_event('shutdown')
 async def on_shutdown():
     await async_session_maker.begin().async_session.close_all()
+    await bot.close()
     logger.info('App shut down')
 
 
@@ -83,5 +84,7 @@ async def on_shutdown():
 async def internal_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     error_message = f'Internal server error: {request.url} | {request.method} | {request.headers} | {exc}'
     logger.error(error_message)
+
+    await send_notify(request, exc)
 
     return JSONResponse(status_code=500, content=jsonable_encoder({"code": 500, "msg": "Internal Server Error"}))
