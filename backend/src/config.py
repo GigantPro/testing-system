@@ -69,7 +69,7 @@ class Config:
     source_path: str = get_str_env('SOURCE_PATH', '/app/testing-system/frontend/source')
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
     static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
-    debug: bool = get_bool_env('DEBUG', False)
+    debug: bool =  get_bool_env('DEBUG', False)
 
     mail_server: str = get_str_env('MAIL_SERVICE')
     email: str = get_str_env('EMAIL')
