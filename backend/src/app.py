@@ -15,7 +15,10 @@ from .config import config
 from .classrooms import classrooms_router
 from .courses import courses_router
 from .logger import init_logger
+from .tgbot import start_bot
 
+
+bot_turn = []
 
 app = FastAPI(
     title='Edu.Xiver',
@@ -59,7 +62,14 @@ app.include_router(
 async def on_startup():
     await init_db()
     await init_logger()
-    
+
+    if config.tg_bot_token:
+        logger.info('Find tg bot token. Start bot')
+        bot_turn.append(await start_bot())
+
+    else:
+        logger.warning('Not find tg bot token. Skip bot')
+
     logger.info('App started')
 
 

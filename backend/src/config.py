@@ -74,6 +74,9 @@ class Config:
     mail_server: str = get_str_env('MAIL_SERVICE')
     email: str = get_str_env('EMAIL')
     mail_password: str = get_str_env('MAIL_PASSWORD')
+    
+    tg_bot_token: str = get_str_env('TG_BOT_TOKEN', '')
+    tg_bot_admin_id: int = get_int_env('TG_BOT_ADMIN_ID', 0)
 
 
 @dataclass(slots=True, frozen=True)

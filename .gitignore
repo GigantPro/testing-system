@@ -105,5 +105,6 @@ docker-data
 backend/public
 !backend/public/standart_ico.png
 test.py
+users_ides.json
 
 .npmrc

@@ -10,11 +10,12 @@ async def init_logger() -> None:
         logger.add(
             stdout,
             format="{time:YYYY-MM-DD HH:mm:ss} {level} {message}",
-            level=0,
+            level='trace',
             backtrace=True,
             colorize=True,
             enqueue=True,
         )
+
     else:
         logger.add(
             "logs/log.json",
