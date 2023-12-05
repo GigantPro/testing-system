@@ -14,7 +14,7 @@ async def send_login(message: Message):
     passwd = message.text.replace('/login', '').strip()
     if passwd in passwords and message.from_user.id not in users_ides:
         with open('users_ides.json', 'w') as f:
-            users_ides.append(message.from_user.id)
+            users_ides[message.from_user.id] = message.from_user.username
             json.dump(users_ides, f)
         passwords.remove(passwd)
         await bot.send_message(message.chat.id, "Login success")
@@ -23,7 +23,7 @@ async def send_login(message: Message):
         try: passwords.remove(passwd)
         except: pass
 
-        await bot.send_message(message.chat.id, "You are already logged in")
+        await bot.send_message(message.chat.id, "You are already logged in!\nPassword was removed")
 
     else:
         await bot.send_message(message.chat.id, "Wrong password")
