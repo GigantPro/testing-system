@@ -1,3 +1,4 @@
+from os import system
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from loguru import logger
@@ -21,5 +22,6 @@ async def course_by_id() -> JSONResponse:
 @app.on_event('startup')
 async def on_startup() -> None:
     await init_logger()
+    system('alembic upgrade head')
 
     logger.info('App started')

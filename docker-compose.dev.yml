@@ -152,9 +152,6 @@ services:
     ports:
       - 80:80
 
-volumes:
-  postgres_dev_data:
-
 networks:
   postgres:
     driver: bridge

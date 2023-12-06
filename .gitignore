@@ -97,6 +97,7 @@ db.sqlite3
 env/
 venv/
 postgres_dev_data
+postgres_dev_data2
 pgadmin
 */yarn-error.log
 */SSL
