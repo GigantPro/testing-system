@@ -86,7 +86,7 @@ class DBConfig:
     POSTGRES_DB = get_str_env('POSTGRES_DB')
 
     DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT')
+    DB_PORT = get_int_env('DB_PORT', 5000)
 
     SECRET = get_str_env('SECRET')
     SECRET_MANAGER = get_str_env('SECRET_MANAGER')

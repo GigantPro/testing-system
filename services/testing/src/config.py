@@ -79,8 +79,8 @@ class DBConfig:
     POSTGRES_USER = get_str_env('POSTGRES_USER')
     POSTGRES_DB = get_str_env('POSTGRES_DB')
 
-    DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT')
+    DB_HOST = get_str_env('DB_HOST', 'postgres2')
+    DB_PORT = get_int_env('DB_PORT', 4999)
 
 
 config = Config()
