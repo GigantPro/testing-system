@@ -1,19 +1,26 @@
-from .course import (
-    ModuleModel,
-    CourseDataModel,
-    TaskModel,
-)
-
-from .course.course import (
-    CourseWithDataModel,
-    CourseUserReadModel,
-    CourseCreateModel,
-    CourseUpdateModel,
-    CourseFullModel,
-)
-
 from .class_invite import (
     ClassInviteModel,
+)
+from .course import (
+    CreateModuleModel,
+    CreateTaskModel,
+    FullCourseDataModel,
+    FullModuleModel,
+    FullTaskModel,
+    ReadCourseDataModel,
+    ReadModuleModel,
+    ReadTaskModel,
+    UpdateTaskModel,
+)
+from .course.course import (
+    CourseCreateModel,
+    CourseFullModel,
+    CourseUpdateModel,
+    CourseUserReadModel,
+    CourseWithDataModel,
+)
+from .user import (
+    UserReadModel,
 )
 
 __all__ = (
@@ -22,8 +29,15 @@ __all__ = (
     "CourseCreateModel",
     "CourseUpdateModel",
     "CourseFullModel",
-    "ModuleModel",
-    "CourseDataModel",
-    "TaskModel",
+    "FullModuleModel",
+    "ReadModuleModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
+    "FullTaskModel",
+    "ReadTaskModel",
     "ClassInviteModel",
+    "CreateModuleModel",
+    "UserReadModel",
+    "CreateTaskModel",
+    "UpdateTaskModel",
 )

@@ -1,17 +1,25 @@
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
-from pydantic import BaseModel
-
-from .module import ModuleModel
-
+from pydantic import BaseModel, Field
 
 __all__ = (
-    "CourseDataModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
 )
 
-class CourseDataModel(BaseModel):
+class FullCourseDataModel(BaseModel):
+    class Config:
+        orm_mode = True
+
     id: int
     changed_time: datetime
     created_time: datetime
-    modules: Optional[ModuleModel]
+    modules_ids: Optional[list[int]] = Field(alias='modules')
+
+
+class ReadCourseDataModel(BaseModel):
+    id: int
+    changed_time: datetime
+    created_time: datetime
+    modules_ids: Optional[list[int]] = Field(alias='modules')

@@ -1,6 +1,6 @@
 from typing import Optional
-from fastapi_users import schemas
 
+from fastapi_users import schemas
 
 __all__ = (
     "UserRead",

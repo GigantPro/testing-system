@@ -1,18 +1,18 @@
+import random
+import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import smtplib
-import random
 
 from fastapi import Depends
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from src.database import User
 from src.config import config
-from ..const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
-from src.functions import update_verification_status
 from src.const import current_active_user
-from ..router import verification_router
+from src.database import User
+from src.functions import update_verification_status
 
+from ..const import URL_FOR_REDIRRECT_AFTER_VERIF_PASSED
+from ..router import verification_router
 
 __all__ = (
     "verification_orders",

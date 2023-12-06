@@ -2,8 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import select, update
 
-from src.database import engine, ClassInvite
-
+from src.database import ClassInvite, engine
 
 __all__ = ("check_for_valid_invite",)
 
@@ -19,7 +18,7 @@ async def check_for_valid_invite(invite_code: str) -> bool:
             return False
 
         if res[5] is False or \
-            res [8] == 0:
+            res[8] == 0:
             return False
         if res[4] < datetime.now():
             await connection.execute(

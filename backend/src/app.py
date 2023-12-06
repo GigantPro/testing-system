@@ -6,17 +6,15 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
 
-from .init_db import init_db
-from .database import async_session_maker
+from .auth import auth_backend, fastapi_users, user_get_router
 from .auth.schemas import UserCreate, UserRead
-from .auth import user_get_router
-from .auth import auth_backend, fastapi_users
-from .config import config
 from .classrooms import classrooms_router
+from .config import config
 from .courses import courses_router
+from .database import async_session_maker
+from .init_db import init_db
 from .logger import init_logger
-from .tgbot import start_bot, send_notify, bot
-
+from .tgbot import bot, send_notify, start_bot
 
 bot_turn = []
 
@@ -59,7 +57,7 @@ app.include_router(
 )
 
 @app.on_event('startup')
-async def on_startup():
+async def on_startup() -> None:
     await init_db()
     await init_logger()
 
@@ -74,7 +72,7 @@ async def on_startup():
 
 
 @app.on_event('shutdown')
-async def on_shutdown():
+async def on_shutdown() -> None:
     await async_session_maker.begin().async_session.close_all()
     await bot.close()
     logger.info('App shut down')

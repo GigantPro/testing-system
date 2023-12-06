@@ -1,6 +1,8 @@
 import os
 import sys
+
 from fastapi import Request
+
 from .bot import bot
 from .global_tg_vars import users_ides
 
@@ -8,7 +10,7 @@ from .global_tg_vars import users_ides
 async def send_notify(request: Request, exc: Exception) -> None:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fpath, fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)
-    
+
     trace = []
     tb = exc.__traceback__
     while tb is not None:
@@ -18,10 +20,10 @@ async def send_notify(request: Request, exc: Exception) -> None:
             "lineno": tb.tb_lineno
         })
         tb = tb.tb_next
-    
+
     tr_exc = [i for i in trace if '/app/src' in i['filename']][-1]
-    
-    
+
+
     message = "*Internal server error*\n" + \
         "*URL:* {}\n" + \
         "*Method:* {}\n" + \
@@ -33,7 +35,7 @@ async def send_notify(request: Request, exc: Exception) -> None:
         "{}\n" \
         "*IP:* {}\n" \
         "*PORT:* {}\n" \
-        "*User\-Agent:* {}\n" \
+        "*User\\-Agent:* {}\n" \
         "*Args:* {}"
 
     params = [

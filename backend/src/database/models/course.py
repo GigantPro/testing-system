@@ -1,10 +1,8 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, String, TIMESTAMP, JSON, Boolean, FLOAT, ForeignKey
+from sqlalchemy import FLOAT, JSON, TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, func
 
 from ..base import Base
-from .course_data import CourseData
-
 
 __all__ = ("Course",)
 
@@ -17,9 +15,10 @@ class Course(Base):
     ico_url = Column(String, default='/api/static/standart_ico.png', nullable=False)
     teachers_ids = Column(JSON, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow, nullable=False)
+    changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     is_active = Column(Boolean, default=False, nullable=False)
     passing_id = Column(JSON[int], default=[])
     passed_id = Column(JSON, default=[])
     reviews = Column(JSON, default=[])
     rating = Column(FLOAT, default=.0)
-    course_data = Column(ForeignKey(CourseData.id), nullable=True)
+    course_data_id = Column(Integer, ForeignKey('courses_data.id'))

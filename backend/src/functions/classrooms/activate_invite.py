@@ -1,8 +1,7 @@
 from fastapi.responses import JSONResponse
 from sqlalchemy import select, update
 
-from src.database import engine, User, ClassInvite, Classroom
-
+from src.database import ClassInvite, Classroom, User, engine
 
 __all__ = ("activate_invite",)
 

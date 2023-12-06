@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 from .verification import verification_router
 
-
 __all__ = (
     "self_router",
     "upload_router",

@@ -1,12 +1,12 @@
 from typing import Any
 
 from sqlalchemy import select
-from src.database import engine, Course
 
+from src.database import Course, engine
 
 __all__ = ("get_top_of_courses_by",)
 
-async def get_top_of_courses_by(start_index: int, count: int, by_: Any) -> list[Course]:
+async def get_top_of_courses_by(start_index: int, count: int, by_: Any) -> list[Course]:  # noqa: ANN401
     """Return sorted courses by param
 
     Args:

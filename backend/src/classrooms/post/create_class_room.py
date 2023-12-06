@@ -1,15 +1,15 @@
 from fastapi import Depends, Request
 from fastapi.responses import JSONResponse
 
+from src.const import current_active_user
 from src.database import User
 from src.functions import (
-    has_permission,
     generate_invite_class_chars,
+    has_permission,
     save_generated_class,
 )
-from src.const import current_active_user
-from ..router import classrooms_router
 
+from ..router import classrooms_router
 
 __all__ = (
     "create_class_room",

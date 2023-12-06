@@ -1,21 +1,30 @@
-from .module import ModuleModel
-
-from .course_data import CourseDataModel
-
-from .task import TaskModel
-
 from .course import (
-    CourseWithDataModel,
-    CourseUserReadModel,
     CourseCreateModel,
-    CourseUpdateModel,
     CourseFullModel,
+    CourseUpdateModel,
+    CourseUserReadModel,
+    CourseWithDataModel,
 )
+from .course_data import FullCourseDataModel, ReadCourseDataModel
+from .module import (
+    CreateModuleModel,
+    FullModuleModel,
+    ReadModuleModel,
+)
+from .task import CreateTaskModel, FullTaskModel, ReadTaskModel, UpdateTaskModel
 
 __all__ = (
-    "ModuleModel",
-    "CourseDataModel",
-    "TaskModel",
+    "FullModuleModel",
+    "ReadModuleModel",
+    "CreateModuleModel",
+    "FullCourseDataModel",
+    "ReadCourseDataModel",
+
+    "FullTaskModel",
+    "ReadTaskModel",
+    "CreateTaskModel",
+    "UpdateTaskModel",
+
     "CourseWithDataModel",
     "CourseUserReadModel",
     "CourseCreateModel",

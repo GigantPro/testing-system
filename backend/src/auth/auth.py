@@ -1,11 +1,9 @@
 from fastapi_users import FastAPIUsers
-from fastapi_users.authentication import CookieTransport
-from fastapi_users.authentication import AuthenticationBackend, JWTStrategy
+from fastapi_users.authentication import AuthenticationBackend, CookieTransport, JWTStrategy
 
-from .manager import get_user_manager
-from ..database import User
 from ..config import db_config
-
+from ..database import User
+from .manager import get_user_manager
 
 __all__ = (
     "cookie_transport",

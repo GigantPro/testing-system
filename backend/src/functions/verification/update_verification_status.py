@@ -2,7 +2,6 @@ from sqlalchemy import update
 
 from src.database import User, engine
 
-
 __all__ = (
     "update_verification_status",
 )

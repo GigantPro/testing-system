@@ -1,14 +1,14 @@
 # ruff: noqa: F403, F405
 
-from .router import *
-from .verification import *
-from .get import *
-from .post import *
 from .auth import *
+from .get import *
 from .init_roles import *
 from .manager import *
+from .post import *
+from .router import *
 from .schemas import *
-
+from .standart_roles import standart_roles  # noqa: F401
+from .verification import *
 
 user_get_router.include_router(
     upload_router,

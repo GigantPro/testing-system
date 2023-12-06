@@ -23,6 +23,9 @@ except: # noqa: E722
         print('W: cannot found db env. Load ../.env')
         load_dotenv('../.env')
 
+        from src.database import Base
+        from src.config import db_config
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

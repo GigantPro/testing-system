@@ -3,11 +3,10 @@
 """Model to working with database"""
 
 from .base import (
-    engine,
+    Base,
     async_session_maker,
+    engine,
     get_async_session,
 )
-
+from .functions import get_user_db, json_array_length
 from .models import *
-from .functions import *
-from .base import Base

@@ -1,11 +1,11 @@
 from fastapi import Depends
 
+from src.const import current_active_user
 from src.database import User
 from src.functions import get_user_read_by_user
-from src.const import current_active_user
-from ..schemas import UserRead
-from ..router import self_router
 
+from ..router import self_router
+from ..schemas import UserRead
 
 __all__ = (
     "who_am_i",

@@ -5,7 +5,6 @@ from sqlalchemy.orm import DeclarativeBase
 
 from ..config import db_config
 
-
 __all__ = (
     "engine",
     "async_session_maker",

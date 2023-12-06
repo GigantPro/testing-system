@@ -1,9 +1,8 @@
-from sqlalchemy import select, update
 from fastapi.responses import JSONResponse
+from sqlalchemy import select, update
 
-from src.database import User, engine, Course
+from src.database import Course, User, engine
 from src.types import CourseUpdateModel
-
 
 __all__ = ("update_course",)
 
@@ -14,7 +13,7 @@ async def update_course(updated_course: CourseUpdateModel, user: User) -> JSONRe
             .where(Course.id == updated_course.id)
         )
         original_course: Course = original_course.fetchone()
-        
+
         if user.id not in original_course.teachers_ids:
             return JSONResponse({'message': 'You are not a teacher', 'status': 'error'}, 403)
 
@@ -29,7 +28,7 @@ async def update_course(updated_course: CourseUpdateModel, user: User) -> JSONRe
             .where(Course.id == original_course.id)
             .values(**change_dict)
         )
-        
+
         await connection.commit()
-        
+
         return JSONResponse({'status': 'success'}, 200)

@@ -1,20 +1,37 @@
-from sqlalchemy import insert
+from sqlalchemy import insert, update
 
-from src.database import engine, User, Course
-
+from src.database import Course, CourseData, User, get_async_session
+from src.types import CourseUserReadModel
 
 __all__ = ("create_new_course",)
 
-async def create_new_course(title: str, description: str, user: User) -> int | None:
-    async with engine.connect() as connection:
-        await connection.execute(
-            insert(Course)
+async def create_new_course(title: str, description: str, user: User) -> CourseUserReadModel:
+    async for session in get_async_session():
+        course = Course(
+            teachers_ids = [user.id],
+            title = title,
+            description = description,
+        )
+
+        session.add(course)
+        await session.commit()
+
+        course_data_id = await session.execute(
+            insert(CourseData)
             .values(
-                teachers_ids = [user.id],
-                title = title,
-                description = description,
+                course_id = course.id,
+            )
+            .returning(CourseData.id)
+        )
+
+        await session.execute(
+            update(Course)
+            .where(Course.id == course.id)
+            .values(
+                course_data_id = course_data_id.scalar_one(),
             )
         )
-        await connection.commit()
 
-        # Fix me: Добавить возвращение присвоенного id
+        await session.commit()
+
+        return CourseUserReadModel.from_orm(course)

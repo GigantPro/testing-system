@@ -1,11 +1,11 @@
-from fastapi import Query, Depends
+from fastapi import Depends, Query
+
+from src.const import current_active_verified_user
+from src.database import User
+from src.functions import get_courses_by_role
+from src.types import CourseUserReadModel
 
 from ..router import courses_router
-from src.functions import get_courses_by_role
-from src.database import User
-from src.types import CourseUserReadModel
-from src.const import current_active_verified_user
-
 
 __all__ = ("mine_courses",)
 

@@ -1,9 +1,8 @@
-from sqlalchemy import select
 from fastapi.responses import JSONResponse
+from sqlalchemy import select
 
-from src.database import engine, Course, User
+from src.database import Course, User, engine
 from src.types import CourseFullModel
-
 
 __all__ = ("get_courses_by_role",)
 

@@ -1,17 +1,38 @@
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
-from .task import TaskModel
-
+from .task import FullTaskModel, ReadTaskModel
 
 __all__ = (
-    "ModuleModel",
+    "FullModuleModel",
+    "ReadModuleModel",
+    "CreateModuleModel",
 )
 
-class ModuleModel(BaseModel):
+class FullModuleModel(BaseModel):
+    class Config:
+        orm_mode = True
+
     id: int
     changed_time: datetime
     created_time: datetime
-    tasks: Optional[list[TaskModel]]
+    title: str
+    description: Optional[str]
+    tasks: Optional[list[FullTaskModel]]
+    course_id: int
+
+class ReadModuleModel(BaseModel):
+    class Config:
+        orm_mode = True
+
+    id: int
+    changed_time: datetime
+    created_time: datetime
+    tasks: Optional[list[ReadTaskModel]]
+    course_id: int
+
+class CreateModuleModel(BaseModel):
+    title: str
+    description: Optional[str]

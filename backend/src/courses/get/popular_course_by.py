@@ -1,12 +1,11 @@
 from fastapi import Query
 from fastapi.responses import JSONResponse
 
+from src.database import Course, json_array_length
+from src.functions import get_top_of_courses, get_top_of_courses_by
+from src.types import CourseUserReadModel
 
 from ..router import courses_router
-from src.functions import get_top_of_courses_by, get_top_of_courses
-from src.types import CourseUserReadModel
-from src.database import Course, json_array_length
-
 
 __all__ = ("popular_courses_by",)
 
@@ -39,7 +38,7 @@ async def popular_courses_by(
 ) -> list[CourseUserReadModel]:
     if count > 50 or count <= 0 or by_ not in dict_:
         return JSONResponse({'message': 'error'}, 401)
-    
+
     if by_ == 'popular':
         return await get_top_of_courses(start_index, count)
 

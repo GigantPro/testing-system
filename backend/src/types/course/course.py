@@ -1,10 +1,9 @@
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, Field, validator
 
-from .course_data import CourseDataModel
-
+from .course_data import ReadCourseDataModel
 
 __all__ = (
     "CourseFullModel",
@@ -24,12 +23,14 @@ class CourseFullModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     passing_id: list
     passed_id: list
     reviews: list
     rating: float
-    course_data: Optional[CourseDataModel]
+    course_data_id: int
+    course_data: Optional[ReadCourseDataModel]
 
     role: Optional[str]
     course_type: str = 'full'
@@ -45,6 +46,7 @@ class CourseUserReadModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     reviews_count: int = Field(alias='reviews')
     passing_count: int = Field(alias='passing_id')
@@ -55,7 +57,7 @@ class CourseUserReadModel(BaseModel):
     course_type: str = 'read'
 
     @validator('reviews_count', 'passing_count', 'passed_count', pre=True)
-    def validation_counts(cls, value):  # noqa: N805
+    def validation_counts(cls, value):  # noqa: N805, ANN201, ANN001
         if isinstance(value, int):
             return value
         return len(value)
@@ -71,9 +73,11 @@ class CourseWithDataModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: list
     created_at: datetime
+    changed_time: datetime
     is_active: bool
     reviews: list
-    course_data: Optional[CourseDataModel]
+    course_data_id: int
+    course_data: Optional[ReadCourseDataModel]
     rating: float
 
     role: Optional[str]
@@ -90,7 +94,6 @@ class CourseUpdateModel(BaseModel):
     ico_url: Optional[str]
     teachers_ids: Optional[list[int]]
     is_active: Optional[bool]
-    course_data: Optional[CourseDataModel]
 
 
 class CourseCreateModel(BaseModel):

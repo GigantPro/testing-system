@@ -1,10 +1,10 @@
 from fastapi import Query
 from fastapi.responses import JSONResponse
 
-from ..router import courses_router
 from src.functions import get_top_of_courses
 from src.types import CourseUserReadModel
 
+from ..router import courses_router
 
 __all__ = ("popular_courses",)
 
