@@ -22,11 +22,4 @@ async def course_by_id() -> JSONResponse:
 async def on_startup() -> None:
     await init_logger()
 
-    # if config.tg_bot_token:
-    #     logger.info('Find tg bot token. Start bot')
-    #     bot_turn.append(await start_bot())
-
-    # else:
-    #     logger.warning('Not find tg bot token. Skip bot')
-
     logger.info('App started')
