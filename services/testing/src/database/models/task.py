@@ -15,7 +15,10 @@ class Task(Base):
     status = Column(String, nullable=False)
 
     url_code_for_run = Column(String)
-    code_languge = Column(String)
+    s_code_for_run = Column(String)
+    code_languge = Column(String, nullable=False)
 
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
     updated_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
+
+    priority = Column(Integer, nullable=False, default=0)

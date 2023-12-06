@@ -1,5 +1,5 @@
 from .router import tasks_api
 
-__all__ = (
-    "tasks_api",
-)
+from .get import *
+from .post import *
+from .patch import *

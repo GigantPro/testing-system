@@ -30,7 +30,7 @@ services:
           cpus: '2'
           memory: 2G
   
-  postgres2:
+  postgres-2:
     image: postgres
     hostname: postgres2
     restart: unless-stopped
@@ -63,7 +63,7 @@ services:
     image: dpage/pgadmin4
     depends_on:
       - postgres
-      - postgres2
+      - postgres-2
     user: root
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
@@ -102,7 +102,7 @@ services:
   
   tests-dev:
     depends_on:
-      - postgres2
+      - postgres-2
     hostname: tests
     environment:
       - DEBUG=true
