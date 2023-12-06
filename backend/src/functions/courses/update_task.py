@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.database import Course, Module, Task, User
+from src.database import Course, Task, User
 from src.types import ReadTaskModel, UpdateTaskModel
 
 

@@ -10,7 +10,7 @@ from ..router import courses_router
 
 __all__ = ("update_task",)
 
-@courses_router.patch('/task/update')
+@courses_router.patch('/task/update', tags=['task'])
 async def update_task(
     updated_task: UpdateTaskModel,
     task_id: int,

@@ -9,6 +9,6 @@ from ..router import courses_router
 
 __all__ = ("task_by_id",)
 
-@courses_router.get('/task/{task_id}')
+@courses_router.get('/task/{task_id}', tags=['task'])
 async def task_by_id(task_id: int, session: AsyncSession = Depends(get_async_session),) -> ReadTaskModel:
     return await get_task_by_id(task_id, session)

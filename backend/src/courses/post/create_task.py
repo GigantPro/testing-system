@@ -10,7 +10,7 @@ from ..router import courses_router
 
 __all__ = ("create_task",)
 
-@courses_router.post('/task/create')
+@courses_router.post('/task/create', tags=['task'])
 async def create_task(
     new_task: CreateTaskModel,
     module_id: int,

@@ -28,7 +28,8 @@ class Task(Base):
     tests_type = Column(Integer, nullable=True)
     """
     0 - simple test
-    1 - test with randow input data
+    1 - simple test with extra code for main.py
+    2 - test with randow input data
     """
     simple_test_data = Column(JSON, nullable=True)
     """

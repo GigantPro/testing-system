@@ -68,6 +68,27 @@ services:
       - 5001:5001
     volumes:
       - ./backend:/app
+  
+  tests-dev:
+    depends_on:
+      - postgres
+    hostname: tests
+    environment:
+      - DEBUG=true
+      - DB_HOST=postgres
+      - DB_PORT=5000
+    env_file: 
+      - ./.env.dev
+    build:
+      context: ./services/testing
+      dockerfile: Dockerfile.dev
+    networks:
+      - postgres
+      - nginx
+    ports:
+      - 5003:5001
+    volumes:
+      - ./services/testing:/app
     
   frontend-dev:
     depends_on:
@@ -90,6 +111,7 @@ services:
   nginx:
     depends_on:
       - backend-dev
+      - tests-dev
       - frontend-dev
     build:
       dockerfile: Dockerfile.dev
