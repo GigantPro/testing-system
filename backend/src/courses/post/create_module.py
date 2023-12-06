@@ -1,5 +1,6 @@
 from fastapi import Depends
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from src.const import current_active_verified_user
 from src.database import User
@@ -16,4 +17,5 @@ async def create_course_module(
     course_id: int,
     user: User = Depends(current_active_verified_user),
 ) -> JSONResponse:
+    logger.info(f"Create new module: {course_id} from {user.id}")
     return await create_new_module(course_id, new_module, user)

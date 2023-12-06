@@ -3,7 +3,9 @@ from datetime import datetime
 from random import randint
 
 from fastapi import Form
+from fastapi.requests import Request
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from src.config import config
 
@@ -12,7 +14,8 @@ from ..router import upload_router
 __all__ = ("update_avatar",)
 
 @upload_router.post('/avatar')
-async def update_avatar(file_type: str = Form(...), filedata: str = Form(...)) -> str:
+async def update_avatar(request: Request, file_type: str = Form(...), filedata: str = Form(...)) -> str:
+    logger.info(f"Update avatar: {file_type} from {request.client.host}")
     if file_type not in ['png', 'jpeg']:
         return JSONResponse({'message': 'Incorrect file format.'}, 400)
 

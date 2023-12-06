@@ -58,8 +58,8 @@ app.include_router(
 
 @app.on_event('startup')
 async def on_startup() -> None:
-    await init_db()
     await init_logger()
+    await init_db()
 
     if config.tg_bot_token:
         logger.info('Find tg bot token. Start bot')

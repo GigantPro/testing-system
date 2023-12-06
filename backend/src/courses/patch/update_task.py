@@ -1,4 +1,6 @@
 from fastapi import Depends
+from fastapi.requests import Request
+from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.const import current_active_verified_user
@@ -14,7 +16,9 @@ __all__ = ("update_task",)
 async def update_task(
     updated_task: UpdateTaskModel,
     task_id: int,
+    request: Request,
     user: User = Depends(current_active_verified_user),
     session: AsyncSession = Depends(get_async_session),
 ) -> ReadTaskModel:
+    logger.info(f"Update task: {task_id} from {user.id} from {request.client.host}")
     return await update_task_func(updated_task, task_id, user, session)

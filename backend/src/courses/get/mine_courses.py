@@ -1,4 +1,5 @@
 from fastapi import Depends, Query
+from loguru import logger
 
 from src.const import current_active_verified_user
 from src.database import User
@@ -18,5 +19,6 @@ async def mine_courses(
     ),
     user: User = Depends(current_active_verified_user)
 ) -> list[CourseUserReadModel]:
+    logger.info(f"Get mine courses: {role} from {user.id}")
     courses = await get_courses_by_role(role, user)
     return courses

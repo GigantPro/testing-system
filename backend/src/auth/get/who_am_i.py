@@ -1,4 +1,5 @@
 from fastapi import Depends
+from loguru import logger
 
 from src.const import current_active_user
 from src.database import User
@@ -13,5 +14,6 @@ __all__ = (
 
 @self_router.get('/who_am_i')
 async def who_am_i(user: User = Depends(current_active_user)) -> UserRead:
+    logger.info(f"Get who am i: {user.id}")
     user_read = await get_user_read_by_user(user)
     return user_read

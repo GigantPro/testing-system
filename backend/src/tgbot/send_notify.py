@@ -1,7 +1,7 @@
-import os
 import sys
 
 from fastapi import Request
+from loguru import logger
 
 from .bot import bot
 from .global_tg_vars import users_ides
@@ -73,5 +73,11 @@ async def send_notify(request: Request, exc: Exception) -> None:
             .replace("!", '\\!')
     message = message.format(*params)
 
+    logger.info(f'Error notify: {message}')
+
     for user_id in users_ides:
-        await bot.send_message(user_id, message, parse_mode="MarkdownV2")
+        try:
+            await bot.send_message(user_id, message, parse_mode="MarkdownV2")
+            logger.info(f'Sended error notify to {users_ides[user_id]}|{user_id}')
+        except Exception as ex:
+            logger.error(f'Error notify to {users_ides[user_id]}|{user_id} : {ex}')
