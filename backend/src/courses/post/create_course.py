@@ -1,4 +1,5 @@
 from fastapi import Depends, Form
+from loguru import logger
 
 from src.const import current_active_verified_user
 from src.database import User
@@ -15,5 +16,6 @@ async def create_course(
     description: str = Form(),
     user: User = Depends(current_active_verified_user),
 ) -> CourseUserReadModel:
+    logger.info(f"Create new course: {title} from {user.id}")
     new_course = await create_new_course(title, description, user)
     return new_course

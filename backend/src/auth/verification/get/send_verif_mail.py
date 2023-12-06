@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 
 from fastapi import Depends
 from fastapi.responses import JSONResponse, RedirectResponse
+from loguru import logger
 
 from src.config import config
 from src.const import current_active_user
@@ -26,6 +27,7 @@ async def send_verif_mail(
     verification_code: int = -1,
     user: User = Depends(current_active_user),
 ) -> dict:
+    logger.info(f"Send verification mail: {user.id} {verification_code=}")
     if verification_code != -1:
         if verification_orders.get(user.id, -1) != verification_code:
             return JSONResponse({'message': 'The code is incorrect or you didn`t ask for it'}, 404)
