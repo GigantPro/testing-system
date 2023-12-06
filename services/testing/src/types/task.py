@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 __all__ = (
     "FullTaskModel",
@@ -11,6 +11,10 @@ __all__ = (
 )
 
 class FullTaskModel(BaseModel):
+    class Config:
+        orm_mode = True
+        from_attributes = True
+
     id: int
     user_id: int
 
@@ -25,6 +29,7 @@ class FullTaskModel(BaseModel):
     updated_at: datetime
 
     priority: int
+
 
 class ReadTaskModel(FullTaskModel):
     pass

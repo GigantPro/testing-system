@@ -1,5 +1,8 @@
-from fastapi import Body
+from fastapi import Body, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.database import get_async_session
+from src.functions import create_task as create_task_func
 from src.types import CreateTaskModel, ReadTaskModel
 
 from ..router import tasks_api
@@ -10,5 +13,6 @@ __all__ = ("task_create",)
 async def task_create(
     new_task: CreateTaskModel,
     secret: str = Body(...),
+    session: AsyncSession = Depends(get_async_session),
 ) -> ReadTaskModel:
-    pass
+    return await create_task_func(new_task, secret, session)

@@ -1,7 +1,6 @@
 from os import system
 
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 from loguru import logger
 
 from .config import config

@@ -12,7 +12,7 @@ class Task(Base):
     user_id = Column(Integer, nullable=False)
 
     testing_mode = Column(String, nullable=False)
-    status = Column(String, nullable=False)
+    status = Column(String, nullable=False, default='created')
 
     url_code_for_run = Column(String)
     s_code_for_run = Column(String)

@@ -1,5 +1,5 @@
-from .router import tasks_api
+# ruff: noqa: F403
 
 from .get import *
-from .post import *
 from .patch import *
+from .post import *
