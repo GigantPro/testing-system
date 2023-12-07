@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.config import config
+from .secret_validate import secret_validate
 from src.database import Task
 from src.types import ReadTaskModel, UpdateTaskModel
 
@@ -14,7 +14,7 @@ async def update_task(
     secret: str,
     session: AsyncSession,
 ) -> ReadTaskModel:
-    if secret != config.tests_api_secret:
+    if not await secret_validate(secret):
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
 
     try:

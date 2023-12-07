@@ -1,26 +1,17 @@
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from src.database import Task
-from src.types import CreateTaskModel, ReadTaskModel
+from src.types import ReadTaskModel
 from .secret_validate import secret_validate
 
-__all__ = ("create_task",)
 
-async def create_task(
-    new_task: CreateTaskModel,
+__all__ = ("get_task_by_id",)
+
+async def get_task_by_id(
+    task_id: int,
     secret: str,
     session: AsyncSession,
 ) -> ReadTaskModel:
     if not await secret_validate(secret):
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
-    session.begin()
-
-    task = Task(**new_task.model_dump())
-
-    session.add(task)
-
-    await session.commit()
-    await session.refresh(task)
-
-    return ReadTaskModel.from_orm(task)
+    return await session.get(Task, task_id)
