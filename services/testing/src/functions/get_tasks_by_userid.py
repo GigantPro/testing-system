@@ -38,7 +38,7 @@ async def get_tasks_by_userid(
     res =  (await session.execute(
         select(Task)
         .where(Task.user_id == user_id)
-        .order_by(Task.created_at.desc(), reversed=True)
+        .order_by(Task.created_at.desc())
         .limit(limit)
     )).all()
 
