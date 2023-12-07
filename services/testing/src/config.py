@@ -68,9 +68,6 @@ class Config:
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
     debug: bool = get_bool_env('DEBUG', False)
 
-    tg_bot_token: str = get_str_env('TG_BOT_TOKEN', '')
-    tg_bot_admin_id: int = get_int_env('TG_BOT_ADMIN_ID', 0)
-
     tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
 
 

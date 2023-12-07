@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from os import getenv
 from typing import NoReturn
 
-__all__ = ('config', 'db_config')
+__all__ = ('config',)
 
 
 class EnvVariableUndefined(Exception):  # noqa: N818
@@ -65,32 +65,11 @@ class Config:
     """Config class."""
     ip: str = get_str_env('IP', '0.0.0.0')
     port: int = 5001
-    source_path: str = get_str_env('SOURCE_PATH', '/app/testing-system/frontend/source')
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
-    static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
     debug: bool = get_bool_env('DEBUG', False)
 
-    mail_server: str = get_str_env('MAIL_SERVICE')
-    email: str = get_str_env('EMAIL')
-    mail_password: str = get_str_env('MAIL_PASSWORD')
+    tg_bot_token: str = get_str_env('TG_BOT_TOKEN', '')
+    tg_bot_admin_id: int = get_int_env('TG_BOT_ADMIN_ID', 0)
 
-    tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
-
-
-@dataclass(slots=True, frozen=True)
-class DBConfig:
-    """Config class."""
-    POSTGRES_PASSWORD = get_str_env('POSTGRES_PASSWORD')
-    POSTGRES_USER = get_str_env('POSTGRES_USER')
-    POSTGRES_DB = get_str_env('POSTGRES_DB')
-
-    DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT', 5000)
-
-    SECRET = get_str_env('SECRET')
-    SECRET_MANAGER = get_str_env('SECRET_MANAGER')
-
-    TTL_COOKIE_DAYS = get_int_env('TTL_COOKIE_DAYS', 30) * 24 * 60
 
 config = Config()
-db_config = DBConfig()
