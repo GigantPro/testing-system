@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 __all__ = (
-    "tasks_api",
+    "tasks_api_router",
 )
 
-tasks_api = APIRouter()
+tasks_api_router = APIRouter()

@@ -5,7 +5,7 @@ from loguru import logger
 
 from .config import config
 from .logger import init_logger
-from .tasks_api import tasks_api
+from .tasks_api import tasks_api_router
 
 app = FastAPI(
     title='Testing.Edu.Xiver',
@@ -16,7 +16,7 @@ app = FastAPI(
 )
 
 app.include_router(
-    tasks_api,
+    tasks_api_router,
 )
 
 
