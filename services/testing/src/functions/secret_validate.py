@@ -1,6 +1,5 @@
 from src.config import config
 
-
 __all__ = (
     "secret_validate",
 )

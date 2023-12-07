@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import Task
 from src.types import CreateTaskModel, ReadTaskModel
+
 from .secret_validate import secret_validate
 
 __all__ = ("create_task",)

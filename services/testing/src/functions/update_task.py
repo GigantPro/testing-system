@@ -3,9 +3,10 @@ from sqlalchemy import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .secret_validate import secret_validate
 from src.database import Task
 from src.types import ReadTaskModel, UpdateTaskModel
+
+from .secret_validate import secret_validate
 
 
 async def update_task(

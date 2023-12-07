@@ -14,6 +14,9 @@ class Task(Base):
     testing_mode = Column(String, nullable=False)
     status = Column(String, nullable=False, default='created')
 
+    result = Column(String)
+    result_getted_time = Column(TIMESTAMP(timezone=True))
+
     url_code_for_run = Column(String)
     s_code_for_run = Column(String)
     code_languge = Column(String, nullable=False)

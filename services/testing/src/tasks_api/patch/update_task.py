@@ -1,6 +1,6 @@
 from fastapi import Body, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_async_session
 from src.functions import update_task as update_task_func

@@ -1,9 +1,10 @@
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.database import Task
 from src.types import ReadTaskModel
-from .secret_validate import secret_validate
 
+from .secret_validate import secret_validate
 
 __all__ = ("get_task_by_id",)
 

@@ -1,6 +1,6 @@
-from fastapi import Body, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
 from loguru import logger
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_async_session
 from src.functions import get_task_by_id

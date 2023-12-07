@@ -13,6 +13,7 @@ __all__ = (
 class FullTaskModel(BaseModel):
     class Config:
         from_attributes = True
+        from_orm = True
 
     id: int
     user_id: int
