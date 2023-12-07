@@ -14,6 +14,7 @@ from .courses import courses_router
 from .database import async_session_maker
 from .init_db import init_db
 from .logger import init_logger
+from .functions import send_error_msg 
 
 bot_turn = []
 
@@ -73,5 +74,7 @@ async def on_shutdown() -> None:
 async def internal_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     error_message = f'Internal server error: {request.url} | {request.method} | {request.headers} | {exc}'
     logger.error(error_message)
+    
+    await send_error_msg(exc, request, 500)
 
     return JSONResponse(status_code=500, content=jsonable_encoder({"code": 500, "msg": "Internal Server Error"}))
