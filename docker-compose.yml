@@ -14,7 +14,7 @@ services:
       - -p 5000
     volumes:
       - /opt/xiver/projects_data/edu/db/data:/data/postgres
-      - /opt/xiver/projects_data/edu/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - /opt/xiver/projects_data/edu/db/de:/docker-entrypoint-initdb.d
     ports:
       - 5000:5000
     healthcheck:
@@ -38,8 +38,8 @@ services:
     command: 
       - -p 4999
     volumes:
-      - /opt/xiver/projects_data/edu/db/data:/data/postgres
-      - /opt/xiver/projects_data/edu/db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - /opt/xiver/projects_data/edu/db2/data:/data/postgres
+      - /opt/xiver/projects_data/edu/db2/de:/docker-entrypoint-initdb.d
     ports:
       - 4999:4999
     healthcheck:
@@ -93,6 +93,21 @@ services:
       - 5003:5001
     volumes:
       - ./services/testing:/app
+    restart: "on-failure"
+  
+  notify:
+    hostname: notify
+    environment:
+      - DEBUG=false
+    env_file: 
+      - ./.env
+    build:
+      context: ./services/notify
+      dockerfile: Dockerfile.dev
+    networks:
+      - nginx
+    volumes:
+      - ./services/notify:/app
     restart: "on-failure"
 
   frontend:

@@ -120,6 +120,22 @@ services:
       - 5003:5001
     volumes:
       - ./services/testing:/app
+  
+  notify-dev:
+    hostname: notify
+    environment:
+      - DEBUG=true
+    env_file: 
+      - ./.env.dev
+    build:
+      context: ./services/notify
+      dockerfile: Dockerfile.dev
+    networks:
+      - nginx
+    ports:
+      - 5004:5001
+    volumes:
+      - ./services/notify:/app
     
   frontend-dev:
     depends_on:
@@ -144,6 +160,7 @@ services:
       - backend-dev
       - tests-dev
       - frontend-dev
+      - notify-dev
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
