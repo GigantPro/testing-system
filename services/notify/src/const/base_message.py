@@ -1,13 +1,12 @@
 from pydantic import BaseModel
 
-
 __all__ = (
     "BaseMessageModel",
     "base_message_template",
 )
 
 base_message_template = """*{title_error_msg}* in *{t_service_name}*
-"*URL:* {requested_url}
+*URL:* {requested_url}
 *Method:* {requested_method}
 *Exception type:* {exception_type}
 *Exception object:* {exception_object}
@@ -16,7 +15,7 @@ base_message_template = """*{title_error_msg}* in *{t_service_name}*
 *Exception args:* {exception_args}
 *IP:* {ip}
 *PORT:* {port}
-*User-Agent:* {user_agent}
+*User\-Agent:* {user_agent}
 """
 
 class BaseMessageModel(BaseModel):

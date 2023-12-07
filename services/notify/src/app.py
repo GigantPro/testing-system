@@ -4,6 +4,7 @@ from loguru import logger
 from .bot import bot, start_bot
 from .config import config
 from .logger import init_logger
+from .notify import notify_router
 
 bot_running = None
 
@@ -14,6 +15,8 @@ app = FastAPI(
     docs_url='/docs',
     root_path='/notify',
 )
+
+app.include_router(notify_router)
 
 @app.on_event('startup')
 async def startup() -> None:

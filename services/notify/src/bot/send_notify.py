@@ -1,83 +1,37 @@
-import sys
-
-from fastapi import Request
 from loguru import logger
+
+from src.config import config
 
 from .bot import bot
 from .global_tg_vars import users_ides
 
 
-async def send_notify(request: Request, exc: Exception) -> None:
-    exc_type, exc_obj, _ = sys.exc_info()
+async def send_notify(message: str) -> tuple[int, int]:
+    """Send notify for loggined users
 
-    trace = []
-    tb = exc.__traceback__
-    while tb is not None:
-        trace.append({
-            "filename": tb.tb_frame.f_code.co_filename,
-            "name": tb.tb_frame.f_code.co_name,
-            "lineno": tb.tb_lineno
-        })
-        tb = tb.tb_next
+    Args:
+        message (str): message to send
 
-    tr_exc = [i for i in trace if '/app/src' in i['filename']][-1]
+    Returns:
+        tuple[int, int]: num of sent messages, num of not sent messages
+    """
+    logger.info(f'Send notify: {message}')
 
-
-    message = "*Internal server error* in *backend*\n" + \
-        "*URL:* {}\n" + \
-        "*Method:* {}\n" + \
-        "{}\n" + \
-        "*Exception type:* {}\n" + \
-        "*Exception object:* {}\n" + \
-        "*Exception fpath:* {}\n" + \
-        "*Exception func:* {}\n" + \
-        "{}\n" \
-        "*IP:* {}\n" \
-        "*PORT:* {}\n" \
-        "*User\\-Agent:* {}\n" \
-        "*Args:* {}"
-
-    params = [
-        request.url,
-        request.method,
-        '---------------------------------',
-        str(exc_type),
-        str(exc_obj),
-        str(tr_exc['filename']) + ':' + str(tr_exc['lineno']),
-        str(tr_exc['name']),
-        '---------------------------------',
-        request.client.host,
-        request.client.port,
-        request.headers['User-Agent'],
-        exc.args
-    ]
-
-    for i in range(len(params)):
-        params[i] = str(params[i]).replace("_", '\\_') \
-            .replace("*", '\\*') \
-            .replace("[", '\\[') \
-            .replace("]", '\\]') \
-            .replace("(", '\\(') \
-            .replace(")", '\\)') \
-            .replace("~", '\\~') \
-            .replace("`", '\\`') \
-            .replace(">", '\\>') \
-            .replace("#", '\\#') \
-            .replace("+", '\\+') \
-            .replace("-", '\\-') \
-            .replace("=", '\\=') \
-            .replace("|", '\\|') \
-            .replace("{", '\\{') \
-            .replace("}", '\\}') \
-            .replace(".", '\\.') \
-            .replace("!", '\\!')
-    message = message.format(*params)
-
-    logger.info(f'Error notify: {message}')
+    good, bad = 0, 0
 
     for user_id in users_ides:
         try:
             await bot.send_message(user_id, message, parse_mode="MarkdownV2")
             logger.info(f'Sended error notify to {users_ides[user_id]}|{user_id}')
+            good += 1
         except Exception as ex:
             logger.error(f'Error notify to {users_ides[user_id]}|{user_id} : {ex}')
+            bad += 1
+
+    await bot.send_message(
+        config.tg_bot_admin_id,
+        f'Message sent to *{good}* users\. Failed send to *{bad}* users\.',
+        parse_mode="MarkdownV2"
+    )
+
+    return good, bad
