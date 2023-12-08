@@ -30,7 +30,7 @@ async def send_notify(message: str) -> tuple[int, int]:
 
     await bot.send_message(
         config.tg_bot_admin_id,
-        f'Message sent to *{good}* users\. Failed send to *{bad}* users\.',
+        rf'Message sent to *{good}* users\. Failed send to *{bad}* users\.',
         parse_mode="MarkdownV2"
     )
 

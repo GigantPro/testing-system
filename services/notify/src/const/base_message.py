@@ -5,7 +5,7 @@ __all__ = (
     "base_message_template",
 )
 
-base_message_template = """*{title_error_msg}* in *{t_service_name}*
+base_message_template = r"""*{title_error_msg}* in *{t_service_name}*
 *URL:* {requested_url}
 *Method:* {requested_method}
 *Exception type:* {exception_type}
