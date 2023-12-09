@@ -15,6 +15,7 @@ from .database import async_session_maker
 from .functions import send_error_msg
 from .init_db import init_db
 from .logger import init_logger
+from .solutions import solution_router
 
 bot_turn = []
 
@@ -54,6 +55,11 @@ app.include_router(
 app.include_router(
     courses_router,
     tags=['courses']
+)
+
+app.include_router(
+    solution_router,
+    tags=['solutions']
 )
 
 @app.on_event('startup')
