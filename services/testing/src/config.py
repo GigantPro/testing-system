@@ -68,8 +68,8 @@ class Config:
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
     debug: bool = get_bool_env('DEBUG', False)
 
-    tg_bot_token: str = get_str_env('TG_BOT_TOKEN', '')
-    tg_bot_admin_id: int = get_int_env('TG_BOT_ADMIN_ID', 0)
+    tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
+    parallel_tests_max: int = get_int_env('PARALLEL_TESTS_MAX', 10)
 
 
 @dataclass(slots=True, frozen=True)
@@ -79,8 +79,8 @@ class DBConfig:
     POSTGRES_USER = get_str_env('POSTGRES_USER')
     POSTGRES_DB = get_str_env('POSTGRES_DB')
 
-    DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT')
+    DB_HOST = get_str_env('DB_HOST', 'postgres2')
+    DB_PORT = get_int_env('DB_PORT', 4999)
 
 
 config = Config()

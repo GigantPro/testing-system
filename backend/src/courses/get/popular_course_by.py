@@ -1,5 +1,7 @@
 from fastapi import Query
+from fastapi.requests import Request
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from src.database import Course, json_array_length
 from src.functions import get_top_of_courses, get_top_of_courses_by
@@ -20,6 +22,7 @@ dict_ = {
 
 @courses_router.get('/popular_by')
 async def popular_courses_by(
+    request: Request,
     start_index: int = Query(
         default=0,
         title='Start inxed for popular courses',
@@ -36,6 +39,7 @@ async def popular_courses_by(
                     'passing_count, reviews_count, rating, popularity]',
     ),
 ) -> list[CourseUserReadModel]:
+    logger.info(f"Get popular courses by {by_} from {start_index} count {count} from {request.client.host}")
     if count > 50 or count <= 0 or by_ not in dict_:
         return JSONResponse({'message': 'error'}, 401)
 

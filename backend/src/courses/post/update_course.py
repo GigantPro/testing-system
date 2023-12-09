@@ -1,5 +1,6 @@
 from fastapi import Depends
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from src.const import current_active_verified_user
 from src.database import User
@@ -15,4 +16,5 @@ async def update_course(
     updated_course: CourseUpdateModel,
     user: User = Depends(current_active_verified_user),
 ) -> JSONResponse:
+    logger.info(f'Update course: {updated_course.id} from {user.id}')
     return await update_course_func(updated_course, user)

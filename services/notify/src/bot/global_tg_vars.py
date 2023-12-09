@@ -1,5 +1,7 @@
 import json
 
+from loguru import logger
+
 passwords = []
 
 try:
@@ -7,7 +9,7 @@ try:
         users_ides = json.load(f)
 except (FileNotFoundError, json.decoder.JSONDecodeError):
     users_ides = {}
-    fs = open('users_ides.json', 'w')
-    fs.write(json.dumps(users_ides))
-    fs.close()
-    del fs
+    with open('users_ides.json', 'w') as fs:
+        fs.write(json.dumps(users_ides))
+
+logger.info('Global Tg vars initialized')

@@ -1,5 +1,7 @@
 from fastapi import Query
+from fastapi.requests import Request
 from fastapi.responses import JSONResponse
+from loguru import logger
 
 from src.functions import get_top_of_courses
 from src.types import CourseUserReadModel
@@ -10,6 +12,7 @@ __all__ = ("popular_courses",)
 
 @courses_router.get('/most_popular')
 async def popular_courses(
+    request: Request,
     start_index: int = Query(
         default=0,
         title='Start inxed for popular courses',
@@ -21,6 +24,7 @@ async def popular_courses(
         description='Count of returned courses. Must be <= 50 and > 0',
     ),
 ) -> list[CourseUserReadModel]:
+    logger.info(f"Get popular courses from {start_index} count {count} from {request.client.host}")
     if count > 50 or count <= 0:
         return JSONResponse({'message': 'error'}, 400)
 

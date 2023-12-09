@@ -74,8 +74,7 @@ class Config:
     email: str = get_str_env('EMAIL')
     mail_password: str = get_str_env('MAIL_PASSWORD')
 
-    tg_bot_token: str = get_str_env('TG_BOT_TOKEN', '')
-    tg_bot_admin_id: int = get_int_env('TG_BOT_ADMIN_ID', 0)
+    tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
 
 
 @dataclass(slots=True, frozen=True)
@@ -86,7 +85,7 @@ class DBConfig:
     POSTGRES_DB = get_str_env('POSTGRES_DB')
 
     DB_HOST = get_str_env('DB_HOST', 'postgres')
-    DB_PORT = get_int_env('DB_PORT')
+    DB_PORT = get_int_env('DB_PORT', 5000)
 
     SECRET = get_str_env('SECRET')
     SECRET_MANAGER = get_str_env('SECRET_MANAGER')

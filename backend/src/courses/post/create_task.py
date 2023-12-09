@@ -1,4 +1,5 @@
 from fastapi import Depends
+from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.const import current_active_verified_user
@@ -18,4 +19,5 @@ async def create_task(
     user: User = Depends(current_active_verified_user),
     session: AsyncSession = Depends(get_async_session),
 ) -> ReadTaskModel:
+    logger.info(f"Create new task: {module_id=} {course_id=} from {user.id}")
     return await create_new_task(new_task, module_id, course_id, user, session)
