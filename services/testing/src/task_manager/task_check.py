@@ -10,6 +10,7 @@ from sqlalchemy import select
 
 from src.config import config
 from src.database import Task, async_session_maker
+from src.functions import send_error_msg
 
 __all__ = ("TaskCheck",)
 
@@ -19,35 +20,47 @@ class NoCodeForRun(Exception):  # noqa: N818
 
 
 class TaskCheck:
-    def __init__(self, task_id: int) -> None:
+    def __init__(self, task_id: int, checking_ids: list) -> None:
         logger.trace(f'Task check created ({task_id})')
         self.task_id = task_id
 
-        self.finished = None
-        self.checking = False
+        self.finished = False
         self.task_corutune = None
-
+        self.checking_ids = checking_ids
 
     async def start(self) -> None:
+        self.task_corutune = asyncio.run_coroutine_threadsafe(self._start(), asyncio.get_event_loop())
+
+    @logger.catch
+    async def _start(self) -> None:
         logger.info(f'Task check starting ({self.task_id})')
-        self.task_corutune = asyncio.run_coroutine_threadsafe(self.check(), asyncio.get_event_loop())
-        while self.task_corutune.running():
-            await asyncio.sleep(1)
-        logger.info(f'Task check stoped ({self.task_id})')
-        self.finished = True
-        self.checking = False
+        try:
+            await self.check()
+
+        except Exception as ex:
+            logger.exception(ex)
+            async with async_session_maker() as session:
+                self.task = (await session.scalars(
+                    select(Task).where(Task.id == self.task_id))).one()
+                self.task.status = 'error'
+                await session.commit()
+
+            await send_error_msg(ex, self.task_id)
+
+        finally:
+            logger.info(f'Task check stoped ({self.task_id})')
+            self.finished = True
+            self.checking_ids.remove(self.task_id)
 
 
     async def cancel(self) -> None:
         logger.info(f'Task check canceld ({self.task_id})')
-        self.checking = False
         self.task_corutune.cancel()
+        self.checking_ids.remove(self.task_id)
 
 
-    @logger.catch
     async def check(self) -> None:
         async with async_session_maker() as session:
-            self.checking = True
             logger.info(f'Task check started ({self.task_id})')
             self.task = (await session.scalars(
                 select(Task).where(Task.id == self.task_id))).one()
@@ -69,11 +82,10 @@ class TaskCheck:
                 logger.error(f'No code for run ({self.task_id})')
                 self.task.status = 'error'
                 await session.commit()
-                self.checking = False
                 try:
                     raise NoCodeForRun(f'No code for run ({self.task_id})')
                 except NoCodeForRun as ex:
-                    # await send_error_msg(ex, self.task.request, 500)
+                    await send_error_msg(ex, self.task_id)
                     logger.error(ex)
                     self.finished = True
                     return

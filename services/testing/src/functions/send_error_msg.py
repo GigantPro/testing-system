@@ -1,12 +1,15 @@
+# ruff: noqa: W605
+
 import sys
 
 import aiohttp
-from fastapi import Request
 from loguru import logger
 
 __all__ = ("send_error_msg",)
 
-async def send_error_msg(exc: Exception, request: Request, error_code: int) -> None:
+
+@logger.catch
+async def send_error_msg(exc: Exception, task_id: int) -> None:
     exc_type, exc_obj, _ = sys.exc_info()
 
     trace = []
@@ -22,21 +25,25 @@ async def send_error_msg(exc: Exception, request: Request, error_code: int) -> N
     tr_exc = [i for i in trace if '/app/src' in i['filename']][-1]
 
     data = {
-        'title_error_msg': str(error_code),
-        't_service_name': 'Backend.Edu.Xiver',
-        'requested_url': str(request.url),
-        'requested_method': request.method,
-        'exception_type': str(exc_type),
-        'exception_object': str(exc_obj),
-        'exception_fpath': str(tr_exc['filename']) + ':' + str(tr_exc['lineno']),
-        'exception_func': str(tr_exc['name']),
-        'exception_args': str(exc.args),
-        'ip': request.client.host,
-        'port': str(request.client.port),
-        'user_agent': request.headers['User-Agent'],
+        'notify_message': '*Error from tests* \n*Exception:* \{exc\}\n'\
+            '*Exception type:* \{exception_type\}\n' \
+            '*Exception object:* \{exception_object\}\n' \
+            '*Exception file path:* \{exception_fpath\}\n' \
+            '*Exception function:* \{exception_func\}\n' \
+            '*Exception args:* \{exception_args\}\n' \
+            '*Task ID*: \{task_id\}',
+        'params': {
+            '\{exc\}': str(exc),
+            '\{exception_type\}': str(exc_type),
+            '\{exception_object\}': str(exc_obj),
+            '\{exception_fpath\}': str(tr_exc['filename']) + ':' + str(tr_exc['lineno']),
+            '\{exception_func\}': str(tr_exc['name']),
+            '\{exception_args\}': str(exc.args),
+            '\{task_id\}': str(task_id),
+        }
     }
 
     async with aiohttp.ClientSession() as session:
-        async with session.post('http://notify:5001/send_base_notify', json=data) as resp:
+        async with session.post('http://notify:5001/send_custom_notify', json=data) as resp:
             answer = await resp.text()
     logger.info(answer)
