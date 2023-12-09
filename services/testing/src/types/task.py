@@ -3,6 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from .extra_params import ExtraParamsModel
+
 __all__ = (
     "FullTaskModel",
     "ReadTaskModel",
@@ -33,6 +35,8 @@ class FullTaskModel(BaseModel):
 
     priority: int
 
+    extra_params: ExtraParamsModel
+
 
 class ReadTaskModel(FullTaskModel):
     pass
@@ -45,6 +49,7 @@ class CreateTaskModel(BaseModel):
     code_languge: str
     correct_output: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)
+    extra_params: Optional[ExtraParamsModel] = Field(ExtraParamsModel(), nullable=False)
 
 
 class UpdateTaskModel(BaseModel):
@@ -53,3 +58,4 @@ class UpdateTaskModel(BaseModel):
     correct_output: Optional[str] = Field(None, nullable=True)
     code_languge: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)
+    extra_params: Optional[ExtraParamsModel] = Field(ExtraParamsModel(), nullable=False)
