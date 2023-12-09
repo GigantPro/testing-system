@@ -10,16 +10,13 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v3
       with:
-        python-version: 3
+        python-version: 3.11
 
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Poetry
-      run: pip install poetry
-
-    - name: Install dependencies
-      run: cd backend; poetry install --with dev && poetry shell
+    - name: Install ruff
+      run: pip install ruff
 
     - name: Ruff
-      run: poetry run ruff .
+      run: ruff .
