@@ -18,12 +18,15 @@ class FullTaskModel(BaseModel):
     id: int
     user_id: int
 
-    testing_mode: str
     status: str
 
     url_code_for_run: Optional[str] = Field(None, nullable=True)
     s_code_for_run: Optional[str] = Field(None, nullable=True)
     code_languge: str
+
+    correct_output: Optional[str] = Field(None, nullable=True)
+    correct: Optional[str] = Field(None, nullable=True)
+    incorrect_log: Optional[str] = Field(None, nullable=True)
 
     created_at: datetime
     updated_at: datetime
@@ -37,15 +40,16 @@ class ReadTaskModel(FullTaskModel):
 
 class CreateTaskModel(BaseModel):
     user_id: int
-    testing_mode: str
     url_code_for_run: Optional[str] = Field(None, nullable=True)
     s_code_for_run: Optional[str] = Field(None, nullable=True)
     code_languge: str
+    correct_output: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)
 
+
 class UpdateTaskModel(BaseModel):
-    testing_mode: Optional[str] = Field(None, nullable=True)
     url_code_for_run: Optional[str] = Field(None, nullable=True)
     s_code_for_run: Optional[str] = Field(None, nullable=True)
+    correct_output: Optional[str] = Field(None, nullable=True)
     code_languge: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)

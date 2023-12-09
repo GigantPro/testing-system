@@ -1,5 +1,5 @@
 
-from sqlalchemy import TIMESTAMP, Column, Integer, String, func
+from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func
 
 from ..base import Base
 
@@ -11,7 +11,6 @@ class Task(Base):
     id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = Column(Integer, nullable=False)
 
-    testing_mode = Column(String, nullable=False)
     status = Column(String, nullable=False, default='created')
     """{ created; processing; completed; }"""
 
@@ -22,6 +21,10 @@ class Task(Base):
     url_code_for_run = Column(String)
     s_code_for_run = Column(String)
     code_languge = Column(String, nullable=False)
+
+    correct_output = Column(String)
+    correct = Column(Boolean)
+    incorrect_log = Column(String)
 
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
     updated_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
