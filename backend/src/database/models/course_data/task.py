@@ -1,6 +1,8 @@
 from sqlalchemy import JSON, TIMESTAMP, Column, ForeignKey, Integer, String
 from sqlalchemy.sql import func
 
+from src.types.extra_params import ExtraParamsModel
+
 from ...base import Base
 
 __all__ = ("Task",)
@@ -37,3 +39,5 @@ class Task(Base):
     """
     solution = Column(String, nullable=True)
     solution_for_testing = Column(String, nullable=True)
+
+    extra_params = Column(JSON, default=ExtraParamsModel().dict(), nullable=False)
