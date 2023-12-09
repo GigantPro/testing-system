@@ -1,20 +1,20 @@
 import asyncio
-from datetime import datetime
-import urllib.request
-from os import makedirs, system
 import shutil
+import urllib.request
+from datetime import datetime
+from os import makedirs, system
 from subprocess import PIPE, STDOUT, run
 
 from loguru import logger
 from sqlalchemy import select
 
-from src.database import Task, async_session_maker
 from src.config import config
+from src.database import Task, async_session_maker
 
 __all__ = ("TaskCheck",)
 
 
-class NoCodeForRun(Exception):
+class NoCodeForRun(Exception):  # noqa: N818
     pass
 
 
@@ -79,12 +79,12 @@ class TaskCheck:
             run_out = run(
                 f'docker run solution-{self.task_id}'.split(),
                 stdout=PIPE, stderr=STDOUT, text=True)
-            
+
             self.task.build_output = build_out.stdout
             self.task.result = run_out.stdout
             self.task.status = 'success'
             self.task.result_getted_time = datetime.now()
-            
+
             await session.commit()
 
         shutil.rmtree(f'../tmp/{self.task_id}', ignore_errors=(not config.debug))
