@@ -19,7 +19,7 @@ jobs:
       run: pip install poetry
 
     - name: Install dependencies
-      run: cd backend; poetry install --with dev
+      run: cd backend; poetry install --with dev && poetry shell
 
     - name: Ruff
-      run: cd backend; poetry run ruff .
+      run: poetry run ruff .
