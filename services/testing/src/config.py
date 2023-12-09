@@ -69,6 +69,7 @@ class Config:
     debug: bool = get_bool_env('DEBUG', False)
 
     tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
+    parallel_tests_max: int = get_int_env('PARALLEL_TESTS_MAX', 10)
 
 
 @dataclass(slots=True, frozen=True)

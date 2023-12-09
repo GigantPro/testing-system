@@ -108,5 +108,6 @@ backend/public
 test.py
 users_ides.json
 test.txt
+tmp
 
 .npmrc

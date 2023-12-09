@@ -1,5 +1,6 @@
 from fastapi import Request
 from loguru import logger
+
 from src.bot import send_notify
 from src.const import BaseMessageModel, base_message_template
 from src.functions import text_preparation

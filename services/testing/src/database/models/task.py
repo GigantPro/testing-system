@@ -13,8 +13,10 @@ class Task(Base):
 
     testing_mode = Column(String, nullable=False)
     status = Column(String, nullable=False, default='created')
+    """{ created; processing; completed; }"""
 
     result = Column(String)
+    build_output = Column(String)
     result_getted_time = Column(TIMESTAMP(timezone=True))
 
     url_code_for_run = Column(String)
