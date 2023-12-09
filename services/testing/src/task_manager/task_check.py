@@ -85,6 +85,30 @@ class TaskCheck:
             self.task.status = 'success'
             self.task.result_getted_time = datetime.now()
 
+            if self.task.correct_output == self.task.result:
+                self.task.correct = True
+
+            else:
+                self.task.correct = False
+
+                corr_tmp = list(self.task.correct_output)
+                output_tmp = list(self.task.result)
+                
+                combo = False
+                res = 'Incorrect output: >error<:\n'
+                for i in range(min((len(corr_tmp), len(output_tmp)))):
+                    if corr_tmp[i] == output_tmp[i]:
+                        if combo:
+                            res += '<'
+                            combo = False
+                        res += corr_tmp[i]
+                    else:
+                        if not combo:
+                            res += '>'
+                            combo = True
+                        res += output_tmp[i]
+                self.task.incorrect_log = res
+
             await session.commit()
 
         shutil.rmtree(f'../tmp/{self.task_id}', ignore_errors=(not config.debug))
