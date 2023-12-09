@@ -93,7 +93,7 @@ class TaskCheck:
 
                 corr_tmp = list(self.task.correct_output)
                 output_tmp = list(self.task.result)
-                
+
                 combo = False
                 res = 'Incorrect output: >error<:\n'
                 for i in range(min((len(corr_tmp), len(output_tmp)))):
