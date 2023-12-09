@@ -15,7 +15,6 @@ class TaskManager:
     def __init__(self) -> None:
         self.working = False
 
-        self.max_tasks = config.parallel_tests_max
         self.tasks = []
 
     async def start(self) -> None:
@@ -28,6 +27,7 @@ class TaskManager:
                 .order_by(Task.priority.desc())
             )).fetchall()
 
+            checking_ids = []
             while self.working:
                 new_ls = []
                 for i in range(len(self.tasks)):
@@ -36,11 +36,14 @@ class TaskManager:
                 self.tasks = new_ls.copy()
                 del new_ls
 
-                while len(self.tasks) < self.max_tasks and tasks:
-                    task = tasks.pop()
-                    task_check = TaskCheck(task[0].id)
-                    self.tasks.append(task_check)
-                    await task_check.start()
+                while len(checking_ids) < config.parallel_tests_max and tasks:
+                    task = tasks.pop(0)
+                    if task[0].id not in checking_ids:
+                        checking_ids += [task[0].id]
+                        task_check = TaskCheck(task[0].id, checking_ids)
+                        await task_check.start()
+
+                await asyncio.sleep(1)
 
                 if not tasks:
                     tasks = (await session.execute(
@@ -48,8 +51,6 @@ class TaskManager:
                         .where(Task.status == 'created')
                         .order_by(Task.priority.desc())
                     )).fetchall()
-
-                await asyncio.sleep(1)
 
     async def stop(self) -> None:
         self.working = False

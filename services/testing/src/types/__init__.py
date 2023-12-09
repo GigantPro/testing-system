@@ -1,3 +1,4 @@
+from .extra_params import ExtraParamsModel
 from .task import (
     CreateTaskModel,
     FullTaskModel,
@@ -10,4 +11,5 @@ __all__ = (
     "ReadTaskModel",
     "CreateTaskModel",
     "UpdateTaskModel",
+    "ExtraParamsModel",
 )

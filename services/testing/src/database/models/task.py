@@ -1,5 +1,6 @@
+from sqlalchemy import JSON, TIMESTAMP, Boolean, Column, Integer, String, func
 
-from sqlalchemy import TIMESTAMP, Boolean, Column, Integer, String, func
+from src.types import ExtraParamsModel
 
 from ..base import Base
 
@@ -30,3 +31,5 @@ class Task(Base):
     updated_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
     priority = Column(Integer, nullable=False, default=0)
+
+    extra_params = Column(JSON, default=ExtraParamsModel().model_dump(), nullable=False)
