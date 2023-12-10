@@ -1,7 +1,7 @@
 from fastapi import Depends, Form
 from loguru import logger
 
-from src.const import current_active_verified_user
+from src.auth import current_active_verified_user
 from src.database import User
 from src.functions import create_new_course
 from src.types import CourseUserReadModel

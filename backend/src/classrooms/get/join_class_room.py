@@ -2,7 +2,7 @@ from fastapi import Depends
 from fastapi.responses import JSONResponse
 from loguru import logger
 
-from src.const import current_active_user
+from src.auth import current_active_user
 from src.database import User
 from src.functions import (
     activate_invite,

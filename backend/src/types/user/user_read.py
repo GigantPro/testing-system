@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field, validator
 
-from src.auth.standart_roles import standart_roles
+from src.const import standart_roles
 
 __all__ = (
     "UserReadModel",

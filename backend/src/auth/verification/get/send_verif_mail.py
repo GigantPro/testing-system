@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from loguru import logger
 
 from src.config import config
-from src.const import current_active_user
+from ...user_types import current_active_user
 from src.database import User
 from src.functions import update_verification_status
 

@@ -3,7 +3,7 @@ from fastapi.requests import Request
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.const import current_active_verified_user
+from src.auth import current_active_verified_user
 from src.database import User, get_async_session
 from src.functions import update_task as update_task_func
 from src.types import ReadTaskModel, UpdateTaskModel

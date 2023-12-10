@@ -1,7 +1,7 @@
 from fastapi import Depends
 from loguru import logger
 
-from src.const import current_active_user
+from ..user_types import current_active_user
 from src.database import User
 from src.functions import get_user_read_by_user
 

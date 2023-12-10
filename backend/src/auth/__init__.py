@@ -7,8 +7,8 @@ from .manager import *
 from .post import *
 from .router import *
 from .schemas import *
-from .standart_roles import standart_roles  # noqa: F401
 from .verification import *
+from .user_types import *
 
 user_get_router.include_router(
     upload_router,

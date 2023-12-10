@@ -14,18 +14,17 @@ class Solution(Base):
     changed_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
     created_time = Column(TIMESTAMP, server_default=func.now(), nullable=False)
 
-    task_id = Column(Integer, ForeignKey('tasks.id'), nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-
+    task_id = Column(Integer, ForeignKey('task.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 
     code_url = Column(String, nullable=False)
     language = Column(String, nullable=False)
 
-    status = Column(String, default='pending', nullable=False)
+    status = Column(String, default='created', nullable=False)
     result = Column(String, nullable=True)
 
     testing_task_id = Column(Integer, nullable=True)
     correct = Column(Boolean, nullable=True)
     incorrect_log = Column(String, nullable=True)
 
-    extra_params = Column(JSON, default=ExtraParamsModel().dictmodel_dump(), nullable=False)
+    extra_params = Column(JSON, default=ExtraParamsModel().dict(), nullable=False)

@@ -1,4 +1,4 @@
-from ..auth.auth import fastapi_users
+from src.auth import fastapi_users
 
 __all__ = (
     'current_user',

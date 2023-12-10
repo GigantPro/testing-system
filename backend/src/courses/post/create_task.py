@@ -2,7 +2,7 @@ from fastapi import Depends
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.const import current_active_verified_user
+from src.auth import current_active_verified_user
 from src.database import User, get_async_session
 from src.functions import create_new_task
 from src.types import CreateTaskModel, ReadTaskModel

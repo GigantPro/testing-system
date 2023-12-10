@@ -36,7 +36,6 @@ class FullSolutionModel(BaseModel):
 
 class CreateSolutionModel(BaseModel):
     task_id: int
-    user_id: int
     code: str
     language: str
 

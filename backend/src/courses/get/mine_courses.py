@@ -1,7 +1,7 @@
 from fastapi import Depends, Query
 from loguru import logger
 
-from src.const import current_active_verified_user
+from src.auth import current_active_verified_user
 from src.database import User
 from src.functions import get_courses_by_role
 from src.types import CourseUserReadModel
