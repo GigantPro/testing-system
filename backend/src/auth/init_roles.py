@@ -1,7 +1,8 @@
 from sqlalchemy import insert, select, update
 
-from ..database import Role, engine
 from src.const import standart_roles
+
+from ..database import Role, engine
 
 __all__ = ("init_roles",)
 

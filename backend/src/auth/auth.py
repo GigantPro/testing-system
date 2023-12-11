@@ -3,6 +3,7 @@ from fastapi_users.authentication import AuthenticationBackend, CookieTransport,
 
 from src.config import db_config
 from src.database import User
+
 from .manager import get_user_manager
 
 __all__ = (

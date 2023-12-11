@@ -16,9 +16,9 @@ async def upload_solution_func(
     new_solution: CreateSolutionModel,
     user: User,
     session: AsyncSession,
-    LANG_TO_SUFF: dict[str, str],
+    lang_to_suff: dict[str, str],
 ) -> ReadSolutionModel:
-    if new_solution.language not in LANG_TO_SUFF:
+    if new_solution.language not in lang_to_suff:
         return JSONResponse(status_code=400, content={'message': 'Invalid language'})
     session.begin()
 
@@ -29,14 +29,14 @@ async def upload_solution_func(
 
     hash = hashlib.md5(new_solution.code.encode()).hexdigest()
     async with aiofiles.open(
-        f"{config.static_files_path}/solutions/{hash}.{LANG_TO_SUFF[new_solution.language]}", "w"
+        f"{config.solutions_files_path}/{user.id}{hash}.{lang_to_suff[new_solution.language]}", "w"
     ) as f:
         await f.write(new_solution.code)
 
 
     sol = Solution(
         user_id=user.id,
-        code_url=f'/static/solutions/{hash}.{LANG_TO_SUFF[new_solution.language]}',
+        code_url=f'/{config.solutions_files_path}/download/{user.id}{hash}.{lang_to_suff[new_solution.language]}',
         language=new_solution.language,
         task_id=new_solution.task_id,
         extra_params=task.extra_params,

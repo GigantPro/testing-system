@@ -67,6 +67,7 @@ class Config:
     port: int = 5001
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
     static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
+    solutions_files_path: str = get_str_env('SOLUTIONS_FILES_PATH', 'solutions')
     debug: bool = get_bool_env('DEBUG', False)
 
     mail_server: str = get_str_env('MAIL_SERVICE')

@@ -5,8 +5,8 @@ from src.auth import current_active_verified_user
 from src.database import User, get_async_session
 from src.functions import upload_solution_func
 from src.types import CreateSolutionModel, ReadSolutionModel
-from ..const import LANG_TO_SUFF
 
+from ..const import LANG_TO_SUFF
 from ..router import solution_router
 
 __all__ = ("upload_solution",)

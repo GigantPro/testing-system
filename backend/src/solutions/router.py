@@ -4,4 +4,4 @@ __all__ = (
     "solution_router",
 )
 
-solution_router = APIRouter(prefix='/solution')
+solution_router = APIRouter(prefix='/solutions')

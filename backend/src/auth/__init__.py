@@ -7,8 +7,8 @@ from .manager import *
 from .post import *
 from .router import *
 from .schemas import *
-from .verification import *
 from .user_types import *
+from .verification import *
 
 user_get_router.include_router(
     upload_router,
