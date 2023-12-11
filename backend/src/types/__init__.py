@@ -29,6 +29,12 @@ from .solution import (
 from .user import (
     UserReadModel,
 )
+from .simple_solution import (
+    CreateSimpleSolutionModel,
+    FullSimpleSolutionModel,
+    ReadSimpleSolutionModel,
+    UpdateSimpleSolutionModel,
+)
 
 __all__ = (
     "CourseWithDataModel",
@@ -53,4 +59,9 @@ __all__ = (
     "ReadSolutionModel",
     "UpdateSolutionModel",
     "FullSolutionModel",
+
+    "CreateSimpleSolutionModel",
+    "ReadSimpleSolutionModel",
+    "UpdateSimpleSolutionModel",
+    "FullSimpleSolutionModel",
 )

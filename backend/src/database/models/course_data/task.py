@@ -31,12 +31,13 @@ class Task(Base):
     """
     0 - simple test
     1 - simple test with extra code for main.py
-    2 - test with randow input data
+    2 - test with random input data
     """
     simple_test_data = Column(JSON, nullable=True)
     """
     {'test_input': 'solution_output'}
     """
+    box_solutions = Column(JSON, nullable=True)
     solution = Column(String, nullable=True)
     solution_for_testing = Column(String, nullable=True)
 

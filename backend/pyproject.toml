@@ -45,7 +45,7 @@ include = ["*.py"]
 force-exclude = true
 fixable = ["ALL"]
 
-exclude = [".mypy_cache", ".ruff_cache", ".venv", "__pypackages__", "alembic", "solutions"]
+exclude = [".mypy_cache", ".ruff_cache", ".venv", "__pypackages__", "alembic", "backend/solutions"]
 line-length = 120
 
 ignore = [
