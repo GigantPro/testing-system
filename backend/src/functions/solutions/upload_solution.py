@@ -7,7 +7,6 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.config import config
-# from src.const.lang_to_suff import LANG_TO_SUFF
 from src.database import Solution, Task, User
 from src.types import CreateSolutionModel, ReadSolutionModel
 
@@ -21,13 +20,6 @@ async def upload_solution_func(
 ) -> ReadSolutionModel:
     if new_solution.language not in LANG_TO_SUFF:
         return JSONResponse(status_code=400, content={'message': 'Invalid language'})
-
-    hash = hashlib.md5(new_solution.code.encode()).hexdigest()
-    async with aiofiles.open(
-        f"{config.static_files_path}/solutions/{hash}.{LANG_TO_SUFF[new_solution.language]}", "w"
-    ) as f:
-        f.write(new_solution.code.encode())
-
     session.begin()
 
     try:
@@ -35,16 +27,23 @@ async def upload_solution_func(
     except NoResultFound:
         return JSONResponse(status_code=404, content={'message': 'Task not found'})
 
+    hash = hashlib.md5(new_solution.code.encode()).hexdigest()
+    async with aiofiles.open(
+        f"{config.static_files_path}/solutions/{hash}.{LANG_TO_SUFF[new_solution.language]}", "w"
+    ) as f:
+        await f.write(new_solution.code)
+
+
     sol = Solution(
         user_id=user.id,
-        code=new_solution.code,
+        code_url=f'/static/solutions/{hash}.{LANG_TO_SUFF[new_solution.language]}',
         language=new_solution.language,
-        code_language=new_solution.language,
         task_id=new_solution.task_id,
         extra_params=task.extra_params,
     )
 
-    await session.add(sol)
+    session.add(sol)
+    await session.commit()
     await session.refresh(sol)
 
     return ReadSolutionModel(**sol.__dict__)

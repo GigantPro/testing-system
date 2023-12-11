@@ -15,7 +15,7 @@ __all__ = (
 
 class FullSolutionModel(BaseModel):
     id: int
-    created_at: datetime
+    created_time: datetime
     changed_time: datetime
 
     task_id: int
@@ -42,7 +42,7 @@ class CreateSolutionModel(BaseModel):
 
 class ReadSolutionModel(BaseModel):
     id: int
-    created_at: datetime
+    created_time: datetime
     changed_time: datetime
 
     task_id: int

@@ -28,6 +28,7 @@ app = FastAPI(
 )
 
 makedirs(config.static_files_path, exist_ok=True)
+makedirs(config.static_files_path + '/solutions', exist_ok=True)
 app.mount("/static", StaticFiles(directory=config.static_files_path))
 
 app.include_router(
