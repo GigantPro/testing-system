@@ -8,14 +8,12 @@ from loguru import logger
 
 from .auth import auth_backend, fastapi_users, user_get_router
 from .auth.schemas import UserCreate, UserRead
-from .classrooms import classrooms_router
 from .config import config
-from .courses import courses_router
 from .database import async_session_maker
 from .functions import send_error_msg
 from .init_db import init_db
 from .logger import init_logger
-from .solutions import solution_router
+from .routes import classrooms_router, courses_router, solution_router
 
 bot_turn = []
 
