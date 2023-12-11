@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "backend-test"
+version = "0.0.0"
+description = "Test module for backend"
+authors = ["GigantPro <pochtagigantpro@gmail.com>"]
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.2"
+httpx = "^0.25.2"
+jsonschema = "^4.20.0"
+pydantic = "^2.5.2"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
