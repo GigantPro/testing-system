@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from fastapi.responses import FileResponse, JSONResponse
 
 from src.config import config
@@ -14,7 +15,7 @@ async def get_solution_func(
         return JSONResponse(status_code=404, content={'message': 'Permission denided'})
 
     sol_path = Path(f'{config.solutions_files_path}/{solution_name}')
-    
+
     if not sol_path.exists():
         return JSONResponse(status_code=404, content={'message': 'Solution not found'})
 

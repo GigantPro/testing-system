@@ -6,7 +6,6 @@ from src.database import User, get_async_session
 from src.functions import check_box_check_func
 from src.types import CreateSimpleSolutionModel, ReadSimpleSolutionModel
 
-from ..const import LANG_TO_SUFF
 from ..router import solution_router
 
 __all__ = ("check_box_check",)

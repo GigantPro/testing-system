@@ -20,6 +20,12 @@ from .course.course import (
     CourseWithDataModel,
 )
 from .extra_params import ExtraParamsModel
+from .simple_solution import (
+    CreateSimpleSolutionModel,
+    FullSimpleSolutionModel,
+    ReadSimpleSolutionModel,
+    UpdateSimpleSolutionModel,
+)
 from .solution import (
     CreateSolutionModel,
     FullSolutionModel,
@@ -28,12 +34,6 @@ from .solution import (
 )
 from .user import (
     UserReadModel,
-)
-from .simple_solution import (
-    CreateSimpleSolutionModel,
-    FullSimpleSolutionModel,
-    ReadSimpleSolutionModel,
-    UpdateSimpleSolutionModel,
 )
 
 __all__ = (

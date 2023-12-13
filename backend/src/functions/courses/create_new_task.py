@@ -1,5 +1,4 @@
 from fastapi.responses import JSONResponse
-from loguru import logger
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 

@@ -1,9 +1,6 @@
 from datetime import datetime
-from typing import Optional
 
-from pydantic import BaseModel, Field
-
-from .extra_params import ExtraParamsModel
+from pydantic import BaseModel
 
 __all__ = (
     "FullSimpleSolutionModel",
@@ -25,7 +22,7 @@ class FullSimpleSolutionModel(BaseModel):
     user_id: int
 
     answer: dict
-    
+
     correct: bool
 
 

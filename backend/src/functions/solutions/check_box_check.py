@@ -1,12 +1,9 @@
-from pathlib import Path
-from fastapi.responses import FileResponse, JSONResponse
-from loguru import logger
+from fastapi.responses import JSONResponse
 from sqlalchemy import select
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.config import config
-from src.database import User, SimpleSolution, Task
+from src.database import SimpleSolution, Task, User
 from src.types import CreateSimpleSolutionModel, ReadSimpleSolutionModel
 
 __all__ = ("check_box_check_func",)
@@ -32,9 +29,9 @@ async def check_box_check_func(
         answer=new_solution.answer,
         correct=(task.box_solutions == new_solution.answer),
     )
-    
+
     session.add(solution)
     await session.commit()
     await session.refresh(solution)
-    
+
     return ReadSimpleSolutionModel.from_orm(solution)
