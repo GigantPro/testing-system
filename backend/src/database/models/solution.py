@@ -27,4 +27,7 @@ class Solution(Base):
     correct = Column(Boolean, nullable=True)
     incorrect_log = Column(String, nullable=True)
 
+    tests_ids = Column(JSON, default=[], nullable=True)
+    """List of test ids that were run from testing service"""
+
     extra_params = Column(JSON, default=ExtraParamsModel().dict(), nullable=False)

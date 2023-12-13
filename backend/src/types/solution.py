@@ -31,6 +31,8 @@ class FullSolutionModel(BaseModel):
     correct: Optional[bool] = Field(None, nullable=True)
     incorrect_log: Optional[str] = Field(None, nullable=True)
 
+    tests_ids: list
+
     extra_params: ExtraParamsModel
 
 
