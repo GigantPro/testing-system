@@ -32,6 +32,8 @@ class FullSolutionModel(BaseModel):
     incorrect_log: Optional[str] = Field(None, nullable=True)
 
     tests_ids: list
+    
+    priority: int
 
     extra_params: ExtraParamsModel
 
@@ -59,6 +61,8 @@ class ReadSolutionModel(BaseModel):
     testing_task_id: Optional[int] = Field(None, nullable=True)
     correct: Optional[bool] = Field(None, nullable=True)
     incorrect_log: Optional[str] = Field(None, nullable=True)
+    
+    priority: int
 
     extra_params: ExtraParamsModel
 

@@ -29,5 +29,7 @@ class Solution(Base):
 
     tests_ids = Column(JSON, default=[], nullable=True)
     """List of test ids that were run from testing service"""
+    
+    priority = Column(Integer, default=0, nullable=False)
 
     extra_params = Column(JSON, default=ExtraParamsModel().dict(), nullable=False)

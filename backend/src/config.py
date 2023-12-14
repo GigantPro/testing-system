@@ -76,6 +76,8 @@ class Config:
 
     tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
 
+    max_parallel_solition_jobs: int = get_int_env('MAX_PARALLEL_SOLUTION_JOBS', 2)
+
 
 @dataclass(slots=True, frozen=True)
 class DBConfig:
