@@ -36,6 +36,8 @@ from .user import (
     UserReadModel,
 )
 
+from .services import ServiceTaskModel
+
 __all__ = (
     "CourseWithDataModel",
     "CourseUserReadModel",
@@ -64,4 +66,6 @@ __all__ = (
     "ReadSimpleSolutionModel",
     "UpdateSimpleSolutionModel",
     "FullSimpleSolutionModel",
+    
+    "ServiceTaskModel",
 )

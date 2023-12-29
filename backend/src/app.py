@@ -14,6 +14,7 @@ from .functions import send_error_msg
 from .init_db import init_db
 from .logger import init_logger
 from .routes import classrooms_router, courses_router, solution_router
+from .solutions_engine import solutions_engine
 
 bot_turn = []
 
@@ -65,6 +66,8 @@ app.include_router(
 async def on_startup() -> None:
     await init_logger()
     await init_db()
+    
+    await solutions_engine.start()
 
     logger.info('App started')
 
@@ -72,6 +75,8 @@ async def on_startup() -> None:
 @app.on_event('shutdown')
 async def on_shutdown() -> None:
     await async_session_maker.begin().async_session.close_all()
+
+    await solutions_engine.stop()
     logger.info('App shut down')
 
 
