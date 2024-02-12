@@ -17,7 +17,7 @@ load-dotenv = "^0.1.0"
 aiohttp = "^3.9.1"
 ruff = "^0.1.7"
 psycopg2-binary = "^2.9.9"
-python-multipart = "^0.0.6"
+python-multipart = "^0.0.7"
 
 
 [build-system]
