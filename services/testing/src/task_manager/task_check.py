@@ -72,7 +72,7 @@ class TaskCheck:
             system(f'cp docker_tests/Dockerfile.Python ../tmp/{self.task_id}/Dockerfile')
 
             if self.task.url_code_for_run:
-                urllib.request.urlretrieve(self.task.url_code_for_run, f'../tmp/{self.task_id}/solution.py')
+                system(f'cp /solutions/{self.task.url_code_for_run.split("/")[-1]} ../tmp/{self.task_id}/solution.py')
 
             else:
                 logger.error(f'No code for run ({self.task_id})')
