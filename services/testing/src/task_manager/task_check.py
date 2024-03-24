@@ -36,6 +36,7 @@ class TaskCheck:
         logger.info(f'Task check starting ({self.task_id})')
         try:
             await self.check()
+            logger.info(f'Task check complited ({self.task_id})')
 
         except Exception as ex:
             logger.exception(ex)
@@ -46,9 +47,9 @@ class TaskCheck:
                 await session.commit()
 
             await send_error_msg(ex, self.task_id)
+            logger.error(f'Task check failed ({self.task_id})!')
 
         finally:
-            logger.info(f'Task check stoped ({self.task_id})')
             self.finished = True
             self.checking_ids.remove(self.task_id)
 
