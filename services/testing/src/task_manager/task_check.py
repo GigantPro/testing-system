@@ -74,10 +74,6 @@ class TaskCheck:
             if self.task.url_code_for_run:
                 urllib.request.urlretrieve(self.task.url_code_for_run, f'../tmp/{self.task_id}/solution.py')
 
-            elif self.task.s_code_for_run:
-                with open(f'../tmp/{self.task_id}/solution.py', 'w') as f:
-                    f.write(self.task.s_code_for_run)
-
             else:
                 logger.error(f'No code for run ({self.task_id})')
                 self.task.status = 'error'
