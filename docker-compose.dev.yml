@@ -120,6 +120,7 @@ services:
       - 5003:5001
     volumes:
       - ./services/testing:/app
+      - ./backend/solutions:/solutions
       - /var/run/docker.sock:/var/run/docker.sock:rw
   
   notify-dev:
