@@ -36,6 +36,7 @@ class TaskCheck:
         logger.info(f'Task check starting ({self.task_id})')
         try:
             await self.check()
+            logger.info(f'Task check complited ({self.task_id})')
 
         except Exception as ex:
             logger.exception(ex)
@@ -46,9 +47,9 @@ class TaskCheck:
                 await session.commit()
 
             await send_error_msg(ex, self.task_id)
+            logger.error(f'Task check failed ({self.task_id})!')
 
         finally:
-            logger.info(f'Task check stoped ({self.task_id})')
             self.finished = True
             self.checking_ids.remove(self.task_id)
 
@@ -72,11 +73,7 @@ class TaskCheck:
             system(f'cp docker_tests/Dockerfile.Python ../tmp/{self.task_id}/Dockerfile')
 
             if self.task.url_code_for_run:
-                urllib.request.urlretrieve(self.task.url_code_for_run, f'../tmp/{self.task_id}/solution.py')
-
-            elif self.task.s_code_for_run:
-                with open(f'../tmp/{self.task_id}/solution.py', 'w') as f:
-                    f.write(self.task.s_code_for_run)
+                system(f'cp /solutions/{self.task.url_code_for_run.split("/")[-1]} ../tmp/{self.task_id}/solution.py')
 
             else:
                 logger.error(f'No code for run ({self.task_id})')

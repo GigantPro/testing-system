@@ -20,7 +20,6 @@ class Task(Base):
     result_getted_time = Column(TIMESTAMP(timezone=True))
 
     url_code_for_run = Column(String)
-    s_code_for_run = Column(String)
     code_languge = Column(String, nullable=False)
 
     correct_output = Column(String)

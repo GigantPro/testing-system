@@ -1,12 +1,12 @@
 from fastapi import Depends
 from loguru import logger
 
-from src.const import current_active_user
 from src.database import User
 from src.functions import get_user_read_by_user
 
 from ..router import self_router
 from ..schemas import UserRead
+from ..user_types import current_active_user
 
 __all__ = (
     "who_am_i",

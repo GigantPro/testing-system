@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel
+from loguru import logger
+from pydantic import BaseModel, Field, validator
 
 __all__ = (
     "FullTaskModel",
@@ -23,6 +24,7 @@ class FullTaskModel(BaseModel):
     video_url: Optional[str]
     tests_type: Optional[int]
     simple_test_data: Optional[dict]
+    box_solutions: Optional[dict]
     solution: Optional[str]
     solution_for_testing: Optional[str]
 
@@ -42,6 +44,19 @@ class ReadTaskModel(BaseModel):
     description: Optional[str]
     video_url: Optional[str]
     tests_type: Optional[int]
+    box_task: Optional[list] = Field(alias="box_solutions")
+
+    @validator("box_task", pre=True)
+    def validate_box_task(cls, v: dict):  # noqa: N805, ANN201
+        logger.warning(f'{v=}|{type(v)=}')
+        if v is None:
+            return None
+
+        if isinstance(v, list):
+            return v
+
+        return (list(v.keys()))
+
 
 class CreateTaskModel(BaseModel):
     type: int
@@ -51,6 +66,7 @@ class CreateTaskModel(BaseModel):
     video_url: Optional[str]
     tests_type: Optional[int]
     simple_test_data: Optional[dict]
+    box_solutions: Optional[dict]
     solution: Optional[str]
     solution_for_testing: Optional[str]
 

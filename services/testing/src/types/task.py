@@ -23,7 +23,6 @@ class FullTaskModel(BaseModel):
     status: str
 
     url_code_for_run: Optional[str] = Field(None, nullable=True)
-    s_code_for_run: Optional[str] = Field(None, nullable=True)
     code_languge: str
 
     correct_output: Optional[str] = Field(None, nullable=True)
@@ -45,7 +44,6 @@ class ReadTaskModel(FullTaskModel):
 class CreateTaskModel(BaseModel):
     user_id: int
     url_code_for_run: Optional[str] = Field(None, nullable=True)
-    s_code_for_run: Optional[str] = Field(None, nullable=True)
     code_languge: str
     correct_output: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)
@@ -54,7 +52,6 @@ class CreateTaskModel(BaseModel):
 
 class UpdateTaskModel(BaseModel):
     url_code_for_run: Optional[str] = Field(None, nullable=True)
-    s_code_for_run: Optional[str] = Field(None, nullable=True)
     correct_output: Optional[str] = Field(None, nullable=True)
     code_languge: Optional[str] = Field(None, nullable=True)
     priority: Optional[int] = Field(None, nullable=True)

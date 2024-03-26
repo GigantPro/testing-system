@@ -65,9 +65,9 @@ class Config:
     """Config class."""
     ip: str = get_str_env('IP', '0.0.0.0')
     port: int = 5001
-    source_path: str = get_str_env('SOURCE_PATH', '/app/testing-system/frontend/source')
     log_level: str = get_str_env('LOG_LEVEL', 'debug')
     static_files_path: str = get_str_env('STATIC_FILES_PATH', 'public')
+    solutions_files_path: str = get_str_env('SOLUTIONS_FILES_PATH', 'solutions')
     debug: bool = get_bool_env('DEBUG', False)
 
     mail_server: str = get_str_env('MAIL_SERVICE')
@@ -75,6 +75,8 @@ class Config:
     mail_password: str = get_str_env('MAIL_PASSWORD')
 
     tests_api_secret: str = get_str_env('TESTS_API_SECRET', '')
+
+    max_parallel_solition_jobs: int = get_int_env('MAX_PARALLEL_SOLUTION_JOBS', 2)
 
 
 @dataclass(slots=True, frozen=True)

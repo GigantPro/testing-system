@@ -8,13 +8,13 @@ from loguru import logger
 
 from .auth import auth_backend, fastapi_users, user_get_router
 from .auth.schemas import UserCreate, UserRead
-from .classrooms import classrooms_router
 from .config import config
-from .courses import courses_router
 from .database import async_session_maker
 from .functions import send_error_msg
 from .init_db import init_db
 from .logger import init_logger
+from .routes import classrooms_router, courses_router, solution_router
+from .solutions_engine import solutions_engine
 
 bot_turn = []
 
@@ -27,6 +27,7 @@ app = FastAPI(
 )
 
 makedirs(config.static_files_path, exist_ok=True)
+makedirs(config.solutions_files_path, exist_ok=True)
 app.mount("/static", StaticFiles(directory=config.static_files_path))
 
 app.include_router(
@@ -56,10 +57,17 @@ app.include_router(
     tags=['courses']
 )
 
+app.include_router(
+    solution_router,
+    tags=['solutions']
+)
+
 @app.on_event('startup')
 async def on_startup() -> None:
     await init_logger()
     await init_db()
+    
+    await solutions_engine.start()
 
     logger.info('App started')
 
@@ -67,6 +75,8 @@ async def on_startup() -> None:
 @app.on_event('shutdown')
 async def on_shutdown() -> None:
     await async_session_maker.begin().async_session.close_all()
+
+    await solutions_engine.stop()
     logger.info('App shut down')
 
 

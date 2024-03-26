@@ -8,6 +8,8 @@ from .course_data import (
 )
 from .lesson import Lesson
 from .role import Role
+from .simple_solution import SimpleSolution
+from .solution import Solution
 from .user import User
 
 __all__ = (
@@ -20,4 +22,6 @@ __all__ = (
     "CourseData",
     "Module",
     "Task",
+    "Solution",
+    "SimpleSolution",
 )

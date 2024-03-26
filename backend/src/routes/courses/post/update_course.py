@@ -2,7 +2,7 @@ from fastapi import Depends
 from fastapi.responses import JSONResponse
 from loguru import logger
 
-from src.const import current_active_verified_user
+from src.auth import current_active_verified_user
 from src.database import User
 from src.functions import update_course as update_course_func
 from src.types import CourseUpdateModel

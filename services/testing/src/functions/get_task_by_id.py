@@ -15,4 +15,5 @@ async def get_task_by_id(
 ) -> ReadTaskModel:
     if not await secret_validate(secret):
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
-    return await session.get(Task, task_id)
+    res = await session.get(Task, task_id)
+    return res

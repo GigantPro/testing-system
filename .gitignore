@@ -109,5 +109,6 @@ test.py
 users_ides.json
 test.txt
 tmp
+backend/solutions
 
 .npmrc

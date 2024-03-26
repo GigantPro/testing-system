@@ -16,7 +16,7 @@ app = FastAPI(
     debug=config.debug,
     openapi_url='/openapi.json',
     docs_url='/docs',
-    root_path='/tests',
+    # root_path='/tests',
 )
 
 app.include_router(

@@ -19,9 +19,24 @@ from .course.course import (
     CourseUserReadModel,
     CourseWithDataModel,
 )
+from .extra_params import ExtraParamsModel
+from .simple_solution import (
+    CreateSimpleSolutionModel,
+    FullSimpleSolutionModel,
+    ReadSimpleSolutionModel,
+    UpdateSimpleSolutionModel,
+)
+from .solution import (
+    CreateSolutionModel,
+    FullSolutionModel,
+    ReadSolutionModel,
+    UpdateSolutionModel,
+)
 from .user import (
     UserReadModel,
 )
+
+from .services import ServiceTaskModel
 
 __all__ = (
     "CourseWithDataModel",
@@ -40,4 +55,17 @@ __all__ = (
     "UserReadModel",
     "CreateTaskModel",
     "UpdateTaskModel",
+    "ExtraParamsModel",
+
+    "CreateSolutionModel",
+    "ReadSolutionModel",
+    "UpdateSolutionModel",
+    "FullSolutionModel",
+
+    "CreateSimpleSolutionModel",
+    "ReadSimpleSolutionModel",
+    "UpdateSimpleSolutionModel",
+    "FullSimpleSolutionModel",
+    
+    "ServiceTaskModel",
 )
