@@ -67,7 +67,7 @@ services:
     networks:
       - postgres
       - nginx
-      - testsс
+      - tests
     ports:
       - 5001:5001
     restart: "on-failure"
